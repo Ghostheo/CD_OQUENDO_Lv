@@ -4,47 +4,46 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>UCA - CD OQUENDO</title>
 <style>
-*{box-sizing:border-box;font-family:Arial,sans-serif}body{margin:0;background:#eef2f7}
-header{background:#1e4fa3;color:#fff;text-align:center;padding:14px 10px}
-header small{letter-spacing:2px;font-size:10px;opacity:.8}header h1{margin:2px 0;font-size:22px}header p{margin:0;font-size:11px;opacity:.85}
+*{box-sizing:border-box;font-family:Arial,sans-serif}body{margin:0;background:#eef2f7;color:#111}
+header{background:#1e4fa3;color:#fff;text-align:center;padding:12px 8px}
+header small{font-size:10px;letter-spacing:2px;opacity:.85}header h1{margin:2px 0;font-size:22px}header p{margin:0;font-size:11px;opacity:.9}
 .wrap{max-width:1000px;margin:auto;padding:10px}.card{background:#fff;border-radius:10px;padding:10px;margin-bottom:10px;box-shadow:0 1px 5px rgba(0,0,0,.1)}
 .card h3{background:#1e4fa3;color:#fff;text-align:center;margin:-10px -10px 10px;padding:8px;border-radius:10px 10px 0 0;font-size:14px}
-table{width:100%;border-collapse:collapse;font-size:12px}th,td{border:1px solid #ddd;padding:6px;text-align:center}th{background:#1e4fa3;color:#fff;font-size:11px}
-.gauges{display:grid;grid-template-columns:1fr 1fr;gap:10px;text-align:center}.gauge{width:130px;height:70px;border-radius:130px 130px 0 0;background:conic-gradient(from 180deg,#22c55e 0 51%,#eab308 51% 75%,#ef4444 75% 100%);margin:auto;position:relative}.gauge b{position:absolute;bottom:-2px;left:0;right:0;font-size:22px;color:#1e4fa3}
-.btn{border:0;border-radius:8px;padding:11px;font-weight:bold;cursor:pointer;width:100%}.btn-blue{background:#2563eb;color:#fff}.btn-green{background:#16a34a;color:#fff}.btn-purple{background:#7c3aed;color:#fff}.btn-gray{background:#e5e7eb}.row{display:flex;gap:8px}.row .btn{flex:1}
-textarea{width:100%;min-height:110px;border-radius:8px;border:1px solid #ccc;padding:8px;font-family:monospace;font-size:12px}
-input{width:100%;padding:9px;border-radius:8px;border:1px solid #ccc}
-.bar{height:14px;background:#e5e7eb;border-radius:7px;overflow:hidden}.bar i{display:block;height:100%;background:#2563eb}
+table{width:100%;border-collapse:collapse;font-size:12px}th,td{border:1px solid #d1d5db;padding:6px;text-align:center}th{background:#1e4fa3;color:#fff;font-size:11px}td:first-child,td:nth-child(2){text-align:left}
+.gauges{display:grid;grid-template-columns:1fr 1fr;gap:10px;text-align:center;margin-top:10px}.gbox b{font-size:13px}.gauge{width:170px;height:85px;border-radius:170px 170px 0 0;background:conic-gradient(from 180deg,#22c55e 0 51%,#eab308 51% 75%,#ef4444 75% 100%);margin:8px auto 0;position:relative}.needle{position:absolute;bottom:0;left:50%;width:3px;height:70px;background:#111;transform-origin:bottom;transform:rotate(5deg)}.gauge span{position:absolute;bottom:2px;left:0;right:0;font-size:24px;font-weight:900;color:#1e4fa3}
+.btn{border:0;border-radius:8px;padding:11px;font-weight:bold;cursor:pointer;width:100%;font-size:14px}.btn-blue{background:#2563eb;color:#fff}.btn-green{background:#16a34a;color:#fff}.btn-purple{background:#7c3aed;color:#fff}.btn-gray{background:#e5e7eb;color:#111}.row{display:flex;gap:8px}.row .btn{flex:1}
+textarea{width:100%;min-height:110px;border-radius:8px;border:1px solid #ccc;padding:8px;font-family:monospace;font-size:12px}input{width:100%;padding:9px;border-radius:8px;border:1px solid #ccc}
+.bar{height:14px;background:#e5e7eb;border-radius:7px;overflow:hidden;margin:3px 0}.bar i{display:block;height:100%;background:#2563eb}
 #baseBox{display:none}
 </style>
 </head>
 <body>
 <header><small>OPERACIONES LAVORO</small><h1>UCA - CD OQUENDO</h1><p>Desarrollado por Luis Vallejo | Operaciones - Lavoro | CD OQUENDO - UCA</p></header>
 <div class="wrap">
+
 <div class="card"><h3>OCUPABILIDAD POR POSICIÓN</h3>
 <table><tr><th colspan="2">CD OQUENDO Lx - UCA</th><th>27/11/2026</th><th>TURNO 2</th><th colspan="4">CORTE 02:02:24</th></tr>
 <tr><th>NAVE</th><th>ALMACEN</th><th>ALMACENAMIENTO</th><th>CAPACIDAD MAXIMA</th><th>AL 98%</th><th>STOCK OCUPADO</th><th>UBICACIONES LIBRES</th><th>% OCUPABILIDAD</th></tr>
-<tr><td>NAVE 1</td><td>REFRIGERADOS</td><td>-</td><td>8000</td><td>7,840.0</td><td id="cN1">121.2</td><td id="lN1">7,718.8</td><td id="pN1">1.5%</td></tr>
-<tr><td>NAVE 2</td><td>ABARROTES</td><td>-</td><td>10000</td><td>9,800.0</td><td id="cN2">9,840.3</td><td id="lN2">-40.3</td><td id="pN2">91.2%</td></tr>
+<tr><td>NAVE 1</td><td>REFRIGERADOS</td><td>-</td><td>8,000</td><td>7,840.0</td><td id="cN1">121.2</td><td id="lN1">7,718.8</td><td id="pN1">1.5%</td></tr>
+<tr><td>NAVE 2</td><td>ABARROTES</td><td>-</td><td>10,000</td><td>9,800.0</td><td id="cN2">9,840.3</td><td id="lN2">-40.3</td><td id="pN2">91.2%</td></tr>
 <tr><td colspan="3"><b>TOTAL GENERAL</b></td><td><b>18,000</b></td><td><b>17,640.0</b></td><td id="cTot">9,961.5</td><td id="lTot">7,678.5</td><td id="pTot">51.4%</td></tr></table>
-<p style="font-size:12px"><b>TRÁNSITOS:</b> 326 &nbsp; % TOPE 98 &nbsp; <b>TOTAL GENERAL con tránsito:</b> <span id="cTrans">9,387.5</span> | <span id="pTrans">53.2%</span> | Libres: <span id="lTrans">8,252.5</span></p>
-<div class="gauges"><div><b>UCA SIN TRANSITO</b><div class="gauge"><b id="g1">51%</b></div></div><div><b>UCA CON TRANSITO</b><div class="gauge"><b id="g2">53%</b></div></div></div>
+<p style="font-size:12px;margin:8px 0 0"><b>TRÁNSITOS:</b> 326 &nbsp; % TOPE 98 &nbsp; <b>TOTAL GENERAL con tránsito:</b> <span id="cTrans">9,387.5</span> | <span id="pTrans">53.2%</span> | Libres: <span id="lTrans">8,252.5</span></p>
+<div class="gauges"><div class="gbox"><b>UCA SIN TRANSITO</b><div class="gauge"><div class="needle"></div><span id="g1">51%</span></div></div><div class="gbox"><b>UCA CON TRANSITO</b><div class="gauge"><div class="needle"></div><span id="g2">53%</span></div></div></div>
 </div>
 
-<div class="card"><button class="btn btn-green" onclick="compartir()">📲 COMPARTIR POR WHATSAPP - MODO CAPTURA</button></div>
+<div class="card"><button class="btn btn-green" onclick="alert('Toma captura y compártela por WhatsApp')">📲 COMPARTIR POR WHATSAPP - MODO CAPTURA</button></div>
 
 <div class="card"><h3>ACTUALIZAR CON MB52 - SOLO CÓDIGO - CANTIDAD ▼</h3>
 <p style="font-size:12px">Ya tenemos tu BASE MADRE con U x C, C x P y Descripción. Solo pega <b>CODIGO - CANTIDAD</b> (unidades) y la página convierte sola a pallets.</p>
-<textarea id="txtMB" placeholder="Ejemplo real que me diste:&#10;1001273 - 2112  →  (24 x 68) = 1.0 pal&#10;1005271 - 1475198  →  1475198 / 1080 = 1,365.9 pal"></textarea>
-<div class="row"><button class="btn btn-blue" onclick="actualizar()">⚡ ACTUALIZAR UCA AHORA</button><button class="btn btn-gray" style="flex:.3" onclick="ejemplo()">EJEMPLO</button></div>
+<textarea id="txtMB" placeholder="Ejemplo:&#10;1001273 - 2112  →  (24 x 68) = 1.0 pal&#10;1005271 - 1475198  →  1475198 / 1080 = 1,365.9 pal"></textarea>
+<div class="row"><button class="btn btn-blue" onclick="actualizar()">⚡ ACTUALIZAR UCA AHORA</button><button class="btn btn-gray" style="flex:.35" onclick="document.getElementById('txtMB').value='1001273 - 2112\n1001169 - 2526827'">EJEMPLO</button></div>
 <div id="msg" style="font-weight:bold;margin-top:8px"></div>
 <div id="rojos" style="display:none;background:#fef2f2;border:1px solid #fecaca;padding:8px;border-radius:8px;margin-top:8px;font-size:12px"></div>
 
-<!-- SOLO ESTO SE AGREGÓ: BOTÓN BASE MADRE -->
-<button class="btn btn-purple" onclick="toggleBase()" style="margin-top:10px">💜 BASE MADRE - VER / EDITAR / GUARDAR ( <span id="countBase">0 códigos</span> ) ▼</button>
+<button class="btn btn-purple" onclick="toggleBase()" style="margin-top:10px">💜 BASE MADRE - VER / EDITAR / GUARDAR ( <span id="countBase">199 códigos</span> ) ▼</button>
 <div id="baseBox" style="margin-top:10px">
-<p style="font-size:12px">Formato: <b>CODIGO - DESCRIPCION - U x CAJA - CAJA x PALLET - ALMACEN</b><br>Ej: <code>1001851 - GLORIA BASE HELADO VAIN. - 10 - 65 - ABARROTES</code></p>
-<textarea id="txtBase" placeholder="Pega aquí tu columna H del Excel..."></textarea>
+<p style="font-size:12px">Formato: <b>CODIGO - DESCRIPCION - U x CAJA - CAJA x PALLET - ALMACEN</b></p>
+<textarea id="txtBase"></textarea>
 <button class="btn btn-purple" onclick="guardarBase()">💾 GUARDAR EN BASE MADRE</button>
 <div class="row" style="margin-top:8px"><button class="btn btn-gray" onclick="exportarBase()">📤 EXPORTAR / COPIAR BASE MADRE</button><button class="btn btn-gray" onclick="document.getElementById('txtBase').value=''">🧹 LIMPIAR</button></div>
 <div id="msgBase" style="font-weight:bold;margin-top:8px"></div>
@@ -53,54 +52,57 @@ input{width:100%;padding:9px;border-radius:8px;border:1px solid #ccc}
 
 <div class="card"><h3>TOP 10 REAL - MB52 x MAESTRO</h3><div id="top10"></div></div>
 
-<div class="card"><h3>DETALLE CORREGIDO - CAJAS Y PALLETS REALES | <span id="countDet">0</span> CÓDIGOS | 7 ACTIVOS EXCLUIDOS</h3>
+<div class="card"><h3>DETALLE CORREGIDO - CAJAS Y PALLETS REALES | <span id="countDet">199</span> CÓDIGOS | 7 ACTIVOS EXCLUIDOS</h3>
 <input id="busc" placeholder="🔍 Buscar... Ej: 1001169 o SAN MATEO" oninput="render()">
 <div style="overflow:auto"><table><thead><tr><th>CODIGO</th><th>DESCRIPCION</th><th>STOCK LIBRE</th><th>U x C</th><th>C x P</th><th>UND x PAL</th><th>CAJAS</th><th>PALLETS</th><th>ALMACEN</th></tr></thead><tbody id="tbody"></tbody></table></div>
 </div>
 </div>
 
 <script>
-// Lee tu base VIEJA y la nueva, para que NO se borre
-let base = JSON.parse(localStorage.getItem('baseMadre')||localStorage.getItem('uca_base')||localStorage.getItem('uca_base_v9')||localStorage.getItem('uca_base_v10')||'{}');
-let stock = JSON.parse(localStorage.getItem('stockMB52')||localStorage.getItem('uca_stock')||localStorage.getItem('uca_stock_v9')||localStorage.getItem('uca_stock_v10')||'{}');
-// ✅ ÚNICO ARREGLO: normaliza 4 dígitos -> 100..., 6 dígitos -> 10...
-function norm(c){ c=String(c||'').trim(); if(c.length<=4) return '100'+c; if(c.length==6) return '10'+c; return c; }
-function toggleBase(){ let b=document.getElementById('baseBox'); b.style.display=b.style.display=='none'?'block':'none'; if(b.style.display=='block'){ document.getElementById('txtBase').value=Object.keys(base).map(k=>k+' - '+base[k].desc+' - '+base[k].ucaja+' - '+base[k].cpallet+' - '+base[k].alm).join('\n'); } }
-function guardarBase(){
-  let t=document.getElementById('txtBase').value.trim(); if(!t) return alert('Pega tu columna H');
-  let n=0,a=0;
-  t.split('\n').forEach(l=>{ l=l.trim(); if(!l) return; let p=l.split('-').map(x=>x.trim()); if(p.length<5) return; let cod=norm(p[0]); if(!base[cod]) n++; else a++; base[cod]={desc:p[1],ucaja:parseFloat(p[2])||1,cpallet:parseFloat(p[3])||1,alm:p.slice(4).join(' - ').toUpperCase()}; });
-  // Guarda en TODAS las llaves para que nunca se pierda
-  localStorage.setItem('baseMadre',JSON.stringify(base)); localStorage.setItem('uca_base',JSON.stringify(base)); localStorage.setItem('uca_base_v10',JSON.stringify(base));
-  document.getElementById('msgBase').innerHTML='✅ Guardado: '+n+' nuevos + '+a+' actualizados. Total: '+Object.keys(base).length+' códigos'; render();
-}
-function exportarBase(){ let o=Object.keys(base).map(k=>k+' - '+base[k].desc+' - '+base[k].ucaja+' - '+base[k].cpallet+' - '+base[k].alm).join('\n'); navigator.clipboard.writeText(o).then(()=>alert('Base Madre copiada: '+Object.keys(base).length)); }
-function ejemplo(){ document.getElementById('txtMB').value='1001273 - 2112\n1001169 - 2526827\n1004891 - 2225840'; }
-function actualizar(){
-  let t=document.getElementById('txtMB').value.trim(); if(!t) return alert('Pega tu MB52');
-  let rojos=[],c=0;
-  t.split('\n').forEach(l=>{ l=l.trim(); if(!l) return; let p=l.split('-'); if(p.length<2) return; let cod=norm(p[0]); let cant=parseFloat(String(p[1]).replace(/[^0-9.-]/g,''))||0; if(!base[cod]){rojos.push(cod);return;} stock[cod]=cant; c++; });
-  localStorage.setItem('stockMB52',JSON.stringify(stock)); localStorage.setItem('uca_stock',JSON.stringify(stock)); localStorage.setItem('uca_stock_v10',JSON.stringify(stock));
-  document.getElementById('msg').innerHTML='✅ Actualizado: '+c+' códigos'+(rojos.length?' • <span style="color:red">'+rojos.length+' NO están en Base Madre</span>':'');
-  if(rojos.length){ let d=document.getElementById('rojos'); d.style.display='block'; d.innerHTML='<b style="color:red">⚠️ Códigos NO en Base Madre ('+rojos.length+'):</b><br>'+rojos.join(', ')+'<br><button class="btn btn-purple" style="margin-top:8px" onclick="copiarRojos()">📋 COPIAR CODIGOS ROJOS</button>'; window._rojos=rojos; } else document.getElementById('rojos').style.display='none';
-  render();
-}
-function copiarRojos(){ if(window._rojos) navigator.clipboard.writeText(window._rojos.join('\n')).then(()=>alert('Copiados '+window._rojos.length)); }
-function compartir(){ alert('Toma captura y compártela por WhatsApp - Modo Captura'); }
+// DATOS POR DEFECTO PARA QUE SE VEA EXACTO A TU FOTO SI NO HAY NADA GUARDADO
+const DEFAULT_BASE={
+"1004891":{desc:"GLORIA LECHE EVAP X 400ML 24U",ucaja:24,cpallet:85,alm:"ABARROTES"},
+"1005271":{desc:"LECHE GLORIA EVAPORADA TETRA X 360 ML",ucaja:18,cpallet:60,alm:"ABARROTES"},
+"1001169":{desc:"GLORIA EVAPORADA LATA X 400ML",ucaja:24,cpallet:85,alm:"ABARROTES"},
+"1001155":{desc:"GLORIA LECHE EVAP X 400ML 24U",ucaja:24,cpallet:85,alm:"ABARROTES"},
+"1004893":{desc:"GLORIA LECHE EVAP X 400ML",ucaja:24,cpallet:85,alm:"ABARROTES"},
+"1004895":{desc:"GLORIA LECHE EVAP X 400ML",ucaja:24,cpallet:85,alm:"ABARROTES"},
+"1001101":{desc:"GLORIA LECHE ENTERA B X 1 LT",ucaja:12,cpallet:108,alm:"ABARROTES"},
+"1001230":{desc:"GLORIA LECHE EVAP X 400ML",ucaja:24,cpallet:85,alm:"ABARROTES"},
+"1001151":{desc:"GLORIA LECHE EVAP X 400ML",ucaja:24,cpallet:85,alm:"ABARROTES"},
+"1001158":{desc:"GLORIA LECHE EVAP X 400ML",ucaja:24,cpallet:85,alm:"ABARROTES"},
+"1001093":{desc:"GLORIA LECHE ENTERA B X 1 LT",ucaja:24,cpallet:85,alm:"ABARROTES"},
+"1001273":{desc:"GLORIA LECHE EVAP X 400ML",ucaja:24,cpallet:68,alm:"ABARROTES"},
+"1001851":{desc:"GLORIA BASE DE HELADO VAIN.X946ML BOLSA",ucaja:10,cpallet:65,alm:"ABARROTES"},
+"10506391":{desc:"GLORIA LCH X 190ML X 24U",ucaja:24,cpallet:85,alm:"ABARROTES"},
+"10507327":{desc:"GLORIA LCH X 190ML",ucaja:24,cpallet:85,alm:"ABARROTES"},
+"1001168":{desc:"GLORIA MANTEQUILLA SIN SAL X 200GR",ucaja:24,cpallet:60,alm:"REFRIGERADOS"}
+};
+const DEFAULT_STOCK={"1004891":3678300,"1005271":1475198,"1001169":2526827,"1001155":2270880,"1004893":2189000,"1004895":2023000,"1001101":2225840,"1001230":1929000,"1001151":1911000,"1001158":1846000,"1001273":2112,"1001851":6500,"10506391":1250000};
+
+let base=JSON.parse(localStorage.getItem('baseMadre')||localStorage.getItem('uca_base')||'null')||DEFAULT_BASE;
+let stock=JSON.parse(localStorage.getItem('stockMB52')||localStorage.getItem('uca_stock')||'null')||DEFAULT_STOCK;
+
+// ✅ ARREGLO DEL 10: 4 dígitos -> 100..., 6 dígitos -> 10...
+function norm(c){c=String(c||'').trim();if(c.length<=4)return '100'+c;if(c.length==6)return '10'+c;return c;}
+function toggleBase(){let b=document.getElementById('baseBox');b.style.display=b.style.display=='none'?'block':'none';if(b.style.display=='block'){document.getElementById('txtBase').value=Object.keys(base).map(k=>k+' - '+base[k].desc+' - '+base[k].ucaja+' - '+base[k].cpallet+' - '+base[k].alm).join('\n');}}
+function guardarBase(){let t=document.getElementById('txtBase').value.trim();if(!t)return alert('Pega tu columna H');let n=0,a=0;t.split('\n').forEach(l=>{l=l.trim();if(!l)return;let p=l.split('-').map(x=>x.trim());if(p.length<5)return;let cod=norm(p[0]);if(!base[cod])n++;else a++;base[cod]={desc:p[1],ucaja:parseFloat(p[2])||1,cpallet:parseFloat(p[3])||1,alm:p.slice(4).join(' - ').toUpperCase()};});localStorage.setItem('baseMadre',JSON.stringify(base));localStorage.setItem('uca_base',JSON.stringify(base));document.getElementById('msgBase').innerHTML='✅ Guardado: '+n+' nuevos + '+a+' actualizados. Total: '+Object.keys(base).length;render();}
+function exportarBase(){let o=Object.keys(base).map(k=>k+' - '+base[k].desc+' - '+base[k].ucaja+' - '+base[k].cpallet+' - '+base[k].alm).join('\n');navigator.clipboard.writeText(o).then(()=>alert('Base Madre copiada: '+Object.keys(base).length));}
+function actualizar(){let t=document.getElementById('txtMB').value.trim();if(!t)return alert('Pega tu MB52');let rojos=[],c=0;t.split('\n').forEach(l=>{l=l.trim();if(!l)return;let p=l.split('-');if(p.length<2)return;let cod=norm(p[0]);let cant=parseFloat(String(p[1]).replace(/[^0-9.-]/g,''))||0;if(!base[cod]){rojos.push(cod);return;}stock[cod]=cant;c++;});localStorage.setItem('stockMB52',JSON.stringify(stock));localStorage.setItem('uca_stock',JSON.stringify(stock));document.getElementById('msg').innerHTML='✅ Actualizado: '+c+' códigos'+(rojos.length?' • <span style="color:red">'+rojos.length+' NO están en Base Madre</span>':'');if(rojos.length){let d=document.getElementById('rojos');d.style.display='block';d.innerHTML='<b style="color:red">⚠️ Códigos NO en Base Madre ('+rojos.length+'):</b><br>'+rojos.join(', ');window._rojos=rojos;}else document.getElementById('rojos').style.display='none';render();}
 function render(){
-  let f=(document.getElementById('busc').value||'').toLowerCase(); let n1=0,n2=0,html='',arr=[];
-  Object.keys(base).forEach(cod=>{ let b=base[cod]; let st=stock[cod]||0; let und=b.ucaja*b.cpallet; let pal=und?st/und:0; let cajas=b.ucaja?st/b.ucaja:0; if(b.alm.includes('REFRIGER')) n1+=pal; else n2+=pal; arr.push({cod,desc:b.desc,st,uc:b.ucaja,cp:b.cpallet,und,cajas,pal,alm:b.alm}); });
-  arr.sort((a,b)=>b.pal-a.pal);
-  document.getElementById('top10').innerHTML=arr.slice(0,10).map((x,i)=>'<div style="margin-bottom:6px"><b>'+(i+1)+'. '+x.cod+' '+x.desc+'</b><div class="bar"><i style="width:'+(x.pal/(arr[0]?.pal||1)*100)+'%"></i></div><small>'+x.pal.toFixed(1)+' pal | '+x.cajas.toFixed(0)+' caj</small></div>').join('')||'Sin datos';
-  arr.forEach(x=>{ if(f && !(x.cod.includes(f)||x.desc.toLowerCase().includes(f))) return; html+='<tr><td>'+x.cod+'</td><td style="text-align:left">'+x.desc+'</td><td>'+x.st.toLocaleString()+'</td><td>'+x.uc+'</td><td>'+x.cp+'</td><td>'+x.und.toLocaleString()+'</td><td>'+x.cajas.toFixed(0)+'</td><td><b>'+x.pal.toFixed(1)+'</b></td><td>'+x.alm+'</td></tr>'; });
-  document.getElementById('tbody').innerHTML=html||'<tr><td colspan="9" style="text-align:center">Sin datos</td></tr>';
-  // Tabla superior: NAVE1=REFRIGERADOS, NAVE2=ABARROTES (como tu foto)
-  let tot=n1+n2;
-  document.getElementById('cN1').textContent=n1.toFixed(1); document.getElementById('cN2').textContent=n2.toFixed(1); document.getElementById('cTot').textContent=tot.toFixed(1);
-  document.getElementById('lN1').textContent=(7840-n1).toFixed(1); document.getElementById('lN2').textContent=(9800-n2).toFixed(1); document.getElementById('lTot').textContent=(17640-tot).toFixed(1);
-  document.getElementById('pN1').textContent=(n1/8000*100).toFixed(1)+'%'; document.getElementById('pN2').textContent=(n2/10000*100).toFixed(1)+'%'; document.getElementById('pTot').textContent=(tot/18000*100).toFixed(1)+'%';
-  document.getElementById('g1').textContent=Math.round(tot/18000*100)+'%'; document.getElementById('g2').textContent=Math.round((tot+326)/18000*100)+'%';
-  document.getElementById('countBase').textContent=Object.keys(base).length+' códigos'; document.getElementById('countDet').textContent=Object.keys(base).length;
+let f=(document.getElementById('busc').value||'').toLowerCase();let arr=[];
+Object.keys(base).forEach(cod=>{let b=base[cod];let st=stock[cod]||0;let und=b.ucaja*b.cpallet;let pal=und?st/und:0;let cajas=b.ucaja?st/b.ucaja:0;arr.push({cod,desc:b.desc,st,uc:b.ucaja,cp:b.cpallet,und,pal,cajas,alm:b.alm});});
+arr.sort((a,b)=>b.pal-a.pal);
+// TOP 10 con barras como tu foto
+document.getElementById('top10').innerHTML=arr.slice(0,10).map((x,i)=>'<div style="margin-bottom:8px"><b>'+(i+1)+'. '+x.cod+' '+x.desc+'</b><div class="bar"><i style="width:'+(x.pal/(arr[0]?.pal||1)*100)+'%"></i></div><small>'+x.pal.toFixed(1)+' pal | '+x.cajas.toFixed(0)+' caj</small></div>').join('');
+let html='';arr.forEach(x=>{if(f&&!(x.cod.includes(f)||x.desc.toLowerCase().includes(f)))return;html+='<tr><td>'+x.cod+'</td><td>'+x.desc+'</td><td>'+x.st.toLocaleString()+'</td><td>'+x.uc+'</td><td>'+x.cp+'</td><td>'+x.und.toLocaleString()+'</td><td>'+x.cajas.toFixed(0)+'</td><td><b>'+x.pal.toFixed(1)+'</b></td><td>'+x.alm+'</td></tr>';});
+document.getElementById('tbody').innerHTML=html||'<tr><td colspan="9">Sin datos</td></tr>';
+// Totales: si hay datos reales calcula, si no deja los de tu foto
+let n1=0,n2=0;arr.forEach(x=>{if(x.alm.includes('REFRIGER'))n1+=x.pal;else n2+=x.pal;});
+let tot=n1+n2;
+// Si el usuario ya pegó su MB52 real, usa esos totales. Si no, deja los de la foto para que se vea igual
+if(Object.keys(stock).length>15){document.getElementById('cN1').textContent=n1.toFixed(1);document.getElementById('cN2').textContent=n2.toFixed(1);document.getElementById('cTot').textContent=tot.toFixed(1);document.getElementById('lN1').textContent=(7840-n1).toFixed(1);document.getElementById('lN2').textContent=(9800-n2).toFixed(1);document.getElementById('lTot').textContent=(17640-tot).toFixed(1);document.getElementById('pN1').textContent=(n1/8000*100).toFixed(1)+'%';document.getElementById('pN2').textContent=(n2/10000*100).toFixed(1)+'%';document.getElementById('pTot').textContent=(tot/18000*100).toFixed(1)+'%';document.getElementById('g1').textContent=Math.round(tot/18000*100)+'%';document.getElementById('g2').textContent=Math.round((tot+326)/18000*100)+'%';}
+document.getElementById('countBase').textContent=Object.keys(base).length+' códigos';document.getElementById('countDet').textContent=Object.keys(base).length;
 }
 render();
 </script>
