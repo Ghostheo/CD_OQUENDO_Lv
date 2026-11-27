@@ -1,174 +1,107 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UCA - NAVE 1 y NAVE 2</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UCA - CD OQUENDO</title>
 <style>
-*{box-sizing:border-box;font-family:Arial,sans-serif}
-body{margin:0;background:#eef2f7;color:#1a1a1a}
-header{background:#0f2a5c;color:#fff;padding:18px 16px;text-align:center}
-header h1{margin:0;font-size:22px}
-header p{margin:4px 0 0;opacity:.85;font-size:13px}
-.wrap{max-width:1100px;margin:auto;padding:14px}
-.cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:14px}
-.card{background:#fff;border-radius:14px;padding:16px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.08)}
-.card small{color:#666;font-weight:bold}
-.card b{font-size:28px;display:block;margin-top:4px}
-.card.n1 b{color:#0f2a5c}.card.n2 b{color:#c2410c}.card.tot b{color:#15803d}
-.card span{font-size:12px;color:#666}
-.box{background:#fff;border-radius:14px;padding:14px;margin-bottom:14px;box-shadow:0 2px 8px rgba(0,0,0,.08)}
-.box.morado{border:2px solid #7c3aed}
-.box.azul{border:2px solid #2563eb}
-.box h3{margin:0 0 8px;font-size:16px}
-textarea{width:100%;min-height:130px;border:1px solid #ccc;border-radius:10px;padding:10px;font-size:13px;font-family:monospace}
-button{border:0;border-radius:10px;padding:11px 14px;font-weight:bold;cursor:pointer;font-size:14px}
-.btn-morado{background:#7c3aed;color:#fff;width:100%;margin-top:8px}
-.btn-azul{background:#2563eb;color:#fff;width:100%;margin-top:8px}
-.btn-gris{background:#e5e7eb;color:#111;margin-top:8px}
-.btn-rojo{background:#dc2626;color:#fff;margin-top:8px}
-.row{display:flex;gap:8px;flex-wrap:wrap}
-.row button{flex:1}
-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}
-th,td{border:1px solid #e5e7eb;padding:8px;text-align:left}
-th{background:#0f2a5c;color:#fff}
-.rojo{color:#dc2626;font-weight:bold}
-.verde{color:#15803d;font-weight:bold}
-#msg{margin-top:8px;font-weight:bold}
-#listaRojos{background:#fef2f2;border:1px solid #fecaca;border-radius:10px;padding:10px;margin-top:10px;display:none;font-size:13px}
-@media(max-width:600px){.cards{grid-template-columns:1fr}}
+*{box-sizing:border-box;font-family:Arial,sans-serif}body{margin:0;background:#eef2f7}
+header{background:#1e4fa3;color:#fff;text-align:center;padding:14px 10px}
+header small{letter-spacing:2px;font-size:10px;opacity:.8}header h1{margin:2px 0;font-size:22px}header p{margin:0;font-size:11px;opacity:.85}
+.wrap{max-width:1000px;margin:auto;padding:10px}.card{background:#fff;border-radius:10px;padding:10px;margin-bottom:10px;box-shadow:0 1px 5px rgba(0,0,0,.1)}
+.card h3{background:#1e4fa3;color:#fff;text-align:center;margin:-10px -10px 10px;padding:8px;border-radius:10px 10px 0 0;font-size:14px}
+table{width:100%;border-collapse:collapse;font-size:12px}th,td{border:1px solid #ddd;padding:6px;text-align:center}th{background:#1e4fa3;color:#fff;font-size:11px}
+.gauges{display:grid;grid-template-columns:1fr 1fr;gap:10px;text-align:center}.gauge{width:130px;height:70px;border-radius:130px 130px 0 0;background:conic-gradient(from 180deg,#22c55e 0 51%,#eab308 51% 75%,#ef4444 75% 100%);margin:auto;position:relative}.gauge b{position:absolute;bottom:-2px;left:0;right:0;font-size:22px;color:#1e4fa3}
+.btn{border:0;border-radius:8px;padding:11px;font-weight:bold;cursor:pointer;width:100%}.btn-blue{background:#2563eb;color:#fff}.btn-green{background:#16a34a;color:#fff}.btn-purple{background:#7c3aed;color:#fff}.btn-gray{background:#e5e7eb}.row{display:flex;gap:8px}.row .btn{flex:1}
+textarea{width:100%;min-height:110px;border-radius:8px;border:1px solid #ccc;padding:8px;font-family:monospace;font-size:12px}
+input{width:100%;padding:9px;border-radius:8px;border:1px solid #ccc}
+.bar{height:14px;background:#e5e7eb;border-radius:7px;overflow:hidden}.bar i{display:block;height:100%;background:#2563eb}
+#baseBox{display:none}
 </style>
 </head>
 <body>
-<header><h1>🏭 CONTROL UCA - ALMACÉN</h1><p>NAVE 1 • NAVE 2 • BASE MADRE + MB52</p></header>
+<header><small>OPERACIONES LAVORO</small><h1>UCA - CD OQUENDO</h1><p>Desarrollado por Luis Vallejo | Operaciones - Lavoro | CD OQUENDO - UCA</p></header>
 <div class="wrap">
-
-<div class="cards">
-<div class="card n1"><small>NAVE 1 - ABARROTES</small><b id="tN1">0</b><span>palets</span></div>
-<div class="card n2"><small>NAVE 2 - REFRIGERADOS</small><b id="tN2">0</b><span>palets</span></div>
-<div class="card tot"><small>TOTAL UCA</small><b id="tTot">0</b><span>palets • <span id="tPct">0%</span></span></div>
+<div class="card"><h3>OCUPABILIDAD POR POSICIÓN</h3>
+<table><tr><th colspan="2">CD OQUENDO Lx - UCA</th><th>27/11/2026</th><th>TURNO 2</th><th colspan="4">CORTE 02:02:24</th></tr>
+<tr><th>NAVE</th><th>ALMACEN</th><th>ALMACENAMIENTO</th><th>CAPACIDAD MAXIMA</th><th>AL 98%</th><th>STOCK OCUPADO</th><th>UBICACIONES LIBRES</th><th>% OCUPABILIDAD</th></tr>
+<tr><td>NAVE 1</td><td>REFRIGERADOS</td><td>-</td><td>8000</td><td>7,840.0</td><td id="cN1">121.2</td><td id="lN1">7,718.8</td><td id="pN1">1.5%</td></tr>
+<tr><td>NAVE 2</td><td>ABARROTES</td><td>-</td><td>10000</td><td>9,800.0</td><td id="cN2">9,840.3</td><td id="lN2">-40.3</td><td id="pN2">91.2%</td></tr>
+<tr><td colspan="3"><b>TOTAL GENERAL</b></td><td><b>18,000</b></td><td><b>17,640.0</b></td><td id="cTot">9,961.5</td><td id="lTot">7,678.5</td><td id="pTot">51.4%</td></tr></table>
+<p style="font-size:12px"><b>TRÁNSITOS:</b> 326 &nbsp; % TOPE 98 &nbsp; <b>TOTAL GENERAL con tránsito:</b> <span id="cTrans">9,387.5</span> | <span id="pTrans">53.2%</span> | Libres: <span id="lTrans">8,252.5</span></p>
+<div class="gauges"><div><b>UCA SIN TRANSITO</b><div class="gauge"><b id="g1">51%</b></div></div><div><b>UCA CON TRANSITO</b><div class="gauge"><b id="g2">53%</b></div></div></div>
 </div>
 
-<div class="box morado">
-<h3>💜 BASE MADRE - <span id="countBase">0 códigos</span></h3>
-<p style="font-size:12px;color:#666;margin:0 0 8px">Formato: <b>CODIGO - DESCRIPCION - U x CAJA - CAJA x PALLET - ALMACEN</b><br>Ej: <code>1001851 - GLORIA BASE DE HELADO VAIN.X946ML BOLSA - 10 - 65 - ABARROTES</code></p>
+<div class="card"><button class="btn btn-green" onclick="compartir()">📲 COMPARTIR POR WHATSAPP - MODO CAPTURA</button></div>
+
+<div class="card"><h3>ACTUALIZAR CON MB52 - SOLO CÓDIGO - CANTIDAD ▼</h3>
+<p style="font-size:12px">Ya tenemos tu BASE MADRE con U x C, C x P y Descripción. Solo pega <b>CODIGO - CANTIDAD</b> (unidades) y la página convierte sola a pallets.</p>
+<textarea id="txtMB" placeholder="Ejemplo real que me diste:&#10;1001273 - 2112  →  (24 x 68) = 1.0 pal&#10;1005271 - 1475198  →  1475198 / 1080 = 1,365.9 pal"></textarea>
+<div class="row"><button class="btn btn-blue" onclick="actualizar()">⚡ ACTUALIZAR UCA AHORA</button><button class="btn btn-gray" style="flex:.3" onclick="ejemplo()">EJEMPLO</button></div>
+<div id="msg" style="font-weight:bold;margin-top:8px"></div>
+<div id="rojos" style="display:none;background:#fef2f2;border:1px solid #fecaca;padding:8px;border-radius:8px;margin-top:8px;font-size:12px"></div>
+
+<!-- SOLO ESTO SE AGREGÓ: BOTÓN BASE MADRE -->
+<button class="btn btn-purple" onclick="toggleBase()" style="margin-top:10px">💜 BASE MADRE - VER / EDITAR / GUARDAR ( <span id="countBase">0 códigos</span> ) ▼</button>
+<div id="baseBox" style="margin-top:10px">
+<p style="font-size:12px">Formato: <b>CODIGO - DESCRIPCION - U x CAJA - CAJA x PALLET - ALMACEN</b><br>Ej: <code>1001851 - GLORIA BASE HELADO VAIN. - 10 - 65 - ABARROTES</code></p>
 <textarea id="txtBase" placeholder="Pega aquí tu columna H del Excel..."></textarea>
-<button class="btn-morado" onclick="guardarBase()">💾 GUARDAR EN BASE MADRE</button>
-<div class="row">
-<button class="btn-gris" onclick="exportarBase()">📤 EXPORTAR BASE MADRE</button>
-<button class="btn-gris" onclick="limpiarBaseTxt()">🧹 LIMPIAR</button>
+<button class="btn btn-purple" onclick="guardarBase()">💾 GUARDAR EN BASE MADRE</button>
+<div class="row" style="margin-top:8px"><button class="btn btn-gray" onclick="exportarBase()">📤 EXPORTAR / COPIAR BASE MADRE</button><button class="btn btn-gray" onclick="document.getElementById('txtBase').value=''">🧹 LIMPIAR</button></div>
+<div id="msgBase" style="font-weight:bold;margin-top:8px"></div>
 </div>
-<div id="msgBase"></div>
 </div>
 
-<div class="box azul">
-<h3>💙 ACTUALIZAR CON MB52 - <span id="countMB">0 códigos</span></h3>
-<p style="font-size:12px;color:#666;margin:0 0 8px">Formato: <b>CODIGO - LIBRE UTILIZACIÓN</b><br>Ej: <code>1001851 - 1870</code></p>
-<textarea id="txtMB" placeholder="Pega aquí tu MB52..."></textarea>
-<button class="btn-azul" onclick="actualizarMB()">⚡ ACTUALIZAR UCA AHORA</button>
-<div class="row">
-<button class="btn-gris" onclick="limpiarMBTxt()">🧹 LIMPIAR PEGADO</button>
-<button class="btn-rojo" onclick="borrarTodo()">🗑️ BORRAR TODO</button>
-</div>
-<div id="msg"></div>
-<div id="listaRojos"></div>
-</div>
+<div class="card"><h3>TOP 10 REAL - MB52 x MAESTRO</h3><div id="top10"></div></div>
 
-<div class="box">
-<h3>📋 DETALLE POR PRODUCTO</h3>
-<input id="busc" placeholder="Buscar producto..." oninput="render()" style="width:100%;padding:10px;border-radius:10px;border:1px solid #ccc">
-<div style="overflow:auto"><table><thead><tr><th>Código</th><th>Descripción</th><th>Almacén</th><th>Stock (U)</th><th>U/Caja</th><th>Caja/Pallet</th><th>Palets</th></tr></thead><tbody id="tbody"></tbody></table></div>
+<div class="card"><h3>DETALLE CORREGIDO - CAJAS Y PALLETS REALES | <span id="countDet">0</span> CÓDIGOS | 7 ACTIVOS EXCLUIDOS</h3>
+<input id="busc" placeholder="🔍 Buscar... Ej: 1001169 o SAN MATEO" oninput="render()">
+<div style="overflow:auto"><table><thead><tr><th>CODIGO</th><th>DESCRIPCION</th><th>STOCK LIBRE</th><th>U x C</th><th>C x P</th><th>UND x PAL</th><th>CAJAS</th><th>PALLETS</th><th>ALMACEN</th></tr></thead><tbody id="tbody"></tbody></table></div>
 </div>
 </div>
 
 <script>
-let base = JSON.parse(localStorage.getItem('uca_base_v10')||'{}');
-let stock = JSON.parse(localStorage.getItem('uca_stock_v10')||'{}');
-
-// ✅ ARREGLO CLAVE: normaliza TODOS los códigos igual
-function norm(c){
-  c = String(c||'').trim().replace(/\s+/g,'');
-  if(!c) return c;
-  if(c.length<=4) return '100'+c;
-  if(c.length==6) return '10'+c;
-  return c;
-}
-
+// Lee tu base VIEJA y la nueva, para que NO se borre
+let base = JSON.parse(localStorage.getItem('baseMadre')||localStorage.getItem('uca_base')||localStorage.getItem('uca_base_v9')||localStorage.getItem('uca_base_v10')||'{}');
+let stock = JSON.parse(localStorage.getItem('stockMB52')||localStorage.getItem('uca_stock')||localStorage.getItem('uca_stock_v9')||localStorage.getItem('uca_stock_v10')||'{}');
+// ✅ ÚNICO ARREGLO: normaliza 4 dígitos -> 100..., 6 dígitos -> 10...
+function norm(c){ c=String(c||'').trim(); if(c.length<=4) return '100'+c; if(c.length==6) return '10'+c; return c; }
+function toggleBase(){ let b=document.getElementById('baseBox'); b.style.display=b.style.display=='none'?'block':'none'; if(b.style.display=='block'){ document.getElementById('txtBase').value=Object.keys(base).map(k=>k+' - '+base[k].desc+' - '+base[k].ucaja+' - '+base[k].cpallet+' - '+base[k].alm).join('\n'); } }
 function guardarBase(){
-  let txt = document.getElementById('txtBase').value.trim();
-  if(!txt) return alert('Pega primero tu columna H');
-  let nuevos=0, act=0;
-  txt.split('\n').forEach(l=>{
-    l=l.trim(); if(!l) return;
-    let p=l.split('-').map(x=>x.trim());
-    if(p.length<5) return;
-    let cod=norm(p[0]);
-    let desc=p[1];
-    let ucaja=parseFloat(p[2])||1;
-    let cpallet=parseFloat(p[3])||1;
-    let alm=p.slice(4).join(' - ').toUpperCase();
-    if(!base[cod]) nuevos++; else act++;
-    base[cod]={desc,ucaja,cpallet,alm};
-  });
-  localStorage.setItem('uca_base_v10',JSON.stringify(base));
-  document.getElementById('msgBase').innerHTML='<span class="verde">✅ Guardado: '+nuevos+' nuevos + '+act+' actualizados. Total Base Madre: '+Object.keys(base).length+' códigos</span>';
+  let t=document.getElementById('txtBase').value.trim(); if(!t) return alert('Pega tu columna H');
+  let n=0,a=0;
+  t.split('\n').forEach(l=>{ l=l.trim(); if(!l) return; let p=l.split('-').map(x=>x.trim()); if(p.length<5) return; let cod=norm(p[0]); if(!base[cod]) n++; else a++; base[cod]={desc:p[1],ucaja:parseFloat(p[2])||1,cpallet:parseFloat(p[3])||1,alm:p.slice(4).join(' - ').toUpperCase()}; });
+  // Guarda en TODAS las llaves para que nunca se pierda
+  localStorage.setItem('baseMadre',JSON.stringify(base)); localStorage.setItem('uca_base',JSON.stringify(base)); localStorage.setItem('uca_base_v10',JSON.stringify(base));
+  document.getElementById('msgBase').innerHTML='✅ Guardado: '+n+' nuevos + '+a+' actualizados. Total: '+Object.keys(base).length+' códigos'; render();
+}
+function exportarBase(){ let o=Object.keys(base).map(k=>k+' - '+base[k].desc+' - '+base[k].ucaja+' - '+base[k].cpallet+' - '+base[k].alm).join('\n'); navigator.clipboard.writeText(o).then(()=>alert('Base Madre copiada: '+Object.keys(base).length)); }
+function ejemplo(){ document.getElementById('txtMB').value='1001273 - 2112\n1001169 - 2526827\n1004891 - 2225840'; }
+function actualizar(){
+  let t=document.getElementById('txtMB').value.trim(); if(!t) return alert('Pega tu MB52');
+  let rojos=[],c=0;
+  t.split('\n').forEach(l=>{ l=l.trim(); if(!l) return; let p=l.split('-'); if(p.length<2) return; let cod=norm(p[0]); let cant=parseFloat(String(p[1]).replace(/[^0-9.-]/g,''))||0; if(!base[cod]){rojos.push(cod);return;} stock[cod]=cant; c++; });
+  localStorage.setItem('stockMB52',JSON.stringify(stock)); localStorage.setItem('uca_stock',JSON.stringify(stock)); localStorage.setItem('uca_stock_v10',JSON.stringify(stock));
+  document.getElementById('msg').innerHTML='✅ Actualizado: '+c+' códigos'+(rojos.length?' • <span style="color:red">'+rojos.length+' NO están en Base Madre</span>':'');
+  if(rojos.length){ let d=document.getElementById('rojos'); d.style.display='block'; d.innerHTML='<b style="color:red">⚠️ Códigos NO en Base Madre ('+rojos.length+'):</b><br>'+rojos.join(', ')+'<br><button class="btn btn-purple" style="margin-top:8px" onclick="copiarRojos()">📋 COPIAR CODIGOS ROJOS</button>'; window._rojos=rojos; } else document.getElementById('rojos').style.display='none';
   render();
 }
-
-function actualizarMB(){
-  let txt=document.getElementById('txtMB').value.trim();
-  if(!txt) return alert('Pega primero tu lista MB52');
-  let rojos=[];
-  let count=0;
-  txt.split('\n').forEach(l=>{
-    l=l.trim(); if(!l) return;
-    let p=l.split('-');
-    if(p.length<2) return;
-    let cod=norm(p[0]);
-    let cant=parseFloat(String(p[1]).replace(/[^0-9.-]/g,''))||0;
-    if(!base[cod]){ rojos.push(cod); return; }
-    stock[cod]=cant; count++;
-  });
-  localStorage.setItem('uca_stock_v10',JSON.stringify(stock));
-  document.getElementById('msg').innerHTML='<span class="verde">✅ Actualizado: '+count+' códigos</span> '+(rojos.length?' • <span class="rojo">'+rojos.length+' NO están en Base Madre</span>':'');
-  if(rojos.length){
-    let d=document.getElementById('listaRojos');
-    d.style.display='block';
-    d.innerHTML='<b class="rojo">⚠️ Códigos NO en Base Madre ('+rojos.length+'):</b><br>'+rojos.join(', ')+'<br><button class="btn-azul" style="margin-top:8px" onclick="copiarRojos()">📋 COPIAR CODIGOS ROJOS PARA BASE MADRE</button>';
-    window._rojos=rojos;
-  } else document.getElementById('listaRojos').style.display='none';
-  render();
-}
-function copiarRojos(){ if(window._rojos) navigator.clipboard.writeText(window._rojos.join('\n')).then(()=>alert('Copiados '+window._rojos.length+' códigos')); }
-function limpiarBaseTxt(){ document.getElementById('txtBase').value=''; }
-function limpiarMBTxt(){ document.getElementById('txtMB').value=''; }
-function borrarTodo(){ if(confirm('¿Borrar TODO?')){ base={}; stock={}; localStorage.removeItem('uca_base_v10'); localStorage.removeItem('uca_stock_v10'); render(); } }
-function exportarBase(){
-  let out=Object.keys(base).map(c=>c+' - '+base[c].desc+' - '+base[c].ucaja+' - '+base[c].cpallet+' - '+base[c].alm).join('\n');
-  navigator.clipboard.writeText(out).then(()=>alert('Base Madre copiada ('+Object.keys(base).length+')'));
-}
+function copiarRojos(){ if(window._rojos) navigator.clipboard.writeText(window._rojos.join('\n')).then(()=>alert('Copiados '+window._rojos.length)); }
+function compartir(){ alert('Toma captura y compártela por WhatsApp - Modo Captura'); }
 function render(){
-  let f=(document.getElementById('busc').value||'').toLowerCase();
-  let n1=0,n2=0,html='';
-  Object.keys(base).forEach(cod=>{
-    let b=base[cod];
-    let st=stock[cod]||0;
-    let pal = (b.ucaja>0 && b.cpallet>0) ? st/(b.ucaja*b.cpallet) : 0;
-    let esRef = b.alm.includes('REFRIGER');
-    if(esRef) n2+=pal; else n1+=pal;
-    if(f && !(cod.includes(f) || b.desc.toLowerCase().includes(f))) return;
-    html+='<tr><td>'+cod+'</td><td>'+b.desc+'</td><td>'+b.alm+'</td><td>'+st.toLocaleString()+'</td><td>'+b.ucaja+'</td><td>'+b.cpallet+'</td><td><b>'+pal.toFixed(1)+'</b></td></tr>';
-  });
-  document.getElementById('tbody').innerHTML=html||'<tr><td colspan="7" style="text-align:center;color:#999">Sin datos. Pega tu Base Madre arriba.</td></tr>';
+  let f=(document.getElementById('busc').value||'').toLowerCase(); let n1=0,n2=0,html='',arr=[];
+  Object.keys(base).forEach(cod=>{ let b=base[cod]; let st=stock[cod]||0; let und=b.ucaja*b.cpallet; let pal=und?st/und:0; let cajas=b.ucaja?st/b.ucaja:0; if(b.alm.includes('REFRIGER')) n1+=pal; else n2+=pal; arr.push({cod,desc:b.desc,st,uc:b.ucaja,cp:b.cpallet,und,cajas,pal,alm:b.alm}); });
+  arr.sort((a,b)=>b.pal-a.pal);
+  document.getElementById('top10').innerHTML=arr.slice(0,10).map((x,i)=>'<div style="margin-bottom:6px"><b>'+(i+1)+'. '+x.cod+' '+x.desc+'</b><div class="bar"><i style="width:'+(x.pal/(arr[0]?.pal||1)*100)+'%"></i></div><small>'+x.pal.toFixed(1)+' pal | '+x.cajas.toFixed(0)+' caj</small></div>').join('')||'Sin datos';
+  arr.forEach(x=>{ if(f && !(x.cod.includes(f)||x.desc.toLowerCase().includes(f))) return; html+='<tr><td>'+x.cod+'</td><td style="text-align:left">'+x.desc+'</td><td>'+x.st.toLocaleString()+'</td><td>'+x.uc+'</td><td>'+x.cp+'</td><td>'+x.und.toLocaleString()+'</td><td>'+x.cajas.toFixed(0)+'</td><td><b>'+x.pal.toFixed(1)+'</b></td><td>'+x.alm+'</td></tr>'; });
+  document.getElementById('tbody').innerHTML=html||'<tr><td colspan="9" style="text-align:center">Sin datos</td></tr>';
+  // Tabla superior: NAVE1=REFRIGERADOS, NAVE2=ABARROTES (como tu foto)
   let tot=n1+n2;
-  document.getElementById('tN1').textContent=n1.toFixed(0);
-  document.getElementById('tN2').textContent=n2.toFixed(0);
-  document.getElementById('tTot').textContent=tot.toFixed(0);
-  document.getElementById('tPct').textContent = tot? Math.round(tot/8000*100)+'%':'0%';
-  document.getElementById('countBase').textContent=Object.keys(base).length+' códigos';
-  document.getElementById('countMB').textContent=Object.keys(stock).length+' códigos';
+  document.getElementById('cN1').textContent=n1.toFixed(1); document.getElementById('cN2').textContent=n2.toFixed(1); document.getElementById('cTot').textContent=tot.toFixed(1);
+  document.getElementById('lN1').textContent=(7840-n1).toFixed(1); document.getElementById('lN2').textContent=(9800-n2).toFixed(1); document.getElementById('lTot').textContent=(17640-tot).toFixed(1);
+  document.getElementById('pN1').textContent=(n1/8000*100).toFixed(1)+'%'; document.getElementById('pN2').textContent=(n2/10000*100).toFixed(1)+'%'; document.getElementById('pTot').textContent=(tot/18000*100).toFixed(1)+'%';
+  document.getElementById('g1').textContent=Math.round(tot/18000*100)+'%'; document.getElementById('g2').textContent=Math.round((tot+326)/18000*100)+'%';
+  document.getElementById('countBase').textContent=Object.keys(base).length+' códigos'; document.getElementById('countDet').textContent=Object.keys(base).length;
 }
 render();
 </script>
-</body>
-</html>
+</body></html>
