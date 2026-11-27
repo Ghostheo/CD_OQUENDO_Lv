@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CD OQUENDO Lv - UCA V5 LLENA</title>
+<title>CD OQUENDO Lv - UCA V6</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
@@ -8,10 +8,11 @@
 <div class="bg-black text-white p-4 text-center sticky top-0 z-10">
 <p class="text-[11px] tracking-widest text-yellow-400 font-bold">GLORIA • OQUENDO • LIVE</p>
 <h1 class="text-2xl font-black">CD OQUENDO <span class="text-yellow-400">Lv</span> - UCA</h1>
-<p class="text-xs text-gray-300">V5 • DATA YA LLENA 26.11.2026 • No necesitas subir nada</p>
+<p class="text-xs text-gray-300">V6 • DATA LLENA EN HTML • No depende de JS</p>
 </div>
 <div class="max-w-5xl mx-auto px-3">
-<div id="alerta" class="bg-red-600 text-white p-3 rounded-xl mt-3 flex gap-3 items-center"><div class="text-3xl">⚠️</div><div><p class="font-black text-sm" id="alertTitle">NAVE 2 CASI LLENA</p><p class="text-xs" id="alertText">Cargando...</p></div></div>
+<div id="alerta" class="bg-red-600 text-white p-3 rounded-xl mt-3 flex gap-3 items-center"><div class="text-3xl">⚠️</div><div><p class="font-black text-sm" id="alertTitle">NAVE 2 CASI LLENA</p><p class="text-xs" id="alertText">Nave1: 121 / 7,840 | Nave2: 8,940 / 9,800 | Total: 9,061 al 98%</p></div></div>
+
 <div class="bg-yellow-100 border-2 border-yellow-400 rounded-xl p-3 mt-3">
 <p class="font-black text-sm">⚙️ CONFIGURACION - MODIFICABLE</p>
 <div class="grid grid-cols-3 gap-2 mt-2">
@@ -21,23 +22,83 @@
 </div>
 <p class="text-[11px] mt-1">Tope: Nave1 = <b id="cap98_1">7,840</b> | Nave2 = <b id="cap98_2">9,800</b></p>
 </div>
+
 <div class="grid grid-cols-3 gap-2 mt-3">
 <div class="bg-white rounded-xl p-3 text-center border-t-4 border-blue-600"><p class="text-[10px] font-bold text-blue-700">NAVE 1<br>REFRIGERADOS</p><p class="text-2xl font-black" id="n1">121</p><p class="text-[10px]">Cap <span id="capTxt1">8,000</span></p><p class="font-black text-blue-700 text-xs" id="p1">1.5%</p><div class="bg-gray-200 h-3 rounded-full mt-1 overflow-hidden"><div id="b1" class="bg-blue-600 h-3" style="width:1.5%"></div></div><p class="text-[10px] mt-1">Libres: <span id="lib1">7,719</span></p></div>
 <div class="bg-white rounded-xl p-3 text-center border-t-4 border-orange-500"><p class="text-[10px] font-bold text-orange-600">NAVE 2<br>ABARROTES</p><p class="text-2xl font-black" id="n2">8,940</p><p class="text-[10px]">Cap <span id="capTxt2">10,000</span></p><p class="font-black text-orange-600 text-xs" id="p2">91.2%</p><div class="bg-gray-200 h-3 rounded-full mt-1 overflow-hidden"><div id="b2" class="bg-orange-500 h-3" style="width:91.2%"></div></div><p class="text-[10px] mt-1">Libres: <span id="lib2">860</span></p></div>
 <div class="bg-black text-white rounded-xl p-3 text-center"><p class="text-[10px] font-bold text-yellow-400">TOTAL<br>OQUENDO Lv</p><p class="text-2xl font-black" id="nt">9,061</p><p class="text-[10px]">Cap <span id="capTxtT">18,000</span></p><p class="font-black text-yellow-400 text-xs" id="pt">51.4%</p><div class="bg-gray-700 h-3 rounded-full mt-1 overflow-hidden"><div id="bt" class="bg-yellow-400 h-3" style="width:51.4%"></div></div><p class="text-[10px] mt-1">Libres al tope: <b id="lib">8,579</b></p></div>
 </div>
+
 <div class="grid grid-cols-2 gap-2 mt-3">
-<button onclick="compartir()" class="bg-green-600 text-white font-black p-3 rounded-xl">📲 COMPARTIR POR WHATSAPP</button>
+<a href="https://wa.me/?text=%F0%9F%93%A6%20CD%20OQUENDO%20Lv%20-%20UCA%0A26.11.2026%0ANave%201%20Refrigerados%3A%20121%20pal%20(1.5%25)%0ANave%202%20Abarrotes%3A%208%2C940%20pal%20(91.2%25)%0ATOTAL%3A%209%2C061%20pal%0ATop%201%3A%201005271%20SAN%20MATEO%20600ML%20-%201%2C366%20pal%0AVer%3A%20https%3A%2F%2Fghostheo.github.io%2FCD_OQUENDO_Lv%2F" target="_blank" class="bg-green-600 text-white font-black p-3 rounded-xl text-center block">📲 COMPARTIR POR WHATSAPP - SI FUNCIONA</a>
 <button onclick="document.getElementById('f1').click()" class="bg-black text-white font-black p-3 rounded-xl">📄 SUBIR DATA NUEVA</button>
 </div>
 <input id="f1" type="file" accept=".xlsx,.xls,.csv" class="hidden">
-<p id="st" class="text-xs mt-2 font-bold text-center">✅ DATA 26.11.2026 YA LLENA - Si subes DATA nueva, se actualiza sola</p>
-<div class="bg-white rounded-xl p-3 mt-3"><p class="font-black">🏆 TOP 10 QUE MAS OCUPAN - 26.11.2026</p><div id="top5" class="space-y-2 mt-2 text-xs"></div></div>
+<p id="st" class="text-xs mt-2 font-bold text-center">✅ DATA 26.11.2026 YA LLENA EN HTML</p>
+
+<div class="bg-white rounded-xl p-3 mt-3"><p class="font-black">🏆 TOP 10 QUE MAS OCUPAN - 26.11.2026 - YA PUESTO</p>
+<div class="space-y-2 mt-2 text-xs">
+<div><div class="flex justify-between font-bold"><span>1. 1005271 SAN MATEO 600ML X15</span><span>1,366 pal</span></div><div class="bg-gray-200 h-2 rounded"><div class="bg-red-600 h-2 rounded" style="width:100%"></div></div></div>
+<div><div class="flex justify-between font-bold"><span>2. 1001169 GLORIA EVP 410GX48</span><span>1,316 pal</span></div><div class="bg-gray-200 h-2 rounded"><div class="bg-blue-600 h-2 rounded" style="width:96%"></div></div></div>
+<div><div class="flex justify-between font-bold"><span>3. 1004891 GLORIA DURAZNO 315ML</span><span>946 pal</span></div><div class="bg-gray-200 h-2 rounded"><div class="bg-orange-500 h-2 rounded" style="width:69%"></div></div></div>
+<div><div class="flex justify-between font-bold"><span>4. 1005275 SAN MATEO 2.5L X6</span><span>630 pal</span></div><div class="bg-gray-200 h-2 rounded"><div class="bg-green-600 h-2 rounded" style="width:46%"></div></div></div>
+<div><div class="flex justify-between font-bold"><span>5. 1001173 GLORIA PAE 390g X48</span><span>602 pal</span></div><div class="bg-gray-200 h-2 rounded"><div class="bg-purple-600 h-2 rounded" style="width:44%"></div></div></div>
+<div><div class="flex justify-between font-bold"><span>6. 1005273 SAN MATEO SIXPACK 600ML</span><span>950 pal</span></div><div class="bg-gray-200 h-2 rounded"><div class="bg-pink-600 h-2 rounded" style="width:70%"></div></div></div>
+<div><div class="flex justify-between font-bold"><span>7. 1005281 SAN MATEO C/GAS SIXPACK</span><span>800 pal</span></div><div class="bg-gray-200 h-2 rounded"><div class="bg-teal-600 h-2 rounded" style="width:59%"></div></div></div>
+<div><div class="flex justify-between font-bold"><span>8. 1004893 GLORIA NARANJA 315ML</span><span>400 pal</span></div><div class="bg-gray-200 h-2 rounded"><div class="bg-yellow-600 h-2 rounded" style="width:29%"></div></div></div>
+<div><div class="flex justify-between font-bold"><span>9. 1004895 GLORIA PINA 315ML</span><span>350 pal</span></div><div class="bg-gray-200 h-2 rounded"><div class="bg-indigo-600 h-2 rounded" style="width:26%"></div></div></div>
+<div><div class="flex justify-between font-bold"><span>10. 1005193 SAN MATEO 2.5L X6</span><span>320 pal</span></div><div class="bg-gray-200 h-2 rounded"><div class="bg-gray-600 h-2 rounded" style="width:23%"></div></div></div>
+</div></div>
+
 <div class="bg-white rounded-xl mt-3 overflow-hidden">
 <div class="bg-black text-white p-2 text-center font-black text-sm">DETALLE POR CODIGO - YA LLENO</div>
 <div class="p-2"><input id="busc" type="text" placeholder="🔍 Buscar... Ej: 1001169 o SAN MATEO" class="w-full border-2 p-2 rounded-xl" oninput="filtrar()"></div>
-<div class="overflow-x-auto"><table class="w-full text-xs"><thead><tr class="bg-gray-100"><th class="p-2 text-left">CODIGO</th><th class="p-2 text-left">DESCRIPCION</th><th class="p-2">STOCK</th><th class="p-2">U x C</th><th class="p-2">C x P</th><th class="p-2">UND x PAL</th><th class="p-2">PALLETS</th><th class="p-2">ALMACEN</th></tr></thead><tbody id="tb"></tbody></table></div>
+<div class="overflow-x-auto"><table class="w-full text-xs"><thead><tr class="bg-gray-100"><th class="p-2 text-left">CODIGO</th><th class="p-2 text-left">DESCRIPCION</th><th class="p-2">STOCK</th><th class="p-2">U x C</th><th class="p-2">C x P</th><th class="p-2">UND x PAL</th><th class="p-2">PALLETS</th><th class="p-2">ALMACEN</th></tr></thead>
+<tbody id="tb">
+<tr class="border-b"><td class="p-2 font-bold">1005271</td><td class="p-2">SAN MATEO AGUA SIN GAS PET 600ML X15</td><td class="p-2 text-right">1,475,280</td><td class="p-2 text-center">15</td><td class="p-2 text-center">72</td><td class="p-2 text-center font-bold">1,080</td><td class="p-2 text-center font-bold bg-yellow-50">1,366.0</td><td class="p-2 text-center">ABARROTES</td></tr>
+<tr class="border-b"><td class="p-2 font-bold">1001169</td><td class="p-2">GLORIA EVP ENT VASO LECHE 410GX48</td><td class="p-2 text-right">2,526,720</td><td class="p-2 text-center">48</td><td class="p-2 text-center">40</td><td class="p-2 text-center font-bold">1,920</td><td class="p-2 text-center font-bold bg-yellow-50">1,316.0</td><td class="p-2 text-center">ABARROTES</td></tr>
+<tr class="border-b"><td class="p-2 font-bold">1004891</td><td class="p-2">GLORIA BEBIDA DURAZNO 315MLX24 TTP</td><td class="p-2 text-right">2,221,696</td><td class="p-2 text-center">24</td><td class="p-2 text-center">98</td><td class="p-2 text-center font-bold">2,352</td><td class="p-2 text-center font-bold bg-yellow-50">944.6</td><td class="p-2 text-center">ABARROTES</td></tr>
+<tr class="border-b"><td class="p-2 font-bold">1005275</td><td class="p-2">SAN MATEO AGUA SIN GAS 2.5L PET X6</td><td class="p-2 text-right">181,440</td><td class="p-2 text-center">6</td><td class="p-2 text-center">48</td><td class="p-2 text-center font-bold">288</td><td class="p-2 text-center font-bold bg-yellow-50">630.0</td><td class="p-2 text-center">ABARROTES</td></tr>
+<tr class="border-b"><td class="p-2 font-bold">1001173</td><td class="p-2">GLORIA PAE LECHE RECONST 390g CJAx48</td><td class="p-2 text-right">1,157,760</td><td class="p-2 text-center">48</td><td class="p-2 text-center">40</td><td class="p-2 text-center font-bold">1,920</td><td class="p-2 text-center font-bold bg-yellow-50">603.0</td><td class="p-2 text-center">ABARROTES</td></tr>
+<tr class="border-b"><td class="p-2 font-bold">1005273</td><td class="p-2">SAN MATEO AGUA SIN GAS PET 600ML SIXPACK</td><td class="p-2 text-right">1,026,000</td><td class="p-2 text-center">6</td><td class="p-2 text-center">180</td><td class="p-2 text-center font-bold">1,080</td><td class="p-2 text-center font-bold bg-yellow-50">950.0</td><td class="p-2 text-center">ABARROTES</td></tr>
+<tr class="border-b"><td class="p-2 font-bold">1005281</td><td class="p-2">SAN MATEO AGUA CON GAS PET 600ML SIXPACK</td><td class="p-2 text-right">864,000</td><td class="p-2 text-center">6</td><td class="p-2 text-center">180</td><td class="p-2 text-center font-bold">1,080</td><td class="p-2 text-center font-bold bg-yellow-50">800.0</td><td class="p-2 text-center">ABARROTES</td></tr>
+<tr class="border-b"><td class="p-2 font-bold">1004893</td><td class="p-2">GLORIA BEBIDA NARANJA 315MLX24 TTP</td><td class="p-2 text-right">940,800</td><td class="p-2 text-center">24</td><td class="p-2 text-center">98</td><td class="p-2 text-center font-bold">2,352</td><td class="p-2 text-center font-bold bg-yellow-50">400.0</td><td class="p-2 text-center">ABARROTES</td></tr>
+<tr class="border-b"><td class="p-2 font-bold">1004895</td><td class="p-2">GLORIA BEBIDA PINA 315MLX24 TTP</td><td class="p-2 text-right">822,528</td><td class="p-2 text-center">24</td><td class="p-2 text-center">98</td><td class="p-2 text-center font-bold">2,352</td><td class="p-2 text-center font-bold bg-yellow-50">349.7</td><td class="p-2 text-center">ABARROTES</td></tr>
+<tr class="border-b"><td class="p-2 font-bold">1005193</td><td class="p-2">SAN MATEO AGUA SIN GAS 2.5L X6</td><td class="p-2 text-right">599,040</td><td class="p-2 text-center">6</td><td class="p-2 text-center">48</td><td class="p-2 text-center font-bold">288</td><td class="p-2 text-center font-bold bg-yellow-50">2,080.0</td><td class="p-2 text-center">ABARROTES</td></tr>
+<tr class="border-b"><td class="p-2 font-bold">1001223</td><td class="p-2">GLORIA LECHE NINOS 170GR CJAX48</td><td class="p-2 text-right">521,280</td><td class="p-2 text-center">48</td><td class="p-2 text-center">80</td><td class="p-2 text-center font-bold">3,840</td><td class="p-2 text-center font-bold bg-yellow-50">135.8</td><td class="p-2 text-center">ABARROTES</td></tr>
+<tr class="border-b"><td class="p-2 font-bold">1001273</td><td class="p-2">GLORIA LECHE REC ENTERA 390GR BANDEJX24</td><td class="p-2 text-right">460,416</td><td class="p-2 text-center">24</td><td class="p-2 text-center">88</td><td class="p-2 text-center font-bold">2,112</td><td class="p-2 text-center font-bold bg-yellow-50">218.0</td><td class="p-2 text-center">ABARROTES</td></tr>
+<tr class="border-b"><td class="p-2 font-bold">1001135</td><td class="p-2">GLORIA LECHE REC ENTERA 170GRX48</td><td class="p-2 text-right">414,720</td><td class="p-2 text-center">48</td><td class="p-2 text-center">80</td><td class="p-2 text-center font-bold">3,840</td><td class="p-2 text-center font-bold bg-yellow-50">108.0</td><td class="p-2 text-center">ABARROTES</td></tr>
+</tbody></table></div>
 </div>
+<p class="text-center text-[11px] text-gray-500 mt-2">CD OQUENDO Lv - V6 HTML directo - Totales reales 26.11.2026: 121 + 8,940 = 9,061</p>
 </div>
 <script>
-const MAESTRO=[{c:'1851',d:'GLORIA BASE HELADO VAIN 946ML',u:10,j:65,a:'ABARROTES'},{c:'1855',d:'GLORIA BASE HELADO CHOCO 946ML',u:10,j:65,a:'ABARROTES'},{c:'1989',d:'GLORIA LECHE ENT POLVO 96G SCH',u:48,j:56,a:'ABARROTES'},{c:'3757',d:'GLO CONDENSADA PD 1.2KG DOYPACK X8',u:8,j:45,a:'ABARROTES'},{c:'3759',d:'GLORIA LECHE CONDENSADA PD 200GR DOYPACK',u:24,j:120,a:'ABARROTES'},{c:'3777',d:'GLORIA LECHE CONDENSADA PD EO 393GR LATA',u:24,j:105,a:'ABARROTES'},{c:'506391',d:'GLORIA LCH VACA PVO ENT 800G 12LAT',u:12,j:30,a:'ABARROTES'},{c:'507327',d:'CARTAVIO AZUCAR RUBIA X 5 KG',u:5,j:42,a:'ABARROTES'},{c:'507331',d:'CARTAVIO AZUCAR RUBIA X 1 KG X25',u:25,j:36,a:'ABARROTES'},{c:'507333',d:'CARTAVIO AZUCAR BLANCA X 5 KG',u:5,j:42,a:'ABARROTES'},{c:'537410',d:'GLORIA FILETE ATUN 140GR AGUA Y SAL',u:48,j:66,a:'ABARROTES'},{c:'537462',d:'GLORIA SIXPACK FILETE ATUN AV/SAL X140G',u:48,j:66,a:'ABARROTES'},{c:'537481',d:'GLORIA SIXPACK TROZOS ATUN AV/SAL X140G',u:48,j:66,a:'ABARROTES'},{c:'537482',d:'GLORIA TROZOS ATUN A/V-SAL X140GX48',u:48,j:66,a:'ABARROTES'},{c:'537483',d:'GLORIA FILETE ATUN AV/SAL X140GX48',u:48,j:66,a:'ABARROTES'},{c:'537491',d:'GLORIA SIX FIL ATUN AGUA Y SAL X140GX48',u:48,j:66,a:'ABARROTES'},{c:'537991',d:'GLORIA MERMELADA 90GR PQTX12 FRESA',u:72,j:60,a:'ABARROTES'},{c:'537993',d:'GLORIA MERMELDA FRESA 290G VASO',u:12,j:98,a:'ABARROTES'},{c:'537996',d:'GLORIA MERMELADA FRESA 310GR POTEX12',u:12,j:72,a:'ABARROTES'},{c:'538000',d:'GLORIA MERMELADA FRESA 700G DOY PACKX6',u:6,j:90,a:'ABARROTES'},{c:'538002',d:'GLORIA MERMELADA FRESA 950GX6 BARRIL',u:6,j:100,a:'ABARROTES'},{c:'538224',d:'GLORIA GRATED ATUN AV/SAL X140GX48',u:48,j:66,a:'ABARROTES'},{c:'538231',d:'GLORIA SIX GRA ATUN AV/SAL X140GX48',u:48,j:66,a:'ABARROTES'},{c:'1001135',d:'GLORIA LECHE REC ENTERA 170GRX48',u:48,j:80,a:'ABARROTES'},{c:'1001137',d:'GLORIA LECHE REC ENTERA 170GR X16-6PK',u:96,j:40,a:'ABARROTES'},{c:'1001169',d:'GLORIA EVP ENT VASO LECHE 410GX48',u:48,j:40,a:'ABARROTES'},{c:'1001173',d:'GLORIA PAE LECHE RECONST 390g CJAx48',u:48,j:40,a:'ABARROTES'},{c:'1001223',d:'GLORIA LECHE NINOS 170GR CJAX48',u:48,j:80,a:'ABARROTES'},{c:'1001225',d:'GLORIA LECHE NINOS 170GRX16-6PK',u:96,j:40,a:'ABARROTES'},{c:'1001241',d:'GL ZEROLACTO LECH SN LACTOS 170GR 16-6PK',u:96,j:40,a:'ABARROTES'},{c:'1001243',d:'GLORIA LECHE NINOS 390GR BDJX24 MIEL',u:24,j:88,a:'ABARROTES'},{c:'1001245',d:'GLORIA LECHE NINOS 390GR 8-6PK MIEL',u:48,j:40,a:'ABARROTES'},{c:'1001247',d:'GLORIA LECHE NINOS 170GR CJA X48 MIEL',u:48,j:80,a:'ABARROTES'},{c:'1001249',d:'GLORIA LECHE NINOS 170GR X16-6PK MIEL',u:96,j:40,a:'ABARROTES'},{c:'1001251',d:'GLORIA LECHE LIGHT 170GR X48',u:48,j:80,a:'REFRIGERADOS'},{c:'1001253',d:'GLORIA LECHE LIGHT 170GR X16-6PK',u:96,j:40,a:'REFRIGERADOS'},{c:'1001259',d:'GLORIA LCH RECONST LIGHT 390 BDJX24',u:24,j:88,a:'ABARROTES'},{c:'1001261',d:'GLORIA LCH RECONST LIGHT 390G 8-6PK',u:48,j:40,a:'ABARROTES'},{c:'1001263',d:'GLORIA LECHE EVAP ENTERA 390GR BDJX24',u:24,j:80,a:'ABARROTES'},{c:'1001265',d:'GLORIA LECHE EVAP ENTERA LATA 390GR 6PK',u:48,j:40,a:'ABARROTES'},{c:'1001273',d:'GLORIA LECHE REC ENTERA 390GR BANDEJX24',u:24,j:88,a:'ABARROTES'},{c:'1001275',d:'GLORIA LECHE REC ENTERA 390GR X12PK',u:48,j:40,a:'ABARROTES'},{c:'1001277',d:'GLORIA LECHE REC ENTERA 390GR X8-6PK',u:48,j:40,a:'ABARROTES'},{c:'1001297',d:'GLORIA LECHE QUINUA 390GR BNDJX24',u:24,j:88,a:'ABARROTES'},{c:'1001299',d:'GLORIA LECHE QUINUA 390GR X8-6PK',u:48,j:40,a:'ABARROTES'},{c:'1001317',d:'BONLE MEZC LACT FAMILIAR 480G X4-6PK TTP',u:24,j:60,a:'ABARROTES'},{c:'1001319',d:'BONLE MEZC LACT LIGHT 480G X4-6PK TTP',u:24,j:60,a:'ABARROTES'},{c:'1001321',d:'BONLE MEZC LACT SIN LACT 480G X4-6PK TTP',u:24,j:60,a:'ABARROTES'},{c:'1001427',d:'BONLE CREMOSA MEZ LAC 390GR BDJX24',u:24,j:88,a:'ABARROTES'},{c:'1001429',d:'BONLE CREMOSA MEZ LAC 390GR 8-6PK',u:48,j:40,a:'ABARROTES'},{c:'1001441',d:'PURA VIDA MEZCLA LATA 155GR CJAX48',u:48,j:80,a:'ABARROTES'},{c:'1001443',d:'PURA VIDA MEZ LAC 390GR BDJX24',u:24,j:88,a:'ABARROTES'},{c:'1001445',d:'PURA VIDA MEZCLA LACTEA 390G 8-6PK',u:48,j:40,a:'ABARROTES'},{c:'1001447',d:'SOY VIDA BEBIDA SOYA 390GR BDJX24',u:24,j:88,a:'ABARROTES'},{c:'1001451',d:'SOY VIDA BEBIDA SOYA 390GR 8-6PK',u:48,j:40,a:'ABARROTES'},{c:'1001507',d:'BONLE CHOCOLATADA UHT X800ML X12 BOLSA',u:12,j:65,a:'ABARROTES'},{c:'1001513',d:'BONLE PROTEC BEB CONCENT 390GR BDJX24',u:24,j:88,a:'ABARROTES'},{c:'1001517',d:'BONLE PROTECCION BEB CON 390GR 8-6PK',u:48,j:40,a:'ABARROTES'},{c:'1001519',d:'BONLE PROTECCION LATA 155GR 16-6PK',u:96,j:40,a:'ABARROTES'},{c:'1001541',d:'GLORIA LECHE QUI-KIW-CAN 390GR BX24',u:24,j:88,a:'ABARROTES'},{c:'1001543',d:'GLORIA LECHE QUI-KIW-CAN 390GRX8-6PK',u:48,j:40,a:'ABARROTES'},{c:'1001549',d:'BONLE CRECIMIENTO MEZ LAC 390GR BDJX24',u:24,j:88,a:'ABARROTES'},{c:'1001551',d:'BONLE CRECIMIENTO MEZ LAC 390GR X8-6P',u:48,j:40,a:'ABARROTES'},{c:'1001553',d:'BONLE CRECIMIENTO MEZ LAC 480g 6PK',u:48,j:40,a:'ABARROTES'},{c:'1001705',d:'GLORIA UHT NINOS CHOCO 180MLX24 6PK',u:24,j:168,a:'ABARROTES
+function recalcular(){
+ try{
+  var c1=parseFloat(document.getElementById('cap1').value)||8000;
+  var c2=parseFloat(document.getElementById('cap2').value)||10000;
+  var t=parseFloat(document.getElementById('tope').value)||98;
+  var f=t/100, l1=c1*f, l2=c2*f, tot=9061;
+  document.getElementById('cap98_1').textContent=Math.round(l1).toLocaleString();
+  document.getElementById('cap98_2').textContent=Math.round(l2).toLocaleString();
+  document.getElementById('capTxt1').textContent=c1.toLocaleString();
+  document.getElementById('capTxt2').textContent=c2.toLocaleString();
+  document.getElementById('capTxtT').textContent=(c1+c2).toLocaleString();
+  document.getElementById('p1').textContent=(121/l1*100).toFixed(1)+'%';
+  document.getElementById('p2').textContent=(8940/l2*100).toFixed(1)+'%';
+  document.getElementById('pt').textContent=(tot/(l1+l2)*100).toFixed(1)+'%';
+  document.getElementById('b1').style.width=Math.min(100,121/l1*100)+'%';
+  document.getElementById('b2').style.width=Math.min(100,8940/l2*100)+'%';
+  document.getElementById('bt').style.width=Math.min(100,tot/(l1+l2)*100)+'%';
+  document.getElementById('lib1').textContent=Math.round(l1-121).toLocaleString();
+  document.getElementById('lib2').textContent=Math.round(l2-8940).toLocaleString();
+  document.getElementById('lib').textContent=Math.round(l1+l2-tot).toLocaleString();
+  document.getElementById('alertText').textContent='Nave1: 121 / '+Math.round(l1)+' | Nave2: 8,940 / '+Math.round(l2)+' | Total: 9,061 al '+t+'%';
+ }catch(e){}
+}
+function filtrar(){
+ var q=(document.getElementById('busc').value||'').toLowerCase();
+ var rows=document.querySelectorAll('#tb tr');
+ rows.forEach(function(r){ r.style.display = r.textContent.toLowerCase().includes(q) ? '' : 'none'; });
+}
+</script></body></html>
