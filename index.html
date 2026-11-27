@@ -8,20 +8,23 @@ body{font-family:Arial,Helvetica,sans-serif;background:#e9e9e9}
 .tabla td{font-size:13px}
 input{outline:none;background:transparent;text-align:center;font-weight:900;width:100%}
 input:focus{background:#fffbe6}
-select{outline:none;background:#1a2a3a;color:white;font-weight:900;border:1px solid #4a657a;border-radius:6px;padding:2px 4px;text-align:center}
+select{outline:none;background:#0e3f7a;color:white;font-weight:900;border:1px solid #3a6db0;border-radius:6px;padding:2px 4px;text-align:center}
 select option{background:white;color:black}
 body.captura .no-captura{display:none!important}
 body.captura{background:white!important}
 body.captura .max-w-5xl{padding:0!important}
-#btnSalir{position:fixed;top:12px;right:12px;z-index:99;background:#1e40af;color:white;width:56px;height:56px;border-radius:9999px;display:none;align-items:center;justify-content:center;flex-direction:column;font-size:22px;line-height:1;box-shadow:0 4px 12px rgba(0,0,0,.35);border:2px solid white}
+#btnSalir{position:fixed;top:12px;right:12px;z-index:99;background:#155EB0;color:white;width:56px;height:56px;border-radius:9999px;display:none;align-items:center;justify-content:center;flex-direction:column;font-size:22px;line-height:1;box-shadow:0 4px 12px rgba(0,0,0,.35);border:2px solid white}
 body.captura #btnSalir{display:flex!important}
 #btnSalir span{font-size:8px;font-weight:900;margin-top:1px}
-/* CRONOMETRO PROFESIONAL */
-.gauge-wrap{width:230px;margin:0 auto;text-align:center}
+/* COLORES LAVORO PERU */
+.bg-lavoro{background:#155EB0}
+.bg-lavoro-dark{background:#0e3f7a}
+.bg-lavoro-bar{background:#1a4a8a}
+/* CRONOMETRO CORREGIDO - % FUERA DEL DIBUJO */
+.gauge-wrap{width:100%;max-width:280px;margin:0 auto;text-align:center}
 .gauge-svg{width:100%;height:auto;display:block}
-.gauge-tick{font-size:8.5px;fill:#6b7280;font-weight:700;font-family:Arial}
-.gauge-pct{font-size:32px;font-weight:900;fill:#1e3a5f;font-family:Arial}
-.gauge-sub{font-size:9px;fill:#9ca3af;font-family:Arial}
+.gauge-tick{font-size:11px;fill:#6b7280;font-weight:700;font-family:Arial}
+.gauge-pct{font-size:36px;font-weight:900;color:#0e3f7a;line-height:1}
 </style></head>
 <body class="pb-6">
 <button id="btnSalir" onclick="salirCaptura()">🚪<span>SALIR</span></button>
@@ -29,18 +32,20 @@ body.captura #btnSalir{display:flex!important}
 <div class="max-w-5xl mx-auto px-2">
 <div id="reporteCaptura" class="bg-white border border-gray-300 mt-3 rounded-2xl overflow-hidden">
 
-<!-- ENCABEZADO -->
-<div class="bg-black text-white text-center pt-4 pb-3 px-3">
-<p class="text-[11px] tracking-[0.3em] text-yellow-400 font-bold">OPERACIONES LAVORO</p>
+<!-- ENCABEZADO COLOR LAVORO - YA NO NEGRO -->
+<div class="bg-lavoro text-white text-center pt-4 pb-3 px-3 relative">
+<div style="height:5px;background:#E53935;width:120px;margin:0 auto 8px;border-radius:99px"></div>
+<p class="text-[11px] tracking-[0.3em] text-white/90 font-bold">OPERACIONES LAVORO</p>
 <h1 class="text-3xl md:text-4xl font-black tracking-wide leading-tight mt-1">UCA - CD OQUENDO</h1>
-<p class="text-[11px] text-gray-300 mt-1">Desarrollado por <b class="text-white">Luis Vallejo</b> | Operaciones - Lavoro</p>
+<p class="text-[11px] text-white/80 mt-1">Desarrollado por <b class="text-white">Luis Vallejo</b> | Operaciones - Lavoro</p>
+<div style="height:5px;background:#3AA655;width:120px;margin:8px auto 0;border-radius:99px"></div>
 </div>
-<div class="bg-[#263f54] text-white text-center py-2.5">
+<div class="bg-lavoro-dark text-white text-center py-2.5">
 <h2 class="text-xl md:text-2xl font-black tracking-wide">OCUPABILIDAD POR POSICION</h2>
 </div>
 
-<!-- FECHA/HORA REAL + TURNO EDITABLE -->
-<div class="bg-[#1a2a3a] text-white flex flex-wrap justify-between items-center gap-2 px-4 py-2.5 text-xs md:text-sm font-bold">
+<!-- FECHA/HORA REAL + TURNO -->
+<div class="bg-[#0a2e56] text-white flex flex-wrap justify-between items-center gap-2 px-4 py-2.5 text-xs md:text-sm font-bold">
 <span>CD OQUENDO Lv - UCA</span>
 <span id="fechaReal">--/--/----</span>
 <span class="flex items-center gap-1">TURNO <select id="turno"><option value="1">1</option><option value="2" selected>2</option><option value="3">3</option></select></span>
@@ -50,11 +55,11 @@ body.captura #btnSalir{display:flex!important}
 <!-- TABLA -->
 <table class="w-full tabla text-center">
 <thead><tr class="bg-[#e5e5e5]">
-<th class="p-2 text-left text-[#1e3a5f]">NAVE</th>
-<th class="p-2 text-left text-[#1e3a5f]">ALMACEN</th>
-<th class="p-2 text-left text-[#1e3a5f]">ALMACENAMIENTO</th>
-<th class="p-2 text-[#1e3a5f]">CAPACIDAD<br>NOMINAL ✏️</th>
-<th class="p-2 text-[#1e3a5f]">AL <span id="topeTxt">98</span>%</th>
+<th class="p-2 text-left text-[#0e3f7a]">NAVE</th>
+<th class="p-2 text-left text-[#0e3f7a]">ALMACEN</th>
+<th class="p-2 text-left text-[#0e3f7a]">ALMACENAMIENTO</th>
+<th class="p-2 text-[#0e3f7a]">CAPACIDAD<br>NOMINAL ✏️</th>
+<th class="p-2 text-[#0e3f7a]">AL <span id="topeTxt">98</span>%</th>
 <th class="p-2 bg-[#fde68a]">STOCK<br>OCUPADO</th>
 <th class="p-2 bg-[#facc15]">UBICACIONES<br>LIBRES</th>
 <th class="p-2 bg-[#222] text-white">% OCUPABILIDAD<br>OCUPABILIDAD</th>
@@ -74,7 +79,7 @@ body.captura #btnSalir{display:flex!important}
 <td class="p-2 bg-[#fef3c7] font-bold">8,940.3</td><td class="p-2 bg-[#facc15] font-bold" id="l2">859.7</td>
 <td class="p-2 bg-[#222] text-white font-black" id="p2">91.2%</td>
 </tr>
-<tr class="bg-[#2c4a64] text-white font-black">
+<tr class="bg-[#1a4a8a] text-white font-black">
 <td class="p-2 text-left" colspan="3">TOTAL GENERAL</td>
 <td class="p-2" id="ctn">18,000</td><td class="p-2" id="ctt">17,640.0</td>
 <td class="p-2 bg-[#fef3c7] text-black">9,061.5</td><td class="p-2 bg-[#facc15] text-black" id="lt">8,578.5</td>
@@ -89,50 +94,59 @@ body.captura #btnSalir{display:flex!important}
 <div>TOTAL GENERAL con transito: <span id="conTransTxt">9,387.5</span> | <span id="conTransPct">53.2%</span> | Libres: <span id="libConTrans">8,252.5</span></div>
 </div>
 
-<!-- CRONOMETROS PROFESIONALES - ESTILO BSF -->
-<div class="bg-[#f8f8f8] grid grid-cols-2 gap-1 p-3 border-t">
+<!-- CRONOMETROS CORREGIDOS -->
+<div class="bg-white grid grid-cols-2 gap-2 p-3 border-t">
 <div class="gauge-wrap">
-<p class="font-black text-[#1e3a5f] text-base md:text-lg leading-tight">UCA SIN TRANSITO</p>
-<svg class="gauge-svg" viewBox="0 0 240 150">
-<defs><filter id="sh" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="1" stdDeviation="1" flood-opacity="0.2"/></filter></defs>
-<!-- fondo -->
-<path d="M 28 132 A 92 92 0 0 1 212 132" fill="none" stroke="#e5e7eb" stroke-width="16" stroke-linecap="round"/>
-<!-- verde 0-50 -->
-<path d="M 28 132 A 92 92 0 0 1 88 51" fill="none" stroke="#4caf50" stroke-width="16"/>
-<!-- amarillo 50-90 -->
-<path d="M 91 49 A 92 92 0 0 1 173 54" fill="none" stroke="#eab308" stroke-width="16"/>
-<!-- rojo 90-120 -->
-<path d="M 176 56 A 92 92 0 0 1 212 132" fill="none" stroke="#dc2626" stroke-width="16"/>
+<p class="font-black text-[#0e3f7a] text-base md:text-lg">UCA SIN TRANSITO</p>
+<svg class="gauge-svg" viewBox="0 0 300 175">
+<!-- arco -->
+<path d="M 30 150 A 120 120 0 0 1 270 150" fill="none" stroke="#e5e7eb" stroke-width="20" stroke-linecap="round"/>
+<path d="M 30 150 A 120 120 0 0 1 110 42" fill="none" stroke="#4caf50" stroke-width="20"/>
+<path d="M 115 40 A 120 120 0 0 1 210 48" fill="none" stroke="#eab308" stroke-width="20"/>
+<path d="M 215 51 A 120 120 0 0 1 270 150" fill="none" stroke="#dc2626" stroke-width="20"/>
 <!-- ticks -->
-<g stroke="#9ca3af" stroke-width="1"><line x1="28" y1="132" x2="36" y2="132"/><line x1="48" y1="66" x2="54" y2="71"/><line x1="88" y1="43" x2="88" y2="51"/><line x1="120" y1="40" x2="120" y2="48"/><line x1="152" y1="43" x2="152" y2="51"/><line x1="192" y1="66" x2="186" y2="71"/><line x1="212" y1="132" x2="204" y2="132"/></g>
-<!-- numeros -->
-<text x="28" y="148" text-anchor="middle" class="gauge-tick">0</text><text x="52" y="68" text-anchor="middle" class="gauge-tick">20</text><text x="92" y="38" text-anchor="middle" class="gauge-tick">40</text><text x="120" y="35" text-anchor="middle" class="gauge-tick">60</text><text x="152" y="38" text-anchor="middle" class="gauge-tick">80</text><text x="192" y="68" text-anchor="middle" class="gauge-tick">100</text><text x="212" y="148" text-anchor="middle" class="gauge-tick">120</text>
-<!-- aguja profesional -->
-<g id="aguja1" filter="url(#sh)"><polygon points="120,132 118,48 122,48" fill="#111827"/><circle cx="120" cy="132" r="3" fill="#111827"/></g>
-<circle cx="120" cy="132" r="8" fill="#111827" stroke="white" stroke-width="2.5"/>
-<text x="120" y="122" text-anchor="middle" class="gauge-pct" id="g1Big">51%</text>
-<text x="120" y="114" text-anchor="middle" class="gauge-sub" id="g1Sub">9,061.5 pal</text>
+<g stroke="#9ca3af" stroke-width="1.5"><line x1="30" y1="150" x2="40" y2="150"/><line x1="58" y1="73" x2="65" y2="80"/><line x1="110" y1="34" x2="110" y2="43"/><line x1="150" y1="30" x2="150" y2="39"/><line x1="190" y1="34" x2="190" y2="43"/><line x1="242" y1="73" x2="235" y2="80"/><line x1="270" y1="150" x2="260" y2="150"/></g>
+<!-- numeros AFUERA y separados -->
+<text x="30" y="172" text-anchor="middle" class="gauge-tick">0</text>
+<text x="62" y="78" text-anchor="middle" class="gauge-tick">20</text>
+<text x="110" y="28" text-anchor="middle" class="gauge-tick">40</text>
+<text x="150" y="22" text-anchor="middle" class="gauge-tick">60</text>
+<text x="192" y="28" text-anchor="middle" class="gauge-tick">80</text>
+<text x="242" y="78" text-anchor="middle" class="gauge-tick">100</text>
+<text x="270" y="172" text-anchor="middle" class="gauge-tick">120</text>
+<!-- aguja FINA -->
+<g id="aguja1"><polygon points="150,150 148,52 152,52" fill="#111827"/></g>
+<circle cx="150" cy="150" r="9" fill="#111827" stroke="white" stroke-width="3"/>
 </svg>
+<!-- % FUERA DEL DIBUJO - YA NO SE TAPA -->
+<div class="gauge-pct" id="g1Big">51%</div>
+<div class="text-[11px] text-gray-500" id="g1Sub">9,061.5 pal / 17,640</div>
 </div>
 <div class="gauge-wrap">
-<p class="font-black text-[#1e3a5f] text-base md:text-lg leading-tight">UCA CON TRANSITO</p>
-<svg class="gauge-svg" viewBox="0 0 240 150">
-<path d="M 28 132 A 92 92 0 0 1 212 132" fill="none" stroke="#e5e7eb" stroke-width="16" stroke-linecap="round"/>
-<path d="M 28 132 A 92 92 0 0 1 88 51" fill="none" stroke="#4caf50" stroke-width="16"/>
-<path d="M 91 49 A 92 92 0 0 1 173 54" fill="none" stroke="#eab308" stroke-width="16"/>
-<path d="M 176 56 A 92 92 0 0 1 212 132" fill="none" stroke="#dc2626" stroke-width="16"/>
-<g stroke="#9ca3af" stroke-width="1"><line x1="28" y1="132" x2="36" y2="132"/><line x1="48" y1="66" x2="54" y2="71"/><line x1="88" y1="43" x2="88" y2="51"/><line x1="120" y1="40" x2="120" y2="48"/><line x1="152" y1="43" x2="152" y2="51"/><line x1="192" y1="66" x2="186" y2="71"/><line x1="212" y1="132" x2="204" y2="132"/></g>
-<text x="28" y="148" text-anchor="middle" class="gauge-tick">0</text><text x="52" y="68" text-anchor="middle" class="gauge-tick">20</text><text x="92" y="38" text-anchor="middle" class="gauge-tick">40</text><text x="120" y="35" text-anchor="middle" class="gauge-tick">60</text><text x="152" y="38" text-anchor="middle" class="gauge-tick">80</text><text x="192" y="68" text-anchor="middle" class="gauge-tick">100</text><text x="212" y="148" text-anchor="middle" class="gauge-tick">120</text>
-<g id="aguja2" filter="url(#sh)"><polygon points="120,132 118,48 122,48" fill="#111827"/><circle cx="120" cy="132" r="3" fill="#111827"/></g>
-<circle cx="120" cy="132" r="8" fill="#111827" stroke="white" stroke-width="2.5"/>
-<text x="120" y="122" text-anchor="middle" class="gauge-pct" id="g2Big">53%</text>
-<text x="120" y="114" text-anchor="middle" class="gauge-sub" id="g2Sub">9,387.5 pal</text>
+<p class="font-black text-[#0e3f7a] text-base md:text-lg">UCA CON TRANSITO</p>
+<svg class="gauge-svg" viewBox="0 0 300 175">
+<path d="M 30 150 A 120 120 0 0 1 270 150" fill="none" stroke="#e5e7eb" stroke-width="20" stroke-linecap="round"/>
+<path d="M 30 150 A 120 120 0 0 1 110 42" fill="none" stroke="#4caf50" stroke-width="20"/>
+<path d="M 115 40 A 120 120 0 0 1 210 48" fill="none" stroke="#eab308" stroke-width="20"/>
+<path d="M 215 51 A 120 120 0 0 1 270 150" fill="none" stroke="#dc2626" stroke-width="20"/>
+<g stroke="#9ca3af" stroke-width="1.5"><line x1="30" y1="150" x2="40" y2="150"/><line x1="58" y1="73" x2="65" y2="80"/><line x1="110" y1="34" x2="110" y2="43"/><line x1="150" y1="30" x2="150" y2="39"/><line x1="190" y1="34" x2="190" y2="43"/><line x1="242" y1="73" x2="235" y2="80"/><line x1="270" y1="150" x2="260" y2="150"/></g>
+<text x="30" y="172" text-anchor="middle" class="gauge-tick">0</text>
+<text x="62" y="78" text-anchor="middle" class="gauge-tick">20</text>
+<text x="110" y="28" text-anchor="middle" class="gauge-tick">40</text>
+<text x="150" y="22" text-anchor="middle" class="gauge-tick">60</text>
+<text x="192" y="28" text-anchor="middle" class="gauge-tick">80</text>
+<text x="242" y="78" text-anchor="middle" class="gauge-tick">100</text>
+<text x="270" y="172" text-anchor="middle" class="gauge-tick">120</text>
+<g id="aguja2"><polygon points="150,150 148,52 152,52" fill="#111827"/></g>
+<circle cx="150" cy="150" r="9" fill="#111827" stroke="white" stroke-width="3"/>
 </svg>
+<div class="gauge-pct" id="g2Big">53%</div>
+<div class="text-[11px] text-gray-500" id="g2Sub">9,387.5 pal / 17,640 • +326</div>
 </div>
 </div>
 
-<!-- PIE SIN PAGINA -->
-<div class="bg-black text-white text-center py-2.5 px-3">
+<!-- PIE COLOR LAVORO -->
+<div class="bg-lavoro text-white text-center py-2.5 px-3">
 <p class="text-[11px]">Desarrollado por <b>Luis Vallejo</b> | Operaciones - Lavoro | CD OQUENDO Lv - UCA</p>
 </div>
 </div>
@@ -159,7 +173,7 @@ body.captura #btnSalir{display:flex!important}
 <div><div class="flex justify-between font-bold"><span>10. 1007119 PANETON 900GR</span><span>277.2 pal | 11,087 caj</span></div><div class="bg-gray-200 h-2 rounded"><div class="bg-gray-600 h-2 rounded" style="width:20%"></div></div></div>
 </div></div>
 <div class="bg-white rounded-xl mt-3 overflow-hidden">
-<div class="bg-black text-white p-2 text-center font-black text-sm">DETALLE CORREGIDO - CAJAS Y PALLETS REALES | 200 CÓDIGOS | 7 ACTIVOS EXCLUIDOS</div>
+<div class="bg-lavoro text-white p-2 text-center font-black text-sm">DETALLE CORREGIDO - CAJAS Y PALLETS REALES | 200 CÓDIGOS | 7 ACTIVOS EXCLUIDOS</div>
 <div class="p-2"><input id="busc" type="text" placeholder="🔍 Buscar... Ej: 1001169 o SAN MATEO" class="w-full border-2 p-2 rounded-xl !text-left !font-normal" oninput="filtrar()"></div>
 <div class="overflow-x-auto"><table class="w-full text-xs"><thead><tr class="bg-gray-100"><th class="p-2 text-left">CODIGO</th><th class="p-2 text-left">DESCRIPCION</th><th class="p-2">STOCK LIBRE</th><th class="p-2">U x C</th><th class="p-2">C x P</th><th class="p-2">UND x PAL</th><th class="p-2">CAJAS</th><th class="p-2">PALLETS</th><th class="p-2">ALMACEN</th></tr></thead>
 <tbody id="tb">
@@ -179,7 +193,7 @@ body.captura #btnSalir{display:flex!important}
 <tr class="border-b"><td class="p-2 font-bold">1001223</td><td class="p-2">GLORIA NIÑOS 170GR - CASI CERO</td><td class="p-2 text-right">1</td><td class="p-2 text-center">48</td><td class="p-2 text-center">80</td><td class="p-2 text-center font-bold">3,840</td><td class="p-2 text-center">0</td><td class="p-2 text-center font-bold bg-yellow-50">0.0</td><td class="p-2 text-center">ABARROTES</td></tr>
 <tr class="border-b"><td class="p-2 font-bold">1001135</td><td class="p-2">GLORIA 170GRX48 - CORREGIDO</td><td class="p-2 text-right">294,630</td><td class="p-2 text-center">48</td><td class="p-2 text-center">80</td><td class="p-2 text-center font-bold">3,840</td><td class="p-2 text-center">6,138</td><td class="p-2 text-center font-bold bg-yellow-50">76.7</td><td class="p-2 text-center">ABARROTES</td></tr>
 </tbody></table></div>
-<p class="text-center text-[11px] text-gray-500 py-2">V14 - Total 9,061.5 sin tránsito | 9,387.5 con tránsito 326 | MB52 26.11.2026</p>
+<p class="text-center text-[11px] text-gray-500 py-2">V15 LAVORO - Total 9,061.5 sin tránsito | 9,387.5 con tránsito 326 | MB52 26.11.2026</p>
 </div>
 </div>
 </div>
@@ -196,7 +210,7 @@ document.getElementById('horaReal').textContent=hh+':'+mi+':'+ss;
 }
 function setAguja(id,pct){
 var el=document.getElementById(id);
-el.setAttribute('transform','rotate('+((pct/120)*180-90)+' 120 132)');
+el.setAttribute('transform','rotate('+((pct/120)*180-90)+' 150 150)');
 }
 function recalc(){
 var c1=parseFloat(document.getElementById('cap1').value)||8000;
@@ -221,8 +235,8 @@ document.getElementById('libConTrans').textContent=fmt(libCon);
 var pctSin=STOCKT/at*100;
 document.getElementById('g1Big').textContent=Math.round(pctSin)+'%';
 document.getElementById('g2Big').textContent=Math.round(pctCon)+'%';
-document.getElementById('g1Sub').textContent=fmt(STOCKT)+' pal';
-document.getElementById('g2Sub').textContent=fmt(con)+' pal';
+document.getElementById('g1Sub').textContent=fmt(STOCKT)+' pal / '+fmt(at);
+document.getElementById('g2Sub').textContent=fmt(con)+' pal / '+fmt(at)+' • +'+trans;
 setAguja('aguja1',pctSin); setAguja('aguja2',pctCon);
 }
 function filtrar(){var q=(document.getElementById('busc').value||'').toLowerCase();document.querySelectorAll('#tb tr').forEach(function(r){r.style.display=r.textContent.toLowerCase().includes(q)?'':'none';});}
