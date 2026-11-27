@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CD OQUENDO Lv - UCA V6</title>
+<title>CD OQUENDO Lv - UCA V7</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
@@ -8,7 +8,8 @@
 <div class="bg-black text-white p-4 text-center sticky top-0 z-10">
 <p class="text-[11px] tracking-widest text-yellow-400 font-bold">GLORIA • OQUENDO • LIVE</p>
 <h1 class="text-2xl font-black">CD OQUENDO <span class="text-yellow-400">Lv</span> - UCA</h1>
-<p class="text-xs text-gray-300">V6 • DATA LLENA EN HTML • No depende de JS</p>
+<p class="text-xs text-gray-300">V7 • DATA LLENA 26.11.2026 • Hora Perú en vivo</p>
+<p id="fechaHora" class="text-sm font-black text-yellow-400 mt-1">📅 Cargando fecha y hora Perú...</p>
 </div>
 <div class="max-w-5xl mx-auto px-3">
 <div id="alerta" class="bg-red-600 text-white p-3 rounded-xl mt-3 flex gap-3 items-center"><div class="text-3xl">⚠️</div><div><p class="font-black text-sm" id="alertTitle">NAVE 2 CASI LLENA</p><p class="text-xs" id="alertText">Nave1: 121 / 7,840 | Nave2: 8,940 / 9,800 | Total: 9,061 al 98%</p></div></div>
@@ -30,13 +31,13 @@
 </div>
 
 <div class="grid grid-cols-2 gap-2 mt-3">
-<a href="https://wa.me/?text=%F0%9F%93%A6%20CD%20OQUENDO%20Lv%20-%20UCA%0A26.11.2026%0ANave%201%20Refrigerados%3A%20121%20pal%20(1.5%25)%0ANave%202%20Abarrotes%3A%208%2C940%20pal%20(91.2%25)%0ATOTAL%3A%209%2C061%20pal%0ATop%201%3A%201005271%20SAN%20MATEO%20600ML%20-%201%2C366%20pal%0AVer%3A%20https%3A%2F%2Fghostheo.github.io%2FCD_OQUENDO_Lv%2F" target="_blank" class="bg-green-600 text-white font-black p-3 rounded-xl text-center block">📲 COMPARTIR POR WHATSAPP - SI FUNCIONA</a>
+<button onclick="compartirDetallado()" class="bg-green-600 text-white font-black p-3 rounded-xl">📲 COMPARTIR REPORTE DETALLADO POR WHATSAPP</button>
 <button onclick="document.getElementById('f1').click()" class="bg-black text-white font-black p-3 rounded-xl">📄 SUBIR DATA NUEVA</button>
 </div>
 <input id="f1" type="file" accept=".xlsx,.xls,.csv" class="hidden">
 <p id="st" class="text-xs mt-2 font-bold text-center">✅ DATA 26.11.2026 YA LLENA EN HTML</p>
 
-<div class="bg-white rounded-xl p-3 mt-3"><p class="font-black">🏆 TOP 10 QUE MAS OCUPAN - 26.11.2026 - YA PUESTO</p>
+<div class="bg-white rounded-xl p-3 mt-3"><p class="font-black">🏆 TOP 10 QUE MAS OCUPAN - 26.11.2026</p>
 <div class="space-y-2 mt-2 text-xs">
 <div><div class="flex justify-between font-bold"><span>1. 1005271 SAN MATEO 600ML X15</span><span>1,366 pal</span></div><div class="bg-gray-200 h-2 rounded"><div class="bg-red-600 h-2 rounded" style="width:100%"></div></div></div>
 <div><div class="flex justify-between font-bold"><span>2. 1001169 GLORIA EVP 410GX48</span><span>1,316 pal</span></div><div class="bg-gray-200 h-2 rounded"><div class="bg-blue-600 h-2 rounded" style="width:96%"></div></div></div>
@@ -70,9 +71,22 @@
 <tr class="border-b"><td class="p-2 font-bold">1001135</td><td class="p-2">GLORIA LECHE REC ENTERA 170GRX48</td><td class="p-2 text-right">414,720</td><td class="p-2 text-center">48</td><td class="p-2 text-center">80</td><td class="p-2 text-center font-bold">3,840</td><td class="p-2 text-center font-bold bg-yellow-50">108.0</td><td class="p-2 text-center">ABARROTES</td></tr>
 </tbody></table></div>
 </div>
-<p class="text-center text-[11px] text-gray-500 mt-2">CD OQUENDO Lv - V6 HTML directo - Totales reales 26.11.2026: 121 + 8,940 = 9,061</p>
+<p class="text-center text-[11px] text-gray-500 mt-2">CD OQUENDO Lv - V7 COMPLETO - Totales reales 26.11.2026: 121 + 8,940 = 9,061</p>
 </div>
 <script>
+function fechaPeru(){
+  try{
+    var ahora = new Date();
+    var f = new Intl.DateTimeFormat('es-PE',{timeZone:'America/Lima', weekday:'long', day:'2-digit', month:'2-digit', year:'numeric'}).format(ahora);
+    var h = new Intl.DateTimeFormat('es-PE',{timeZone:'America/Lima', hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:true}).format(ahora);
+    var texto = '📅 ' + f + ' • 🕐 ' + h + ' - Hora Perú (Lima)';
+    var el = document.getElementById('fechaHora');
+    if(el) el.textContent = texto;
+    return texto;
+  }catch(e){ return 'Fecha Perú'; }
+}
+setInterval(fechaPeru, 1000);
+fechaPeru();
 function recalcular(){
  try{
   var c1=parseFloat(document.getElementById('cap1').value)||8000;
@@ -100,5 +114,16 @@ function filtrar(){
  var q=(document.getElementById('busc').value||'').toLowerCase();
  var rows=document.querySelectorAll('#tb tr');
  rows.forEach(function(r){ r.style.display = r.textContent.toLowerCase().includes(q) ? '' : 'none'; });
+}
+function compartirDetallado(){
+  var fecha = fechaPeru();
+  var txt = '📦 CD OQUENDO Lv - UCA | REPORTE\n' + fecha + '\n\n' +
+  '🧊 NAVE 1 - REFRIGERADOS\nOcupado: 121 pal / 7,840 al 98%\nLibre: 7,719 pal\nOcupabilidad: 1.5% - VACIO\n\n' +
+  '📦 NAVE 2 - ABARROTES\nOcupado: 8,940 pal / 9,800 al 98%\nLibre: 860 pal\nOcupabilidad: 91.2% - CASI LLENO ⚠️\n\n' +
+  'TOTAL OQUENDO: 9,061 pal / 17,640 al 98% - 51.4%\nLibres totales: 8,579 pal\n\n' +
+  '🏆 TOP 5 QUE MAS OCUPAN:\n1. 1005271 SAN MATEO 600ML X15 - 1,366 pal\n2. 1001169 GLORIA EVP 410G - 1,316 pal\n3. 1004891 GLORIA DURAZNO 315ML - 946 pal\n4. 1005275 SAN MATEO 2.5L - 630 pal\n5. 1001173 GLORIA PAE 390G - 602 pal\n\n' +
+  '⚠️ ALERTA: NAVE 2 casi llena, queda solo 860 pal libres. NAVE 1 tiene espacio para mover carga.\n\n' +
+  'Ver reporte completo:\nhttps://ghostheo.github.io/CD_OQUENDO_Lv/';
+  window.open('https://wa.me/?text=' + encodeURIComponent(txt), '_blank');
 }
 </script></body></html>
