@@ -1,64 +1,102 @@
 <!DOCTYPE html>
 <html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CD OQUENDO Lv - UCA V9</title>
+<title>CD OQUENDO Lv - UCA - Ocupabilidad por Posición</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <style>
-  body.captura .no-captura{ display:none !important; }
-  body.captura .solo-captura{ display:block !important; }
-  body.captura{ background:white !important; }
-  .solo-captura{ display:none; }
-  #btnSalirFlotante{ position:fixed; top:12px; right:12px; z-index:99; background:#1e40af; color:white; width:52px; height:52px; border-radius:9999px; display:none; align-items:center; justify-content:center; flex-direction:column; font-size:20px; line-height:1; box-shadow:0 4px 12px rgba(0,0,0,0.35); border:2px solid white; }
-  body.captura #btnSalirFlotante{ display:flex !important; }
-  #btnSalirFlotante span{ font-size:8px; font-weight:900; margin-top:1px; }
-</style>
-</head>
-<body class="bg-[#f1f1f1] pb-6">
-<div class="bg-black text-white p-4 text-center sticky top-0 z-10">
-<p class="text-[11px] tracking-widest text-yellow-400 font-bold">GLORIA • OQUENDO • LIVE</p>
-<h1 class="text-2xl font-black">CD OQUENDO <span class="text-yellow-400">Lv</span> - UCA</h1>
-<p class="text-xs text-gray-300 no-captura">V9 • COMPARADO MB52 + MAESTRO • SIN ACTIVOS</p>
-<p id="fechaHora" class="text-sm font-black text-yellow-400 mt-1">📅 Cargando fecha y hora Perú...</p>
-</div>
-<button id="btnSalirFlotante" onclick="salirCaptura()">🚪<span>SALIR</span></button>
+body{font-family:Arial,Helvetica,sans-serif;background:#e9e9e9}
+.tabla th{font-size:10px;line-height:1.1}
+.tabla td{font-size:13px}
+.gauge{position:relative;width:210px;height:125px;margin:0 auto;overflow:hidden}
+.gauge-bg{position:absolute;inset:0;border-radius:210px 210px 0 0;background:conic-gradient(from 270deg,#22c55e 0deg 72deg,#eab308 72deg 162deg,#ef4444 162deg 180deg);-webkit-mask:radial-gradient(closest-side,transparent 62%,#000 63%);mask:radial-gradient(closest-side,transparent 62%,#000 63%)}
+.aguja{position:absolute;left:50%;bottom:0;width:4px;height:95px;background:#333;transform-origin:bottom center;border-radius:4px;transition:transform .6s}
+.centro{position:absolute;left:50%;bottom:-12px;transform:translateX(-50%);width:28px;height:28px;background:#333;border-radius:50%;border:3px solid white}
+input{outline:none}
+</style></head>
+<body class="pb-6">
 
-<div id="reporteCaptura" class="max-w-5xl mx-auto px-3">
-<div class="bg-red-600 text-white p-3 rounded-xl mt-3 flex gap-3 items-center"><div class="text-3xl">⚠️</div><div><p class="font-black text-sm">NAVE 2 CASI LLENA</p><p class="text-xs" id="alertText">Nave1: 121.2 / 7,840 | Nave2: 8,940.3 / 9,800 | Total: 9,061.5 al 98%</p></div></div>
-
-<div class="bg-yellow-100 border-2 border-yellow-400 rounded-xl p-3 mt-3 no-captura">
-<p class="font-black text-sm">⚙️ CONFIGURACION - MODIFICABLE</p>
-<div class="grid grid-cols-3 gap-2 mt-2">
-<label class="bg-white p-2 rounded text-xs">NAVE 1 Cap<br><input id="cap1" type="number" value="8000" class="w-full border p-1 rounded font-black" oninput="recalcular()"></label>
-<label class="bg-white p-2 rounded text-xs">NAVE 2 Cap<br><input id="cap2" type="number" value="10000" class="w-full border p-1 rounded font-black" oninput="recalcular()"></label>
-<label class="bg-white p-2 rounded text-xs">% TOPE<br><input id="tope" type="number" value="98" class="w-full border p-1 rounded font-black" oninput="recalcular()"> %</label>
+<!-- ===== CABECERA ESTILO BSF ===== -->
+<div class="max-w-5xl mx-auto px-2">
+<div class="bg-black text-white text-center py-5 rounded-t-2xl mt-3">
+<h1 class="text-3xl md:text-4xl font-black tracking-wide">OCUPABILIDAD POR POSICION</h1>
 </div>
-<p class="text-[11px] mt-1">Tope: Nave1 = <b id="cap98_1">7,840</b> | Nave2 = <b id="cap98_2">9,800</b> | Activos excluidos: 7 códigos</p>
+<div class="bg-[#263f54] text-white flex justify-between px-4 py-2.5 text-sm md:text-base font-bold">
+<span>CD OQUENDO Lv - UCA</span><span>26/11/2026 | TURNO 2</span><span>CORTE 22:07</span>
 </div>
 
-<div class="grid grid-cols-3 gap-2 mt-3">
-<div class="bg-white rounded-xl p-3 text-center border-t-4 border-blue-600"><p class="text-[10px] font-bold text-blue-700">NAVE 1<br>REFRIGERADOS</p><p class="text-2xl font-black" id="n1">121.2</p><p class="text-[10px]">Cap <span id="capTxt1">8,000</span></p><p class="font-black text-blue-700 text-xs" id="p1">1.5%</p><div class="bg-gray-200 h-3 rounded-full mt-1 overflow-hidden"><div id="b1" class="bg-blue-600 h-3" style="width:1.5%"></div></div><p class="text-[10px] mt-1">Libres: <span id="lib1">7,719</span> | Stock: 186,808 UND</p></div>
-<div class="bg-white rounded-xl p-3 text-center border-t-4 border-orange-500"><p class="text-[10px] font-bold text-orange-600">NAVE 2<br>ABARROTES</p><p class="text-2xl font-black" id="n2">8,940.3</p><p class="text-[10px]">Cap <span id="capTxt2">10,000</span></p><p class="font-black text-orange-600 text-xs" id="p2">91.2%</p><div class="bg-gray-200 h-3 rounded-full mt-1 overflow-hidden"><div id="b2" class="bg-orange-500 h-3" style="width:91.2%"></div></div><p class="text-[10px] mt-1">Libres: <span id="lib2">860</span> | Stock: 13,307,627 UND</p></div>
-<div class="bg-black text-white rounded-xl p-3 text-center"><p class="text-[10px] font-bold text-yellow-400">TOTAL<br>OQUENDO Lv</p><p class="text-2xl font-black" id="nt">9,061.5</p><p class="text-[10px]">Cap <span id="capTxtT">18,000</span></p><p class="font-black text-yellow-400 text-xs" id="pt">51.4%</p><div class="bg-gray-700 h-3 rounded-full mt-1 overflow-hidden"><div id="bt" class="bg-yellow-400 h-3" style="width:51.4%"></div></div><p class="text-[10px] mt-1">Libres al tope: <b id="lib">8,579</b> | Cajas: 631,381</p></div>
+<!-- ===== TABLA PRINCIPAL ===== -->
+<div class="bg-white border border-gray-300 mt-2 overflow-x-auto">
+<table class="w-full tabla text-center">
+<thead><tr class="bg-[#e5e5e5]">
+<th class="p-2 text-left text-[#1e3a5f]">NAVE</th>
+<th class="p-2 text-left text-[#1e3a5f]">ALMACEN</th>
+<th class="p-2 text-left text-[#1e3a5f]">ALMACENAMIENTO</th>
+<th class="p-2 text-[#1e3a5f]">CAPACIDAD<br>NOMINAL</th>
+<th class="p-2 text-[#1e3a5f]">AL <span id="topeTxt">98</span>%</th>
+<th class="p-2 bg-[#fde68a]">STOCK<br>OCUPADO</th>
+<th class="p-2 bg-[#facc15]">UBICACIONES<br>LIBRES</th>
+<th class="p-2 bg-[#222] text-white">% OCUPABILIDAD<br>OCUPABILIDAD</th>
+</tr></thead>
+<tbody>
+<tr class="border-t">
+<td class="p-2 font-black text-left">NAVE 1</td><td class="p-2 text-left">REFRIGERADOS</td><td class="p-2 text-left">-</td>
+<td class="p-2" id="c1n">8,000</td><td class="p-2" id="c1t">7,840</td>
+<td class="p-2 bg-[#fef3c7] font-bold" id="s1">121.2</td><td class="p-2 bg-[#facc15] font-bold" id="l1">7,718.8</td>
+<td class="p-2 bg-[#222] text-white font-black" id="p1">1.5%</td>
+</tr>
+<tr class="border-t">
+<td class="p-2 font-black text-left">NAVE 2</td><td class="p-2 text-left">ABARROTES</td><td class="p-2 text-left">-</td>
+<td class="p-2" id="c2n">10,000</td><td class="p-2" id="c2t">9,800</td>
+<td class="p-2 bg-[#fef3c7] font-bold" id="s2">8,940.3</td><td class="p-2 bg-[#facc15] font-bold" id="l2">859.7</td>
+<td class="p-2 bg-[#222] text-white font-black" id="p2">91.2%</td>
+</tr>
+<tr class="bg-[#2c4a64] text-white font-black">
+<td class="p-2 text-left" colspan="3">TOTAL GENERAL</td>
+<td class="p-2" id="ctn">18,000</td><td class="p-2" id="ctt">17,640</td>
+<td class="p-2 bg-[#fef3c7] text-black" id="st">9,061.5</td><td class="p-2 bg-[#facc15] text-black" id="lt">8,578.5</td>
+<td class="p-2 bg-[#222]" id="pt">51.4%</td>
+</tr>
+</tbody></table>
 </div>
 
-<div class="solo-captura bg-yellow-50 border-2 border-yellow-400 rounded-xl p-3 mt-3 text-center">
-<p class="font-black text-sm">⚠️ ALERTA: NAVE 2 casi llena, quedan solo 860 pal libres. NAVE 1 tiene espacio. Sin activos.</p>
+<!-- ===== TRANSITOS ===== -->
+<div class="bg-[#bdbdbd] flex flex-col md:flex-row justify-between px-4 py-3 font-black text-base md:text-lg">
+<span>TRANSITOS: <span id="transTxt">326</span></span>
+<span>TOTAL GENERAL con transito: <span id="conTransTxt">9,387.5</span> | <span id="conTransPct">53.2%</span> | Libres: <span id="libConTrans">8,252.5</span></span>
 </div>
 
-<div class="grid grid-cols-2 gap-2 mt-3 no-captura">
-<button onclick="entrarCaptura()" class="bg-green-600 text-white font-black p-3 rounded-xl">📲 COMPARTIR POR WHATSAPP</button>
-<button onclick="document.getElementById('f1').click()" class="bg-black text-white font-black p-3 rounded-xl">📄 SUBIR MB52 NUEVO</button>
+<!-- ===== CONFIGURABLE ===== -->
+<div class="bg-yellow-100 border-2 border-yellow-400 rounded-xl p-3 mt-3">
+<p class="font-black text-sm">⚙️ CONFIGURABLE - CAMBIA Y SE RECALCULA SOLO</p>
+<div class="grid grid-cols-4 gap-2 mt-2 text-xs">
+<label class="bg-white p-2 rounded">NAVE 1 Cap<br><input id="cap1" type="number" value="8000" class="w-full border p-1 rounded font-black" oninput="recalc()"></label>
+<label class="bg-white p-2 rounded">NAVE 2 Cap<br><input id="cap2" type="number" value="10000" class="w-full border p-1 rounded font-black" oninput="recalc()"></label>
+<label class="bg-white p-2 rounded">% TOPE<br><input id="tope" type="number" value="98" class="w-full border p-1 rounded font-black" oninput="recalc()"></label>
+<label class="bg-white p-2 rounded">TRÁNSITOS<br><input id="trans" type="number" value="326" class="w-full border p-1 rounded font-black" oninput="recalc()"></label>
 </div>
-<input id="f1" type="file" accept=".xlsx,.xls,.csv" class="hidden no-captura">
-<p class="text-xs mt-2 font-bold text-center no-captura">✅ DATA COMPARADA: MB52 26.11 (207 mat) + MAESTRO (200 mat) - 7 ACTIVOS EXCLUIDOS</p>
+<p class="text-[11px] mt-1">Fórmula: Pallets = Stock Libre MB52 / (Und x Caj × Caj x Pallet) | 7 activos excluidos | 200 códigos con maestro</p>
+</div>
 
-<div class="bg-white rounded-xl p-3 mt-3"><p class="font-black">🏆 TOP 10 REAL - COMPARADO MB52 x MAESTRO</p>
-<div class="space-y-2 mt-2 text-xs" id="top10">
+<!-- ===== TACOMETROS ===== -->
+<div class="bg-[#f2f2f2] grid grid-cols-2 gap-2 mt-2 p-3 text-center">
+<div><p class="font-black text-[#1e3a5f] text-base md:text-xl leading-tight">UCA SIN TRANSITO<br><span id="g1Txt" class="text-3xl">51%</span></p>
+<div class="gauge mt-2"><div class="gauge-bg"></div><div class="aguja" id="aguja1"></div><div class="centro"></div></div>
+<p class="text-[10px] text-gray-500">0 &nbsp; 10 &nbsp; 20 &nbsp; 40 &nbsp; 60 &nbsp; 80 &nbsp; 90 &nbsp; 100 &nbsp; 110 &nbsp; 120</p>
+<p class="font-black text-[#1e3a5f] text-4xl -mt-1" id="g1Big">51%</p></div>
+<div><p class="font-black text-[#1e3a5f] text-base md:text-xl leading-tight">UCA CON TRANSITO<br><span id="g2Txt" class="text-3xl">53%</span></p>
+<div class="gauge mt-2"><div class="gauge-bg"></div><div class="aguja" id="aguja2"></div><div class="centro"></div></div>
+<p class="text-[10px] text-gray-500">0 &nbsp; 10 &nbsp; 20 &nbsp; 40 &nbsp; 60 &nbsp; 80 &nbsp; 90 &nbsp; 100 &nbsp; 110 &nbsp; 120</p>
+<p class="font-black text-[#1e3a5f] text-4xl -mt-1" id="g2Big">53%</p></div>
+</div>
+<p class="text-center text-xs text-gray-500 mt-1">CD OQUENDO Lv - Reporte de Ocupabilidad • Actualizado 26/11/2026 22:07 • Sin activos</p>
+
+<!-- ===== TOP 10 REAL ===== -->
+<div class="bg-white rounded-xl p-3 mt-3"><p class="font-black">🏆 TOP 10 REAL - MB52 x MAESTRO</p>
+<div class="text-xs space-y-2 mt-2">
 <div><div class="flex justify-between font-bold"><span>1. 1005271 SAN MATEO 600ML X15</span><span>1,365.9 pal | 98,347 caj</span></div><div class="bg-gray-200 h-2 rounded"><div class="bg-red-600 h-2 rounded" style="width:100%"></div></div></div>
 <div><div class="flex justify-between font-bold"><span>2. 1001169 GLORIA EVP 410GX48</span><span>1,316.1 pal | 52,642 caj</span></div><div class="bg-gray-200 h-2 rounded"><div class="bg-blue-600 h-2 rounded" style="width:96%"></div></div></div>
-<div><div class="flex justify-between font-bold"><span>3. 1004891 GLORIA DURAZNO 315ML</span><span>946.4 pal | 92,743 caj</span></div><div class="bg-gray-200 h-2 rounded"><div class="bg-orange-500 h-2 rounded" style="width:69%"></div></div></div>
+<div><div class="flex justify-between font-bold"><span>3. 1004891 DURAZNO 315ML</span><span>946.4 pal | 92,743 caj</span></div><div class="bg-gray-200 h-2 rounded"><div class="bg-orange-500 h-2 rounded" style="width:69%"></div></div></div>
 <div><div class="flex justify-between font-bold"><span>4. 1005275 SAN MATEO 2.5L X6</span><span>630.1 pal | 30,247 caj</span></div><div class="bg-gray-200 h-2 rounded"><div class="bg-green-600 h-2 rounded" style="width:46%"></div></div></div>
-<div><div class="flex justify-between font-bold"><span>5. 1001173 GLORIA PAE 390g X48</span><span>601.9 pal | 24,078 caj</span></div><div class="bg-gray-200 h-2 rounded"><div class="bg-purple-600 h-2 rounded" style="width:44%"></div></div></div>
+<div><div class="flex justify-between font-bold"><span>5. 1001173 GLORIA PAE 390g</span><span>601.9 pal | 24,078 caj</span></div><div class="bg-gray-200 h-2 rounded"><div class="bg-purple-600 h-2 rounded" style="width:44%"></div></div></div>
 <div><div class="flex justify-between font-bold"><span>6. 1050167 GLORIA UHT BOLSA 800ML</span><span>436.2 pal | 28,350 caj</span></div><div class="bg-gray-200 h-2 rounded"><div class="bg-pink-600 h-2 rounded" style="width:32%"></div></div></div>
 <div><div class="flex justify-between font-bold"><span>7. 1004903 PURA VIDA 3L</span><span>420.8 pal | 25,251 caj</span></div><div class="bg-gray-200 h-2 rounded"><div class="bg-teal-600 h-2 rounded" style="width:31%"></div></div></div>
 <div><div class="flex justify-between font-bold"><span>8. 1001273 GLORIA 390GR BANDEJA</span><span>393.8 pal | 34,654 caj</span></div><div class="bg-gray-200 h-2 rounded"><div class="bg-yellow-600 h-2 rounded" style="width:29%"></div></div></div>
@@ -66,9 +104,10 @@
 <div><div class="flex justify-between font-bold"><span>10. 1007119 PANETON 900GR</span><span>277.2 pal | 11,087 caj</span></div><div class="bg-gray-200 h-2 rounded"><div class="bg-gray-600 h-2 rounded" style="width:20%"></div></div></div>
 </div></div>
 
+<!-- ===== DETALLE CORREGIDO ===== -->
 <div class="bg-white rounded-xl mt-3 overflow-hidden">
-<div class="bg-black text-white p-2 text-center font-black text-sm">DETALLE CORREGIDO - CAJAS Y PALLETS REALES</div>
-<div class="p-2 no-captura"><input id="busc" type="text" placeholder="🔍 Buscar... Ej: 1001169 o SAN MATEO" class="w-full border-2 p-2 rounded-xl" oninput="filtrar()"></div>
+<div class="bg-black text-white p-2 text-center font-black text-sm">DETALLE CORREGIDO - CAJAS Y PALLETS REALES | 200 CÓDIGOS | 7 ACTIVOS EXCLUIDOS</div>
+<div class="p-2"><input id="busc" type="text" placeholder="🔍 Buscar... Ej: 1001169 o SAN MATEO" class="w-full border-2 p-2 rounded-xl" oninput="filtrar()"></div>
 <div class="overflow-x-auto"><table class="w-full text-xs"><thead><tr class="bg-gray-100"><th class="p-2 text-left">CODIGO</th><th class="p-2 text-left">DESCRIPCION</th><th class="p-2">STOCK LIBRE</th><th class="p-2">U x C</th><th class="p-2">C x P</th><th class="p-2">UND x PAL</th><th class="p-2">CAJAS</th><th class="p-2">PALLETS</th><th class="p-2">ALMACEN</th></tr></thead>
 <tbody id="tb">
 <tr class="border-b"><td class="p-2 font-bold">1005271</td><td class="p-2">SAN MATEO 600ML X15</td><td class="p-2 text-right">1,475,198</td><td class="p-2 text-center">15</td><td class="p-2 text-center">72</td><td class="p-2 text-center font-bold">1,080</td><td class="p-2 text-center">98,347</td><td class="p-2 text-center font-bold bg-yellow-50">1,365.9</td><td class="p-2 text-center">ABARROTES</td></tr>
@@ -87,49 +126,39 @@
 <tr class="border-b"><td class="p-2 font-bold">1001223</td><td class="p-2">GLORIA NIÑOS 170GR - CASI CERO</td><td class="p-2 text-right">1</td><td class="p-2 text-center">48</td><td class="p-2 text-center">80</td><td class="p-2 text-center font-bold">3,840</td><td class="p-2 text-center">0</td><td class="p-2 text-center font-bold bg-yellow-50">0.0</td><td class="p-2 text-center">ABARROTES</td></tr>
 <tr class="border-b"><td class="p-2 font-bold">1001135</td><td class="p-2">GLORIA 170GRX48 - CORREGIDO</td><td class="p-2 text-right">294,630</td><td class="p-2 text-center">48</td><td class="p-2 text-center">80</td><td class="p-2 text-center font-bold">3,840</td><td class="p-2 text-center">6,138</td><td class="p-2 text-center font-bold bg-yellow-50">76.7</td><td class="p-2 text-center">ABARROTES</td></tr>
 </tbody></table></div>
+<p class="text-center text-[11px] text-gray-500 py-2">V10 BSF STYLE - Total real 9,061.5 pal sin tránsito | 9,387.5 con tránsito | 631,381 cajas | 13,494,435 UND sin activos | MB52 26.11.2026</p>
 </div>
-<p class="text-center text-[11px] text-gray-500 mt-2 no-captura">V9 - Total real 9,061.5 pal | 200 códigos con maestro | 7 activos excluidos | MB52 26.11.2026</p>
-<p class="solo-captura text-center text-[11px] text-gray-500 mt-2 font-bold">CD OQUENDO Lv - Reporte para WhatsApp • Sin activos • https://ghostheo.github.io/CD_OQUENDO_Lv/</p>
 </div>
+
 <script>
-var ACTIVOS = ['9460','9471','19003031','19003730','19011191','19011660','19011720'];
-function esActivo(codigo){ return ACTIVOS.indexOf(String(codigo).trim()) !== -1; }
-function fechaPeru(){
-  try{
-    var ahora = new Date();
-    var f = new Intl.DateTimeFormat('es-PE',{timeZone:'America/Lima', weekday:'long', day:'2-digit', month:'2-digit', year:'numeric'}).format(ahora);
-    var h = new Intl.DateTimeFormat('es-PE',{timeZone:'America/Lima', hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:true}).format(ahora);
-    document.getElementById('fechaHora').textContent = '📅 ' + f + ' • 🕐 ' + h + ' - Hora Perú (Lima)';
-  }catch(e){}
+var STOCK1=121.2, STOCK2=8940.3, STOCKT=9061.5;
+function fmt(n){return n.toLocaleString('en-US',{minimumFractionDigits:1,maximumFractionDigits:1});}
+function recalc(){
+var c1=parseFloat(document.getElementById('cap1').value)||8000;
+var c2=parseFloat(document.getElementById('cap2').value)||10000;
+var tope=parseFloat(document.getElementById('tope').value)||98;
+var trans=parseFloat(document.getElementById('trans').value)||0;
+var f=tope/100, a1=c1*f, a2=c2*f, at=a1+a2;
+var l1=a1-STOCK1, l2=a2-STOCK2, lt=at-STOCKT;
+var con=STOCKT+trans, pctCon=con/at*100, libCon=at-con;
+document.getElementById('topeTxt').textContent=tope;
+document.getElementById('c1n').textContent=c1.toLocaleString(); document.getElementById('c1t').textContent=fmt(a1);
+document.getElementById('c2n').textContent=c2.toLocaleString(); document.getElementById('c2t').textContent=fmt(a2);
+document.getElementById('ctn').textContent=(c1+c2).toLocaleString(); document.getElementById('ctt').textContent=fmt(at);
+document.getElementById('l1').textContent=fmt(l1); document.getElementById('l2').textContent=fmt(l2); document.getElementById('lt').textContent=fmt(lt);
+document.getElementById('p1').textContent=(STOCK1/a1*100).toFixed(1)+'%';
+document.getElementById('p2').textContent=(STOCK2/a2*100).toFixed(1)+'%';
+document.getElementById('pt').textContent=(STOCKT/at*100).toFixed(1)+'%';
+document.getElementById('transTxt').textContent=trans;
+document.getElementById('conTransTxt').textContent=fmt(con);
+document.getElementById('conTransPct').textContent=pctCon.toFixed(1)+'%';
+document.getElementById('libConTrans').textContent=fmt(libCon);
+var pctSin=STOCKT/at*100;
+document.getElementById('g1Txt').textContent=Math.round(pctSin)+'%'; document.getElementById('g1Big').textContent=Math.round(pctSin)+'%';
+document.getElementById('g2Txt').textContent=Math.round(pctCon)+'%'; document.getElementById('g2Big').textContent=Math.round(pctCon)+'%';
+document.getElementById('aguja1').style.transform='rotate('+(-90+pctSin/120*180)+'deg)';
+document.getElementById('aguja2').style.transform='rotate('+(-90+pctCon/120*180)+'deg)';
 }
-setInterval(fechaPeru, 1000); fechaPeru();
-function recalcular(){
- try{
-  var c1=parseFloat(document.getElementById('cap1').value)||8000;
-  var c2=parseFloat(document.getElementById('cap2').value)||10000;
-  var t=parseFloat(document.getElementById('tope').value)||98;
-  var f=t/100, l1=c1*f, l2=c2*f, tot=9061.5, n1=121.2, n2=8940.3;
-  document.getElementById('cap98_1').textContent=Math.round(l1).toLocaleString();
-  document.getElementById('cap98_2').textContent=Math.round(l2).toLocaleString();
-  document.getElementById('capTxt1').textContent=c1.toLocaleString();
-  document.getElementById('capTxt2').textContent=c2.toLocaleString();
-  document.getElementById('capTxtT').textContent=(c1+c2).toLocaleString();
-  document.getElementById('p1').textContent=(n1/l1*100).toFixed(1)+'%';
-  document.getElementById('p2').textContent=(n2/l2*100).toFixed(1)+'%';
-  document.getElementById('pt').textContent=(tot/(l1+l2)*100).toFixed(1)+'%';
-  document.getElementById('b1').style.width=Math.min(100,n1/l1*100)+'%';
-  document.getElementById('b2').style.width=Math.min(100,n2/l2*100)+'%';
-  document.getElementById('bt').style.width=Math.min(100,tot/(l1+l2)*100)+'%';
-  document.getElementById('lib1').textContent=Math.round(l1-n1).toLocaleString();
-  document.getElementById('lib2').textContent=Math.round(l2-n2).toLocaleString();
-  document.getElementById('lib').textContent=Math.round(l1+l2-tot).toLocaleString();
-  document.getElementById('alertText').textContent='Nave1: '+n1+' / '+Math.round(l1)+' | Nave2: '+n2+' / '+Math.round(l2)+' | Total: '+tot+' al '+t+'%';
- }catch(e){}
-}
-function filtrar(){
- var q=(document.getElementById('busc').value||'').toLowerCase();
- document.querySelectorAll('#tb tr').forEach(function(r){ r.style.display = r.textContent.toLowerCase().includes(q) ? '' : 'none'; });
-}
-function entrarCaptura(){ document.body.classList.add('captura'); window.scrollTo(0,0); }
-function salirCaptura(){ document.body.classList.remove('captura'); }
+function filtrar(){var q=(document.getElementById('busc').value||'').toLowerCase();document.querySelectorAll('#tb tr').forEach(function(r){r.style.display=r.textContent.toLowerCase().includes(q)?'':'none';});}
+recalc();
 </script></body></html>
