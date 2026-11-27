@@ -4,33 +4,35 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
 body{font-family:Arial,Helvetica,sans-serif;background:#e9e9e9}
-.tabla th{font-size:10px;line-height:1.1}
+.tabla th{font-size:10px;line-height:1.15}
 .tabla td{font-size:13px}
-.gauge{position:relative;width:210px;height:125px;margin:0 auto;overflow:hidden}
-.gauge-bg{position:absolute;inset:0;border-radius:210px 210px 0 0;background:conic-gradient(from 270deg,#22c55e 0deg 72deg,#eab308 72deg 162deg,#ef4444 162deg 180deg);-webkit-mask:radial-gradient(closest-side,transparent 62%,#000 63%);mask:radial-gradient(closest-side,transparent 62%,#000 63%)}
-.aguja{position:absolute;left:50%;bottom:0;width:4px;height:95px;background:#333;transform-origin:bottom center;border-radius:4px;transition:transform .6s}
-.centro{position:absolute;left:50%;bottom:-12px;transform:translateX(-50%);width:28px;height:28px;background:#333;border-radius:50%;border:3px solid white}
-input{outline:none}
+input{outline:none;background:transparent;text-align:center;font-weight:900;width:100%}
+input:focus{background:#fffbe6}
+/* TACOMETRO PROFESIONAL - estilo BSF / Excel */
+.gauge-wrap{width:230px;margin:0 auto;text-align:center}
+.gauge-svg{width:100%;height:auto;display:block}
+.gauge-label{font-size:10px;fill:#666;font-family:Arial}
+.gauge-num{font-size:34px;font-weight:900;fill:#1e3a5f;font-family:Arial}
 </style></head>
 <body class="pb-6">
-
-<!-- ===== CABECERA ESTILO BSF ===== -->
 <div class="max-w-5xl mx-auto px-2">
-<div class="bg-black text-white text-center py-5 rounded-t-2xl mt-3">
+
+<!-- ===== UN SOLO CUADRO - COMO BSF ===== -->
+<div class="bg-white border border-gray-300 mt-3 rounded-t-2xl overflow-hidden">
+<div class="bg-black text-white text-center py-5">
 <h1 class="text-3xl md:text-4xl font-black tracking-wide">OCUPABILIDAD POR POSICION</h1>
 </div>
 <div class="bg-[#263f54] text-white flex justify-between px-4 py-2.5 text-sm md:text-base font-bold">
 <span>CD OQUENDO Lv - UCA</span><span>26/11/2026 | TURNO 2</span><span>CORTE 22:07</span>
 </div>
 
-<!-- ===== TABLA PRINCIPAL ===== -->
-<div class="bg-white border border-gray-300 mt-2 overflow-x-auto">
+<!-- TABLA + EDITABLE DENTRO DEL MISMO CUADRO -->
 <table class="w-full tabla text-center">
 <thead><tr class="bg-[#e5e5e5]">
 <th class="p-2 text-left text-[#1e3a5f]">NAVE</th>
 <th class="p-2 text-left text-[#1e3a5f]">ALMACEN</th>
 <th class="p-2 text-left text-[#1e3a5f]">ALMACENAMIENTO</th>
-<th class="p-2 text-[#1e3a5f]">CAPACIDAD<br>NOMINAL</th>
+<th class="p-2 text-[#1e3a5f]">CAPACIDAD<br>NOMINAL ✏️</th>
 <th class="p-2 text-[#1e3a5f]">AL <span id="topeTxt">98</span>%</th>
 <th class="p-2 bg-[#fde68a]">STOCK<br>OCUPADO</th>
 <th class="p-2 bg-[#facc15]">UBICACIONES<br>LIBRES</th>
@@ -39,57 +41,72 @@ input{outline:none}
 <tbody>
 <tr class="border-t">
 <td class="p-2 font-black text-left">NAVE 1</td><td class="p-2 text-left">REFRIGERADOS</td><td class="p-2 text-left">-</td>
-<td class="p-2" id="c1n">8,000</td><td class="p-2" id="c1t">7,840</td>
-<td class="p-2 bg-[#fef3c7] font-bold" id="s1">121.2</td><td class="p-2 bg-[#facc15] font-bold" id="l1">7,718.8</td>
+<td class="p-2 bg-blue-50"><input id="cap1" type="number" value="8000" oninput="recalc()"></td>
+<td class="p-2" id="c1t">7,840.0</td>
+<td class="p-2 bg-[#fef3c7] font-bold">121.2</td><td class="p-2 bg-[#facc15] font-bold" id="l1">7,718.8</td>
 <td class="p-2 bg-[#222] text-white font-black" id="p1">1.5%</td>
 </tr>
 <tr class="border-t">
 <td class="p-2 font-black text-left">NAVE 2</td><td class="p-2 text-left">ABARROTES</td><td class="p-2 text-left">-</td>
-<td class="p-2" id="c2n">10,000</td><td class="p-2" id="c2t">9,800</td>
-<td class="p-2 bg-[#fef3c7] font-bold" id="s2">8,940.3</td><td class="p-2 bg-[#facc15] font-bold" id="l2">859.7</td>
+<td class="p-2 bg-blue-50"><input id="cap2" type="number" value="10000" oninput="recalc()"></td>
+<td class="p-2" id="c2t">9,800.0</td>
+<td class="p-2 bg-[#fef3c7] font-bold">8,940.3</td><td class="p-2 bg-[#facc15] font-bold" id="l2">859.7</td>
 <td class="p-2 bg-[#222] text-white font-black" id="p2">91.2%</td>
 </tr>
 <tr class="bg-[#2c4a64] text-white font-black">
 <td class="p-2 text-left" colspan="3">TOTAL GENERAL</td>
-<td class="p-2" id="ctn">18,000</td><td class="p-2" id="ctt">17,640</td>
-<td class="p-2 bg-[#fef3c7] text-black" id="st">9,061.5</td><td class="p-2 bg-[#facc15] text-black" id="lt">8,578.5</td>
+<td class="p-2" id="ctn">18,000</td><td class="p-2" id="ctt">17,640.0</td>
+<td class="p-2 bg-[#fef3c7] text-black">9,061.5</td><td class="p-2 bg-[#facc15] text-black" id="lt">8,578.5</td>
 <td class="p-2 bg-[#222]" id="pt">51.4%</td>
 </tr>
 </tbody></table>
+
+<!-- TRANSITOS + TOPE DENTRO DEL MISMO CUADRO -->
+<div class="bg-[#bdbdbd] flex flex-col md:flex-row md:items-center justify-between px-4 py-2.5 gap-2 font-black text-sm md:text-base border-t border-gray-400">
+<div class="flex items-center gap-2">TRÁNSITOS: <span class="bg-white px-2 py-1 rounded w-24 inline-block"><input id="trans" type="number" value="326" oninput="recalc()"></span>
+<span class="font-normal text-xs">% TOPE: <span class="bg-white px-2 py-1 rounded w-16 inline-block"><input id="tope" type="number" value="98" oninput="recalc()"></span> %</span></div>
+<div>TOTAL GENERAL con transito: <span id="conTransTxt">9,387.5</span> | <span id="conTransPct">53.2%</span> | Libres: <span id="libConTrans">8,252.5</span></div>
+</div>
+<p class="text-center text-[11px] text-gray-500 py-1.5 bg-[#f2f2f2]">✏️ Edita Capacidad, Tránsitos y % Tope directo en la tabla - Fórmula: Pallets = Stock Libre MB52 / (Und x Caj × Caj x Pallet) | 7 activos excluidos</p>
+
+<!-- TACOMETROS PROFESIONALES -->
+<div class="bg-[#f2f2f2] grid grid-cols-2 gap-2 p-3">
+<div class="gauge-wrap">
+<p class="font-black text-[#1e3a5f] text-base md:text-lg leading-tight">UCA SIN TRANSITO</p>
+<svg class="gauge-svg" viewBox="0 0 230 145">
+<!-- arco fondo -->
+<path d="M 20 130 A 95 95 0 0 1 210 130" fill="none" stroke="#e5e5e5" stroke-width="14"/>
+<!-- segmentos delgados profesionales -->
+<path d="M 20 130 A 95 95 0 0 1 77 42" fill="none" stroke="#5cb85c" stroke-width="14"/>
+<path d="M 77 42 A 95 95 0 0 1 165 48" fill="none" stroke="#e6c200" stroke-width="14"/>
+<path d="M 165 48 A 95 95 0 0 1 210 130" fill="none" stroke="#d9534f" stroke-width="14"/>
+<!-- ticks -->
+<g id="ticks1"></g>
+<!-- aguja fina -->
+<line id="aguja1" x1="115" y1="130" x2="115" y2="45" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round"/>
+<circle cx="115" cy="130" r="7" fill="#1a1a1a" stroke="white" stroke-width="2"/>
+<text x="115" y="118" text-anchor="middle" class="gauge-num" id="g1Big">51%</text>
+</svg>
+<div class="flex justify-between text-[9px] text-gray-500 px-1 -mt-1"><span>0</span><span>20</span><span>40</span><span>60</span><span>80</span><span>100</span><span>120</span></div>
+</div>
+<div class="gauge-wrap">
+<p class="font-black text-[#1e3a5f] text-base md:text-lg leading-tight">UCA CON TRANSITO</p>
+<svg class="gauge-svg" viewBox="0 0 230 145">
+<path d="M 20 130 A 95 95 0 0 1 210 130" fill="none" stroke="#e5e5e5" stroke-width="14"/>
+<path d="M 20 130 A 95 95 0 0 1 77 42" fill="none" stroke="#5cb85c" stroke-width="14"/>
+<path d="M 77 42 A 95 95 0 0 1 165 48" fill="none" stroke="#e6c200" stroke-width="14"/>
+<path d="M 165 48 A 95 95 0 0 1 210 130" fill="none" stroke="#d9534f" stroke-width="14"/>
+<g id="ticks2"></g>
+<line id="aguja2" x1="115" y1="130" x2="115" y2="45" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round"/>
+<circle cx="115" cy="130" r="7" fill="#1a1a1a" stroke="white" stroke-width="2"/>
+<text x="115" y="118" text-anchor="middle" class="gauge-num" id="g2Big">53%</text>
+</svg>
+<div class="flex justify-between text-[9px] text-gray-500 px-1 -mt-1"><span>0</span><span>20</span><span>40</span><span>60</span><span>80</span><span>100</span><span>120</span></div>
+</div>
+</div>
 </div>
 
-<!-- ===== TRANSITOS ===== -->
-<div class="bg-[#bdbdbd] flex flex-col md:flex-row justify-between px-4 py-3 font-black text-base md:text-lg">
-<span>TRANSITOS: <span id="transTxt">326</span></span>
-<span>TOTAL GENERAL con transito: <span id="conTransTxt">9,387.5</span> | <span id="conTransPct">53.2%</span> | Libres: <span id="libConTrans">8,252.5</span></span>
-</div>
-
-<!-- ===== CONFIGURABLE ===== -->
-<div class="bg-yellow-100 border-2 border-yellow-400 rounded-xl p-3 mt-3">
-<p class="font-black text-sm">⚙️ CONFIGURABLE - CAMBIA Y SE RECALCULA SOLO</p>
-<div class="grid grid-cols-4 gap-2 mt-2 text-xs">
-<label class="bg-white p-2 rounded">NAVE 1 Cap<br><input id="cap1" type="number" value="8000" class="w-full border p-1 rounded font-black" oninput="recalc()"></label>
-<label class="bg-white p-2 rounded">NAVE 2 Cap<br><input id="cap2" type="number" value="10000" class="w-full border p-1 rounded font-black" oninput="recalc()"></label>
-<label class="bg-white p-2 rounded">% TOPE<br><input id="tope" type="number" value="98" class="w-full border p-1 rounded font-black" oninput="recalc()"></label>
-<label class="bg-white p-2 rounded">TRÁNSITOS<br><input id="trans" type="number" value="326" class="w-full border p-1 rounded font-black" oninput="recalc()"></label>
-</div>
-<p class="text-[11px] mt-1">Fórmula: Pallets = Stock Libre MB52 / (Und x Caj × Caj x Pallet) | 7 activos excluidos | 200 códigos con maestro</p>
-</div>
-
-<!-- ===== TACOMETROS ===== -->
-<div class="bg-[#f2f2f2] grid grid-cols-2 gap-2 mt-2 p-3 text-center">
-<div><p class="font-black text-[#1e3a5f] text-base md:text-xl leading-tight">UCA SIN TRANSITO<br><span id="g1Txt" class="text-3xl">51%</span></p>
-<div class="gauge mt-2"><div class="gauge-bg"></div><div class="aguja" id="aguja1"></div><div class="centro"></div></div>
-<p class="text-[10px] text-gray-500">0 &nbsp; 10 &nbsp; 20 &nbsp; 40 &nbsp; 60 &nbsp; 80 &nbsp; 90 &nbsp; 100 &nbsp; 110 &nbsp; 120</p>
-<p class="font-black text-[#1e3a5f] text-4xl -mt-1" id="g1Big">51%</p></div>
-<div><p class="font-black text-[#1e3a5f] text-base md:text-xl leading-tight">UCA CON TRANSITO<br><span id="g2Txt" class="text-3xl">53%</span></p>
-<div class="gauge mt-2"><div class="gauge-bg"></div><div class="aguja" id="aguja2"></div><div class="centro"></div></div>
-<p class="text-[10px] text-gray-500">0 &nbsp; 10 &nbsp; 20 &nbsp; 40 &nbsp; 60 &nbsp; 80 &nbsp; 90 &nbsp; 100 &nbsp; 110 &nbsp; 120</p>
-<p class="font-black text-[#1e3a5f] text-4xl -mt-1" id="g2Big">53%</p></div>
-</div>
-<p class="text-center text-xs text-gray-500 mt-1">CD OQUENDO Lv - Reporte de Ocupabilidad • Actualizado 26/11/2026 22:07 • Sin activos</p>
-
-<!-- ===== TOP 10 REAL ===== -->
+<!-- TOP 10 -->
 <div class="bg-white rounded-xl p-3 mt-3"><p class="font-black">🏆 TOP 10 REAL - MB52 x MAESTRO</p>
 <div class="text-xs space-y-2 mt-2">
 <div><div class="flex justify-between font-bold"><span>1. 1005271 SAN MATEO 600ML X15</span><span>1,365.9 pal | 98,347 caj</span></div><div class="bg-gray-200 h-2 rounded"><div class="bg-red-600 h-2 rounded" style="width:100%"></div></div></div>
@@ -104,10 +121,10 @@ input{outline:none}
 <div><div class="flex justify-between font-bold"><span>10. 1007119 PANETON 900GR</span><span>277.2 pal | 11,087 caj</span></div><div class="bg-gray-200 h-2 rounded"><div class="bg-gray-600 h-2 rounded" style="width:20%"></div></div></div>
 </div></div>
 
-<!-- ===== DETALLE CORREGIDO ===== -->
+<!-- DETALLE -->
 <div class="bg-white rounded-xl mt-3 overflow-hidden">
 <div class="bg-black text-white p-2 text-center font-black text-sm">DETALLE CORREGIDO - CAJAS Y PALLETS REALES | 200 CÓDIGOS | 7 ACTIVOS EXCLUIDOS</div>
-<div class="p-2"><input id="busc" type="text" placeholder="🔍 Buscar... Ej: 1001169 o SAN MATEO" class="w-full border-2 p-2 rounded-xl" oninput="filtrar()"></div>
+<div class="p-2"><input id="busc" type="text" placeholder="🔍 Buscar... Ej: 1001169 o SAN MATEO" class="w-full border-2 p-2 rounded-xl !text-left !font-normal" oninput="filtrar()"></div>
 <div class="overflow-x-auto"><table class="w-full text-xs"><thead><tr class="bg-gray-100"><th class="p-2 text-left">CODIGO</th><th class="p-2 text-left">DESCRIPCION</th><th class="p-2">STOCK LIBRE</th><th class="p-2">U x C</th><th class="p-2">C x P</th><th class="p-2">UND x PAL</th><th class="p-2">CAJAS</th><th class="p-2">PALLETS</th><th class="p-2">ALMACEN</th></tr></thead>
 <tbody id="tb">
 <tr class="border-b"><td class="p-2 font-bold">1005271</td><td class="p-2">SAN MATEO 600ML X15</td><td class="p-2 text-right">1,475,198</td><td class="p-2 text-center">15</td><td class="p-2 text-center">72</td><td class="p-2 text-center font-bold">1,080</td><td class="p-2 text-center">98,347</td><td class="p-2 text-center font-bold bg-yellow-50">1,365.9</td><td class="p-2 text-center">ABARROTES</td></tr>
@@ -126,13 +143,26 @@ input{outline:none}
 <tr class="border-b"><td class="p-2 font-bold">1001223</td><td class="p-2">GLORIA NIÑOS 170GR - CASI CERO</td><td class="p-2 text-right">1</td><td class="p-2 text-center">48</td><td class="p-2 text-center">80</td><td class="p-2 text-center font-bold">3,840</td><td class="p-2 text-center">0</td><td class="p-2 text-center font-bold bg-yellow-50">0.0</td><td class="p-2 text-center">ABARROTES</td></tr>
 <tr class="border-b"><td class="p-2 font-bold">1001135</td><td class="p-2">GLORIA 170GRX48 - CORREGIDO</td><td class="p-2 text-right">294,630</td><td class="p-2 text-center">48</td><td class="p-2 text-center">80</td><td class="p-2 text-center font-bold">3,840</td><td class="p-2 text-center">6,138</td><td class="p-2 text-center font-bold bg-yellow-50">76.7</td><td class="p-2 text-center">ABARROTES</td></tr>
 </tbody></table></div>
-<p class="text-center text-[11px] text-gray-500 py-2">V10 BSF STYLE - Total real 9,061.5 pal sin tránsito | 9,387.5 con tránsito | 631,381 cajas | 13,494,435 UND sin activos | MB52 26.11.2026</p>
+<p class="text-center text-[11px] text-gray-500 py-2">V11 BSF STYLE - Total 9,061.5 sin tránsito | 9,387.5 con tránsito 326 | MB52 26.11.2026</p>
 </div>
 </div>
 
 <script>
 var STOCK1=121.2, STOCK2=8940.3, STOCKT=9061.5;
 function fmt(n){return n.toLocaleString('en-US',{minimumFractionDigits:1,maximumFractionDigits:1});}
+function polar(cx,cy,r,deg){var rad=(deg-180)*Math.PI/180;return [cx+r*Math.cos(rad),cy+r*Math.sin(rad)];}
+function setAguja(id,pct){
+  // 0% = -180deg (izquierda), 120% = 0deg (derecha)
+  var ang = -180 + (pct/120)*180;
+  var p = polar(115,130,85,ang+180); // punto aguja
+  // Convertir: nuestro polar usa 0-180
+  var rad = (180 - pct/120*180) * Math.PI/180;
+  var x2 = 115 + 85*Math.cos(Math.PI - rad);
+  var y2 = 130 - 85*Math.sin(rad);
+  // Más simple: usar rotación CSS vía transform en SVG
+  var el=document.getElementById(id);
+  el.setAttribute('transform','rotate('+((pct/120)*180-90)+' 115 130)');
+}
 function recalc(){
 var c1=parseFloat(document.getElementById('cap1').value)||8000;
 var c2=parseFloat(document.getElementById('cap2').value)||10000;
@@ -142,22 +172,21 @@ var f=tope/100, a1=c1*f, a2=c2*f, at=a1+a2;
 var l1=a1-STOCK1, l2=a2-STOCK2, lt=at-STOCKT;
 var con=STOCKT+trans, pctCon=con/at*100, libCon=at-con;
 document.getElementById('topeTxt').textContent=tope;
-document.getElementById('c1n').textContent=c1.toLocaleString(); document.getElementById('c1t').textContent=fmt(a1);
-document.getElementById('c2n').textContent=c2.toLocaleString(); document.getElementById('c2t').textContent=fmt(a2);
-document.getElementById('ctn').textContent=(c1+c2).toLocaleString(); document.getElementById('ctt').textContent=fmt(at);
+document.getElementById('c1t').textContent=fmt(a1);
+document.getElementById('c2t').textContent=fmt(a2);
+document.getElementById('ctn').textContent=(c1+c2).toLocaleString();
+document.getElementById('ctt').textContent=fmt(at);
 document.getElementById('l1').textContent=fmt(l1); document.getElementById('l2').textContent=fmt(l2); document.getElementById('lt').textContent=fmt(lt);
 document.getElementById('p1').textContent=(STOCK1/a1*100).toFixed(1)+'%';
 document.getElementById('p2').textContent=(STOCK2/a2*100).toFixed(1)+'%';
 document.getElementById('pt').textContent=(STOCKT/at*100).toFixed(1)+'%';
-document.getElementById('transTxt').textContent=trans;
 document.getElementById('conTransTxt').textContent=fmt(con);
 document.getElementById('conTransPct').textContent=pctCon.toFixed(1)+'%';
 document.getElementById('libConTrans').textContent=fmt(libCon);
 var pctSin=STOCKT/at*100;
-document.getElementById('g1Txt').textContent=Math.round(pctSin)+'%'; document.getElementById('g1Big').textContent=Math.round(pctSin)+'%';
-document.getElementById('g2Txt').textContent=Math.round(pctCon)+'%'; document.getElementById('g2Big').textContent=Math.round(pctCon)+'%';
-document.getElementById('aguja1').style.transform='rotate('+(-90+pctSin/120*180)+'deg)';
-document.getElementById('aguja2').style.transform='rotate('+(-90+pctCon/120*180)+'deg)';
+document.getElementById('g1Big').textContent=Math.round(pctSin)+'%';
+document.getElementById('g2Big').textContent=Math.round(pctCon)+'%';
+setAguja('aguja1',pctSin); setAguja('aguja2',pctCon);
 }
 function filtrar(){var q=(document.getElementById('busc').value||'').toLowerCase();document.querySelectorAll('#tb tr').forEach(function(r){r.style.display=r.textContent.toLowerCase().includes(q)?'':'none';});}
 recalc();
