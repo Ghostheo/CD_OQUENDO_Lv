@@ -18,15 +18,14 @@ body.captura #btnSalir{display:flex!important}
 #btnSalir span{font-size:8px;font-weight:900;margin-top:1px}
 .bg-lavoro{background:#155EB0}
 .bg-lavoro-dark{background:#0e3f7a}
-/* CRONOMETRO V17 - NUMEROS YA NO SE CORTAN */
+/* CRONOMETRO V18 - SIN CIRCULO BLANCO, SOLO AGUJA */
 .gauge-box{width:250px;margin:0 auto;text-align:center;position:relative}
 .gauge{position:relative;width:250px;height:135px;overflow:visible;margin:0 auto}
 .gauge-arc{position:absolute;inset:0;border-radius:250px 250px 0 0;background:conic-gradient(from 270deg,#22a355 0deg 75deg,#eab308 75deg 135deg,#dc2626 135deg 180deg);-webkit-mask:radial-gradient(closest-side,transparent 68%,#000 69%);mask:radial-gradient(closest-side,transparent 68%,#000 69%)}
-.gauge-inner{position:absolute;left:50%;top:100%;transform:translate(-50%,-50%);width:150px;height:150px;background:white;border-radius:50%;box-shadow:0 0 0 1px #e5e7eb}
 .gauge-needle{position:absolute;left:50%;bottom:0;width:3px;height:105px;background:#111827;transform-origin:bottom center;border-radius:99px;transition:transform .8s cubic-bezier(.34,1.3,.5,1);z-index:5}
 .gauge-needle:after{content:'';position:absolute;top:-4px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-bottom:10px solid #111827}
 .gauge-dot{position:absolute;left:50%;bottom:-9px;transform:translateX(-50%);width:20px;height:20px;background:#111827;border-radius:50%;border:3px solid white;box-shadow:0 1px 4px rgba(0,0,0,.3);z-index:6}
-.gauge-tick{position:absolute;font-size:11px;font-weight:700;color:#6b7280;transform:translate(-50%,-50%);z-index:4}
+.gauge-tick{position:absolute;font-size:11px;font-weight:900;color:#111827;transform:translate(-50%,-50%);z-index:4}
 .gauge-pct{font-size:36px;font-weight:900;color:#0e3f7a;line-height:1;margin-top:6px}
 </style></head>
 <body class="pb-6">
@@ -68,8 +67,8 @@ body.captura #btnSalir{display:flex!important}
 <div>TOTAL GENERAL con transito: <span id="conTransTxt">9,387.5</span> | <span id="conTransPct">53.2%</span> | Libres: <span id="libConTrans">8,252.5</span></div>
 </div>
 <div class="bg-white grid grid-cols-2 gap-2 p-3 border-t">
-<div class="gauge-box"><p class="font-black text-[#0e3f7a] text-base md:text-lg">UCA SIN TRANSITO</p><div class="gauge" id="gauge1"><div class="gauge-arc"></div><div class="gauge-inner"></div><div class="gauge-needle" id="aguja1"></div><div class="gauge-dot"></div></div><div class="gauge-pct" id="g1Big">51%</div><div class="text-[11px] text-gray-500" id="g1Sub">9,061.5 pal / 17,640</div></div>
-<div class="gauge-box"><p class="font-black text-[#0e3f7a] text-base md:text-lg">UCA CON TRANSITO</p><div class="gauge" id="gauge2"><div class="gauge-arc"></div><div class="gauge-inner"></div><div class="gauge-needle" id="aguja2"></div><div class="gauge-dot"></div></div><div class="gauge-pct" id="g2Big">53%</div><div class="text-[11px] text-gray-500" id="g2Sub">9,387.5 pal / 17,640 • +326</div></div>
+<div class="gauge-box"><p class="font-black text-[#0e3f7a] text-base md:text-lg">UCA SIN TRANSITO</p><div class="gauge" id="gauge1"><div class="gauge-arc"></div><div class="gauge-needle" id="aguja1"></div><div class="gauge-dot"></div></div><div class="gauge-pct" id="g1Big">51%</div><div class="text-[11px] text-gray-500" id="g1Sub">9,061.5 pal / 17,640</div></div>
+<div class="gauge-box"><p class="font-black text-[#0e3f7a] text-base md:text-lg">UCA CON TRANSITO</p><div class="gauge" id="gauge2"><div class="gauge-arc"></div><div class="gauge-needle" id="aguja2"></div><div class="gauge-dot"></div></div><div class="gauge-pct" id="g2Big">53%</div><div class="text-[11px] text-gray-500" id="g2Sub">9,387.5 pal / 17,640 • +326</div></div>
 </div>
 <div class="bg-lavoro text-white text-center py-2.5 px-3"><p class="text-[11px]">Desarrollado por <b>Luis Vallejo</b> | Operaciones - Lavoro | CD OQUENDO Lv - UCA</p></div>
 </div>
@@ -117,14 +116,13 @@ body.captura #btnSalir{display:flex!important}
 <tr class="border-b"><td class="p-2 font-bold">1005275</td><td class="p-2">SAN MATEO 2.5L X6</td><td class="p-2 text-right">181,482</td><td class="p-2 text-center">6</td><td class="p-2 text-center">48</td><td class="p-2 text-center font-bold">288</td><td class="p-2 text-center">30,247</td><td class="p-2 text-center font-bold bg-yellow-50">630.1</td><td class="p-2 text-center">ABARROTES</td></tr>
 <tr class="border-b"><td class="p-2 font-bold">1001173</td><td class="p-2">GLORIA PAE 390g</td><td class="p-2 text-right">1,155,722</td><td class="p-2 text-center">48</td><td class="p-2 text-center">40</td><td class="p-2 text-center font-bold">1,920</td><td class="p-2 text-center">24,078</td><td class="p-2 text-center font-bold bg-yellow-50">601.9</td><td class="p-2 text-center">ABARROTES</td></tr>
 </tbody></table></div>
-<p class="text-center text-[11px] text-gray-500 py-2">V17 LAVORO - Total <span id="footTotal">9,061.5</span> sin tránsito | MB52 solo Código - Cantidad</p>
+<p class="text-center text-[11px] text-gray-500 py-2">V18 LAVORO - Total <span id="footTotal">9,061.5</span> sin tránsito | MB52 solo Código - Cantidad</p>
 </div>
 </div>
 </div>
 
 <script>
 // ===== BASE MADRE - YA TIENE U x C, C x P, DESCRIPCION =====
-// CODIGO : [DESCRIPCION, U x C, C x P, ALMACEN]
 var MAESTRO={
 "1005271":["SAN MATEO 600ML X15",15,72,"ABARROTES"],
 "1001169":["GLORIA EVP 410GX48",48,40,"ABARROTES"],
@@ -144,7 +142,6 @@ var MAESTRO={
 "1001223":["GLORIA NIÑOS 170GR",48,80,"ABARROTES"],
 "1001135":["GLORIA 170GRX48",48,80,"ABARROTES"]
 };
-// Si mañana agregas un código nuevo a la BASE MADRE, solo agrega una línea aquí: "CODIGO":["DESCRIPCION",UxC,CxP,"ABARROTES"],
 var STOCK1=121.2, STOCK2=8940.3, STOCKT=9061.5;
 function fmt(n){return n.toLocaleString('en-US',{minimumFractionDigits:1,maximumFractionDigits:1});}
 function reloj(){var d=new Date();var dd=String(d.getDate()).padStart(2,'0'),mm=String(d.getMonth()+1).padStart(2,'0'),yy=d.getFullYear();var hh=String(d.getHours()).padStart(2,'0'),mi=String(d.getMinutes()).padStart(2,'0'),ss=String(d.getSeconds()).padStart(2,'0');document.getElementById('fechaReal').textContent=dd+'/'+mm+'/'+yy;document.getElementById('horaReal').textContent=hh+':'+mi+':'+ss;}
@@ -152,7 +149,7 @@ function dibujarTicks(gaugeId){
 var g=document.getElementById(gaugeId);if(!g||g.dataset.done)return;g.dataset.done='1';
 [0,20,40,60,80,100,120].forEach(function(v){
 var ang=(180 - v/120*180)*Math.PI/180;
-var cx=125, cy=125, r=92; // más adentro para que 0 y 120 no se corten
+var cx=125, cy=125, r=92;
 var x=cx + r*Math.cos(ang), y=cy - r*Math.sin(ang);
 var s=document.createElement('div');s.className='gauge-tick';s.textContent=v;s.style.left=x+'px';s.style.top=y+'px';g.appendChild(s);
 });
@@ -191,7 +188,6 @@ if(!txt){document.getElementById('msgMB52').textContent='⚠️ Pega primero tu 
 var lineas=txt.split(/\n/);var totalPal=0, rows=[], count=0, faltantes=[];
 lineas.forEach(function(l){
 if(!l.trim())return;
-// Acepta: 1001273 - 2112  |  1001273|2112  |  1001273;2112  |  1001273 2112  |  1001273,2112
 var partes=l.split(/[-|;,\t ]+/).filter(function(x){return x.trim()!==''});
 if(partes.length<2)return;
 var cod=partes[0].trim(), qty=parseFloat(partes[1].replace(/\./g,'').replace(/,/g,''));
