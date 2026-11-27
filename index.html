@@ -18,9 +18,9 @@ body.captura #btnSalir{display:flex!important}
 #btnSalir span{font-size:8px;font-weight:900;margin-top:1px}
 .bg-lavoro{background:#155EB0}
 .bg-lavoro-dark{background:#0e3f7a}
-/* CRONOMETRO PROFESIONAL V16 - NUMEROS CALCULADOS POR JS, NO A MANO */
+/* CRONOMETRO V17 - NUMEROS YA NO SE CORTAN */
 .gauge-box{width:250px;margin:0 auto;text-align:center;position:relative}
-.gauge{position:relative;width:250px;height:125px;overflow:hidden;margin:0 auto}
+.gauge{position:relative;width:250px;height:135px;overflow:visible;margin:0 auto}
 .gauge-arc{position:absolute;inset:0;border-radius:250px 250px 0 0;background:conic-gradient(from 270deg,#22a355 0deg 75deg,#eab308 75deg 135deg,#dc2626 135deg 180deg);-webkit-mask:radial-gradient(closest-side,transparent 68%,#000 69%);mask:radial-gradient(closest-side,transparent 68%,#000 69%)}
 .gauge-inner{position:absolute;left:50%;top:100%;transform:translate(-50%,-50%);width:150px;height:150px;background:white;border-radius:50%;box-shadow:0 0 0 1px #e5e7eb}
 .gauge-needle{position:absolute;left:50%;bottom:0;width:3px;height:105px;background:#111827;transform-origin:bottom center;border-radius:99px;transition:transform .8s cubic-bezier(.34,1.3,.5,1);z-index:5}
@@ -34,8 +34,6 @@ body.captura #btnSalir{display:flex!important}
 
 <div class="max-w-5xl mx-auto px-2">
 <div id="reporteCaptura" class="bg-white border border-gray-300 mt-3 rounded-2xl overflow-hidden">
-
-<!-- ENCABEZADO LAVORO -->
 <div class="bg-lavoro text-white text-center pt-4 pb-3 px-3">
 <div style="height:5px;background:#E53935;width:120px;margin:0 auto 8px;border-radius:99px"></div>
 <p class="text-[11px] tracking-[0.3em] text-white/90 font-bold">OPERACIONES LAVORO</p>
@@ -43,16 +41,12 @@ body.captura #btnSalir{display:flex!important}
 <p class="text-[11px] text-white/80 mt-1">Desarrollado por <b class="text-white">Luis Vallejo</b> | Operaciones - Lavoro</p>
 <div style="height:5px;background:#3AA655;width:120px;margin:8px auto 0;border-radius:99px"></div>
 </div>
-<div class="bg-lavoro-dark text-white text-center py-2.5">
-<h2 class="text-xl md:text-2xl font-black tracking-wide">OCUPABILIDAD POR POSICION</h2>
-</div>
+<div class="bg-lavoro-dark text-white text-center py-2.5"><h2 class="text-xl md:text-2xl font-black tracking-wide">OCUPABILIDAD POR POSICION</h2></div>
 <div class="bg-[#0a2e56] text-white flex flex-wrap justify-between items-center gap-2 px-4 py-2.5 text-xs md:text-sm font-bold">
 <span>CD OQUENDO Lv - UCA</span><span id="fechaReal">--/--/----</span>
 <span class="flex items-center gap-1">TURNO <select id="turno"><option value="1">1</option><option value="2" selected>2</option><option value="3">3</option></select></span>
 <span>CORTE <span id="horaReal">--:--:--</span></span>
 </div>
-
-<!-- TABLA -->
 <table class="w-full tabla text-center">
 <thead><tr class="bg-[#e5e5e5]">
 <th class="p-2 text-left text-[#0e3f7a]">NAVE</th><th class="p-2 text-left text-[#0e3f7a]">ALMACEN</th><th class="p-2 text-left text-[#0e3f7a]">ALMACENAMIENTO</th>
@@ -68,49 +62,35 @@ body.captura #btnSalir{display:flex!important}
 <td class="p-2" id="c2t">9,800.0</td><td class="p-2 bg-[#fef3c7] font-bold" id="s2">8,940.3</td><td class="p-2 bg-[#facc15] font-bold" id="l2">859.7</td><td class="p-2 bg-[#222] text-white font-black" id="p2">91.2%</td></tr>
 <tr class="bg-[#1a4a8a] text-white font-black"><td class="p-2 text-left" colspan="3">TOTAL GENERAL</td><td class="p-2" id="ctn">18,000</td><td class="p-2" id="ctt">17,640.0</td><td class="p-2 bg-[#fef3c7] text-black" id="st">9,061.5</td><td class="p-2 bg-[#facc15] text-black" id="lt">8,578.5</td><td class="p-2 bg-[#222]" id="pt">51.4%</td></tr>
 </tbody></table>
-
 <div class="bg-[#bdbdbd] flex flex-col md:flex-row md:items-center justify-between px-4 py-2.5 gap-2 font-black text-sm md:text-base border-t border-gray-400">
 <div class="flex items-center gap-2">TRÁNSITOS: <span class="bg-white px-2 py-1 rounded w-24 inline-block"><input id="trans" type="number" value="326" oninput="recalc()" class="bg-transparent text-center font-black w-full"></span>
 <span class="font-normal text-xs">% TOPE: <span class="bg-white px-2 py-1 rounded w-16 inline-block"><input id="tope" type="number" value="98" oninput="recalc()" class="bg-transparent text-center font-black w-full"></span> %</span></div>
 <div>TOTAL GENERAL con transito: <span id="conTransTxt">9,387.5</span> | <span id="conTransPct">53.2%</span> | Libres: <span id="libConTrans">8,252.5</span></div>
 </div>
-
-<!-- CRONOMETROS V16 -->
 <div class="bg-white grid grid-cols-2 gap-2 p-3 border-t">
-<div class="gauge-box">
-<p class="font-black text-[#0e3f7a] text-base md:text-lg">UCA SIN TRANSITO</p>
-<div class="gauge" id="gauge1"><div class="gauge-arc"></div><div class="gauge-inner"></div><div class="gauge-needle" id="aguja1"></div><div class="gauge-dot"></div></div>
-<div class="gauge-pct" id="g1Big">51%</div>
-<div class="text-[11px] text-gray-500" id="g1Sub">9,061.5 pal / 17,640</div>
-</div>
-<div class="gauge-box">
-<p class="font-black text-[#0e3f7a] text-base md:text-lg">UCA CON TRANSITO</p>
-<div class="gauge" id="gauge2"><div class="gauge-arc"></div><div class="gauge-inner"></div><div class="gauge-needle" id="aguja2"></div><div class="gauge-dot"></div></div>
-<div class="gauge-pct" id="g2Big">53%</div>
-<div class="text-[11px] text-gray-500" id="g2Sub">9,387.5 pal / 17,640 • +326</div>
-</div>
+<div class="gauge-box"><p class="font-black text-[#0e3f7a] text-base md:text-lg">UCA SIN TRANSITO</p><div class="gauge" id="gauge1"><div class="gauge-arc"></div><div class="gauge-inner"></div><div class="gauge-needle" id="aguja1"></div><div class="gauge-dot"></div></div><div class="gauge-pct" id="g1Big">51%</div><div class="text-[11px] text-gray-500" id="g1Sub">9,061.5 pal / 17,640</div></div>
+<div class="gauge-box"><p class="font-black text-[#0e3f7a] text-base md:text-lg">UCA CON TRANSITO</p><div class="gauge" id="gauge2"><div class="gauge-arc"></div><div class="gauge-inner"></div><div class="gauge-needle" id="aguja2"></div><div class="gauge-dot"></div></div><div class="gauge-pct" id="g2Big">53%</div><div class="text-[11px] text-gray-500" id="g2Sub">9,387.5 pal / 17,640 • +326</div></div>
 </div>
 <div class="bg-lavoro text-white text-center py-2.5 px-3"><p class="text-[11px]">Desarrollado por <b>Luis Vallejo</b> | Operaciones - Lavoro | CD OQUENDO Lv - UCA</p></div>
 </div>
 
-<!-- BOTON WHATSAPP -->
-<div class="grid grid-cols-1 gap-2 mt-3 no-captura">
-<button onclick="entrarCaptura()" class="bg-green-600 text-white font-black p-3.5 rounded-xl text-base shadow">📲 COMPARTIR POR WHATSAPP - MODO CAPTURA</button>
-</div>
+<div class="grid grid-cols-1 gap-2 mt-3 no-captura"><button onclick="entrarCaptura()" class="bg-green-600 text-white font-black p-3.5 rounded-xl text-base shadow">📲 COMPARTIR POR WHATSAPP - MODO CAPTURA</button></div>
 
-<!-- ===== BOTON MB52 - NUEVO ===== -->
+<!-- ===== MB52 SOLO CODIGO - CANTIDAD ===== -->
 <div class="bg-white rounded-xl mt-3 overflow-hidden no-captura border-2 border-[#155EB0]">
-<button onclick="toggleMB52()" class="w-full bg-lavoro text-white font-black p-3.5 text-left flex justify-between items-center"><span>📥 ACTUALIZAR CON MB52 - PEGAR DATA Y ACTUALIZAR UCA</span><span id="flechaMB52">▼</span></button>
-<div id="panelMB52" style="display:none" class="p-3">
-<p class="text-xs text-gray-600">Pega tu MB52 tal cual lo exportas. Formato por línea: <b>CODIGO | STOCK LIBRE | U x C | C x P</b><br>Ej: <span class="bg-gray-100 px-1 rounded">1005271 | 1475198 | 15 | 72</span> &nbsp; o &nbsp; <span class="bg-gray-100 px-1 rounded">1005271;1475198;15;72</span></p>
-<textarea id="txtMB52" rows="6" placeholder="Pega aquí tu MB52...&#10;1005271 | 1475198 | 15 | 72&#10;1001169 | 2526827 | 48 | 40&#10;1004891 | 2225840 | 24 | 98" class="w-full border-2 border-gray-300 rounded-xl p-2 text-xs font-mono mt-2"></textarea>
+<button onclick="toggleMB52()" class="w-full bg-lavoro text-white font-black p-3.5 text-left flex justify-between items-center"><span>📥 ACTUALIZAR CON MB52 - SOLO CÓDIGO - CANTIDAD</span><span id="flechaMB52">▼</span></button>
+<div id="panelMB52" class="p-3">
+<p class="text-xs text-gray-600">Ya tenemos la <b>BASE MADRE</b> con U x C, C x P y Descripción. Solo pega <b>CÓDIGO - CANTIDAD (unidades)</b> y la página convierte sola a pallets.</p>
+<div class="bg-[#eef5ff] rounded-xl p-2 text-xs mt-2 font-mono">Ejemplo real que me diste:<br><b>1001273 - 2112</b> &nbsp; → &nbsp; 2112 / (24 x 88) = <b>1.0 pal</b> &nbsp; | &nbsp; GLORIA 390GR BANDEJA<br><b>1005271 - 1475198</b> &nbsp; → &nbsp; 1475198 / 1080 = <b>1,365.9 pal</b></div>
+<textarea id="txtMB52" rows="6" placeholder="Pega aquí solo CÓDIGO - CANTIDAD&#10;1001273 - 2112&#10;1005271 - 1475198&#10;1001169 - 2526827&#10;1004891 - 2225840" class="w-full border-2 border-gray-300 rounded-xl p-2 text-xs font-mono mt-2"></textarea>
 <div class="flex gap-2 mt-2">
 <label class="flex-1 bg-gray-100 border-2 border-dashed rounded-xl p-2.5 text-center text-xs font-bold cursor-pointer">📂 O SUBIR CSV / TXT MB52<input type="file" id="fileMB52" accept=".csv,.txt" class="hidden" onchange="leerArchivo(this)"></label>
 <button onclick="actualizarMB52()" class="flex-1 bg-[#155EB0] text-white font-black rounded-xl p-2.5 text-sm">🔄 ACTUALIZAR UCA AHORA</button>
 <button onclick="ejemploMB52()" class="bg-yellow-400 font-black rounded-xl px-3 text-xs">EJEMPLO</button>
 </div>
 <p id="msgMB52" class="text-xs font-bold mt-2 text-center"></p>
-<p class="text-[11px] text-gray-500 mt-1 text-center">Al actualizar, recalcula: Stock NAVE 2, Total, Libres, %, Cronómetros, TOP 10 y Detalle. NAVE 1 Refrigerados queda fijo en 121.2 salvo que lo cambies abajo.</p>
+<p id="msgFaltantes" class="text-xs mt-1 text-center text-red-600 font-bold"></p>
+<p class="text-[11px] text-gray-500 mt-1 text-center">Recalcula: Stock NAVE 2, Total, Libres, %, Cronómetros, TOP 10 y Detalle. NAVE 1 Refrigerados queda fijo en 121.2 salvo que lo cambies abajo.</p>
 <div class="flex gap-2 mt-2 text-xs">
 <label class="flex-1 bg-blue-50 p-2 rounded">NAVE 1 Refrigerados (pal)<input id="stock1Manual" type="number" value="121.2" class="w-full border p-1 rounded font-black text-center mt-1"></label>
 <label class="flex-1 bg-blue-50 p-2 rounded">Pallets a excluir / activos<input id="excluir" type="number" value="0" class="w-full border p-1 rounded font-black text-center mt-1"></label>
@@ -118,7 +98,6 @@ body.captura #btnSalir{display:flex!important}
 </div>
 </div>
 
-<!-- TOP 10 -->
 <div class="no-captura">
 <div class="bg-white rounded-xl p-3 mt-3"><p class="font-black">🏆 TOP 10 REAL - MB52 x MAESTRO</p><div class="text-xs space-y-2 mt-2" id="top10">
 <div><div class="flex justify-between font-bold"><span>1. 1005271 SAN MATEO 600ML X15</span><span>1,365.9 pal | 98,347 caj</span></div><div class="bg-gray-200 h-2 rounded"><div class="bg-red-600 h-2 rounded" style="width:100%"></div></div></div>
@@ -138,21 +117,42 @@ body.captura #btnSalir{display:flex!important}
 <tr class="border-b"><td class="p-2 font-bold">1005275</td><td class="p-2">SAN MATEO 2.5L X6</td><td class="p-2 text-right">181,482</td><td class="p-2 text-center">6</td><td class="p-2 text-center">48</td><td class="p-2 text-center font-bold">288</td><td class="p-2 text-center">30,247</td><td class="p-2 text-center font-bold bg-yellow-50">630.1</td><td class="p-2 text-center">ABARROTES</td></tr>
 <tr class="border-b"><td class="p-2 font-bold">1001173</td><td class="p-2">GLORIA PAE 390g</td><td class="p-2 text-right">1,155,722</td><td class="p-2 text-center">48</td><td class="p-2 text-center">40</td><td class="p-2 text-center font-bold">1,920</td><td class="p-2 text-center">24,078</td><td class="p-2 text-center font-bold bg-yellow-50">601.9</td><td class="p-2 text-center">ABARROTES</td></tr>
 </tbody></table></div>
-<p class="text-center text-[11px] text-gray-500 py-2">V16 LAVORO - Total <span id="footTotal">9,061.5</span> sin tránsito | MB52 actualizable</p>
+<p class="text-center text-[11px] text-gray-500 py-2">V17 LAVORO - Total <span id="footTotal">9,061.5</span> sin tránsito | MB52 solo Código - Cantidad</p>
 </div>
 </div>
 </div>
 
 <script>
+// ===== BASE MADRE - YA TIENE U x C, C x P, DESCRIPCION =====
+// CODIGO : [DESCRIPCION, U x C, C x P, ALMACEN]
+var MAESTRO={
+"1005271":["SAN MATEO 600ML X15",15,72,"ABARROTES"],
+"1001169":["GLORIA EVP 410GX48",48,40,"ABARROTES"],
+"1004891":["GLORIA DURAZNO 315ML",24,98,"ABARROTES"],
+"1005275":["SAN MATEO 2.5L X6",6,48,"ABARROTES"],
+"1001173":["GLORIA PAE 390g",48,40,"ABARROTES"],
+"1050167":["GLORIA UHT BOLSA 800ML",12,65,"ABARROTES"],
+"1004903":["PURA VIDA 3L",4,60,"ABARROTES"],
+"1001273":["GLORIA 390GR BANDEJA",24,88,"ABARROTES"],
+"538002":["MERMELADA 950G BARRIL",24,48,"ABARROTES"],
+"1007119":["PANETON 900GR",12,60,"ABARROTES"],
+"1005273":["SAN MATEO SIXPACK 600ML",6,180,"ABARROTES"],
+"1005281":["SAN MATEO C/GAS SIXPACK",6,180,"ABARROTES"],
+"1004893":["GLORIA NARANJA 315ML",24,98,"ABARROTES"],
+"1004895":["GLORIA PIÑA 315ML",24,98,"ABARROTES"],
+"1005193":["SAN MATEO 2.5L X6",6,48,"ABARROTES"],
+"1001223":["GLORIA NIÑOS 170GR",48,80,"ABARROTES"],
+"1001135":["GLORIA 170GRX48",48,80,"ABARROTES"]
+};
+// Si mañana agregas un código nuevo a la BASE MADRE, solo agrega una línea aquí: "CODIGO":["DESCRIPCION",UxC,CxP,"ABARROTES"],
 var STOCK1=121.2, STOCK2=8940.3, STOCKT=9061.5;
 function fmt(n){return n.toLocaleString('en-US',{minimumFractionDigits:1,maximumFractionDigits:1});}
 function reloj(){var d=new Date();var dd=String(d.getDate()).padStart(2,'0'),mm=String(d.getMonth()+1).padStart(2,'0'),yy=d.getFullYear();var hh=String(d.getHours()).padStart(2,'0'),mi=String(d.getMinutes()).padStart(2,'0'),ss=String(d.getSeconds()).padStart(2,'0');document.getElementById('fechaReal').textContent=dd+'/'+mm+'/'+yy;document.getElementById('horaReal').textContent=hh+':'+mi+':'+ss;}
-// CRONOMETRO: NUMEROS CON MATEMATICA EXACTA
 function dibujarTicks(gaugeId){
 var g=document.getElementById(gaugeId);if(!g||g.dataset.done)return;g.dataset.done='1';
 [0,20,40,60,80,100,120].forEach(function(v){
-var ang=(180 - v/120*180)*Math.PI/180; // 0=izquierda, 120=derecha
-var cx=125, cy=125, r=108;
+var ang=(180 - v/120*180)*Math.PI/180;
+var cx=125, cy=125, r=92; // más adentro para que 0 y 120 no se corten
 var x=cx + r*Math.cos(ang), y=cy - r*Math.sin(ang);
 var s=document.createElement('div');s.className='gauge-tick';s.textContent=v;s.style.left=x+'px';s.style.top=y+'px';g.appendChild(s);
 });
@@ -183,34 +183,40 @@ function filtrar(){var q=(document.getElementById('busc').value||'').toLowerCase
 function entrarCaptura(){document.body.classList.add('captura');window.scrollTo(0,0);}
 function salirCaptura(){document.body.classList.remove('captura');}
 function toggleMB52(){var p=document.getElementById('panelMB52');var ab=p.style.display==='none';p.style.display=ab?'block':'none';document.getElementById('flechaMB52').textContent=ab?'▲':'▼';}
-function ejemploMB52(){document.getElementById('txtMB52').value='1005271 | 1475198 | 15 | 72\n1001169 | 2526827 | 48 | 40\n1004891 | 2225840 | 24 | 98\n1005275 | 181482 | 6 | 48\n1001173 | 1155722 | 48 | 40';}
+function ejemploMB52(){document.getElementById('txtMB52').value='1001273 - 2112\n1005271 - 1475198\n1001169 - 2526827\n1004891 - 2225840\n1005275 - 181482';}
 function leerArchivo(inp){var f=inp.files[0];if(!f)return;var r=new FileReader();r.onload=function(e){document.getElementById('txtMB52').value=e.target.result;};r.readAsText(f);}
 function actualizarMB52(){
-var txt=document.getElementById('txtMB52').value.trim();if(!txt){document.getElementById('msgMB52').textContent='⚠️ Pega primero tu MB52';document.getElementById('msgMB52').style.color='red';return;}
-var lineas=txt.split(/\n/);var totalPal=0, rows=[], count=0;
+var txt=document.getElementById('txtMB52').value.trim();
+if(!txt){document.getElementById('msgMB52').textContent='⚠️ Pega primero tu MB52 solo Código - Cantidad';document.getElementById('msgMB52').style.color='red';return;}
+var lineas=txt.split(/\n/);var totalPal=0, rows=[], count=0, faltantes=[];
 lineas.forEach(function(l){
-var partes=l.split(/[|;,\t]/).map(function(x){return x.trim().replace(/\./g,'').replace(/,/g,'')});
-if(partes.length<4)return;
-var cod=partes[0], stock=parseFloat(partes[1]), uxc=parseFloat(partes[2]), cxp=parseFloat(partes[3]);
-if(!stock||!uxc||!cxp)return;
-var undPal=uxc*cxp, cajas=stock/uxc, pal=stock/undPal;
+if(!l.trim())return;
+// Acepta: 1001273 - 2112  |  1001273|2112  |  1001273;2112  |  1001273 2112  |  1001273,2112
+var partes=l.split(/[-|;,\t ]+/).filter(function(x){return x.trim()!==''});
+if(partes.length<2)return;
+var cod=partes[0].trim(), qty=parseFloat(partes[1].replace(/\./g,'').replace(/,/g,''));
+if(!qty)return;
+var m=MAESTRO[cod];
+if(!m){faltantes.push(cod);return;}
+var desc=m[0], uxc=m[1], cxp=m[2], alm=m[3];
+var undPal=uxc*cxp, cajas=qty/uxc, pal=qty/undPal;
 totalPal+=pal;count++;
-rows.push({cod:cod,stock:stock,uxc:uxc,cxp:cxp,undPal:undPal,cajas:cajas,pal:pal});
+rows.push({cod:cod,desc:desc,stock:qty,uxc:uxc,cxp:cxp,undPal:undPal,cajas:cajas,pal:pal,alm:alm});
 });
-if(!count){document.getElementById('msgMB52').textContent='⚠️ No pude leer líneas. Usa: CODIGO | STOCK | U x C | C x P';document.getElementById('msgMB52').style.color='red';return;}
+if(!count){document.getElementById('msgMB52').textContent='⚠️ No encontré ningún código de la Base Madre. Revisa el formato.';document.getElementById('msgMB52').style.color='red';return;}
 STOCK1=parseFloat(document.getElementById('stock1Manual').value)||121.2;
 var excluir=parseFloat(document.getElementById('excluir').value)||0;
 STOCK2=Math.max(0,totalPal-excluir); STOCKT=STOCK1+STOCK2;
-// Ordenar y rehacer TOP10 + Detalle
 rows.sort(function(a,b){return b.pal-a.pal});
 var colores=['bg-red-600','bg-blue-600','bg-orange-500','bg-green-600','bg-purple-600','bg-pink-600','bg-teal-600','bg-yellow-600','bg-indigo-600','bg-gray-600'];
-var topHtml='';rows.slice(0,10).forEach(function(r,i){var w=Math.round(r.pal/rows[0].pal*100);topHtml+='<div><div class="flex justify-between font-bold"><span>'+(i+1)+'. '+r.cod+'</span><span>'+fmt(r.pal)+' pal | '+Math.round(r.cajas).toLocaleString()+' caj</span></div><div class="bg-gray-200 h-2 rounded"><div class="'+colores[i]+' h-2 rounded" style="width:'+w+'%"></div></div></div>';});
+var topHtml='';rows.slice(0,10).forEach(function(r,i){var w=Math.round(r.pal/rows[0].pal*100);topHtml+='<div><div class="flex justify-between font-bold"><span>'+(i+1)+'. '+r.cod+' '+r.desc+'</span><span>'+fmt(r.pal)+' pal | '+Math.round(r.cajas).toLocaleString()+' caj</span></div><div class="bg-gray-200 h-2 rounded"><div class="'+colores[i]+' h-2 rounded" style="width:'+w+'%"></div></div></div>';});
 document.getElementById('top10').innerHTML=topHtml;
-var tb='';rows.forEach(function(r){tb+='<tr class="border-b"><td class="p-2 font-bold">'+r.cod+'</td><td class="p-2">-</td><td class="p-2 text-right">'+Math.round(r.stock).toLocaleString()+'</td><td class="p-2 text-center">'+r.uxc+'</td><td class="p-2 text-center">'+r.cxp+'</td><td class="p-2 text-center font-bold">'+r.undPal.toLocaleString()+'</td><td class="p-2 text-center">'+Math.round(r.cajas).toLocaleString()+'</td><td class="p-2 text-center font-bold bg-yellow-50">'+fmt(r.pal)+'</td><td class="p-2 text-center">ABARROTES</td></tr>';});
+var tb='';rows.forEach(function(r){tb+='<tr class="border-b"><td class="p-2 font-bold">'+r.cod+'</td><td class="p-2">'+r.desc+'</td><td class="p-2 text-right">'+Math.round(r.stock).toLocaleString()+'</td><td class="p-2 text-center">'+r.uxc+'</td><td class="p-2 text-center">'+r.cxp+'</td><td class="p-2 text-center font-bold">'+r.undPal.toLocaleString()+'</td><td class="p-2 text-center">'+Math.round(r.cajas).toLocaleString()+'</td><td class="p-2 text-center font-bold bg-yellow-50">'+fmt(r.pal)+'</td><td class="p-2 text-center">'+r.alm+'</td></tr>';});
 document.getElementById('tb').innerHTML=tb;
 document.getElementById('totalCodigos').textContent=count;
 document.getElementById('msgMB52').textContent='✅ Actualizado: '+count+' códigos | NAVE 2: '+fmt(STOCK2)+' pal | Total: '+fmt(STOCKT)+' pal';
 document.getElementById('msgMB52').style.color='green';
+document.getElementById('msgFaltantes').textContent=faltantes.length?('⚠️ No están en Base Madre, no se sumaron: '+faltantes.join(', ')+' - agrégalos a MAESTRO'):'';
 reloj();recalc();window.scrollTo(0,0);
 }
 dibujarTicks('gauge1');dibujarTicks('gauge2');reloj();setInterval(reloj,1000);recalc();
