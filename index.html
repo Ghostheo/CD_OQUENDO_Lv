@@ -1,20 +1,36 @@
 <!DOCTYPE html>
 <html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CD OQUENDO Lv - UCA V7</title>
+<title>CD OQUENDO Lv - UCA V8</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+  /* MODO CAPTURA - OCULTA LO QUE NO VA EN LA FOTO */
+  body.captura .no-captura{ display:none !important; }
+  body.captura .solo-captura{ display:block !important; }
+  body.captura{ background:white !important; }
+  body.captura #reporteCaptura{ padding:0 !important; }
+  .solo-captura{ display:none; }
+</style>
 </head>
 <body class="bg-[#f1f1f1] pb-6">
 <div class="bg-black text-white p-4 text-center sticky top-0 z-10">
 <p class="text-[11px] tracking-widest text-yellow-400 font-bold">GLORIA • OQUENDO • LIVE</p>
 <h1 class="text-2xl font-black">CD OQUENDO <span class="text-yellow-400">Lv</span> - UCA</h1>
-<p class="text-xs text-gray-300">V7 • DATA LLENA 26.11.2026 • Hora Perú en vivo</p>
+<p class="text-xs text-gray-300 no-captura">V8 • DATA LLENA 26.11.2026 • Hora Perú en vivo</p>
 <p id="fechaHora" class="text-sm font-black text-yellow-400 mt-1">📅 Cargando fecha y hora Perú...</p>
 </div>
-<div class="max-w-5xl mx-auto px-3">
+
+<!-- BARRA MODO CAPTURA - SOLO SALE CUANDO ACTIVAS -->
+<div id="modoCaptura" class="solo-captura bg-blue-600 text-white p-3 text-center sticky top-0 z-20">
+<p class="font-black text-sm">📸 MODO CAPTURA ACTIVADO</p>
+<p class="text-xs">Toma screenshot ahora con tu celular y mándalo por WhatsApp</p>
+<button onclick="salirCaptura()" class="bg-white text-blue-700 font-black px-4 py-2 rounded-full mt-2 text-sm">❌ SALIR DE MODO CAPTURA</button>
+</div>
+
+<div id="reporteCaptura" class="max-w-5xl mx-auto px-3">
 <div id="alerta" class="bg-red-600 text-white p-3 rounded-xl mt-3 flex gap-3 items-center"><div class="text-3xl">⚠️</div><div><p class="font-black text-sm" id="alertTitle">NAVE 2 CASI LLENA</p><p class="text-xs" id="alertText">Nave1: 121 / 7,840 | Nave2: 8,940 / 9,800 | Total: 9,061 al 98%</p></div></div>
 
-<div class="bg-yellow-100 border-2 border-yellow-400 rounded-xl p-3 mt-3">
+<div class="bg-yellow-100 border-2 border-yellow-400 rounded-xl p-3 mt-3 no-captura">
 <p class="font-black text-sm">⚙️ CONFIGURACION - MODIFICABLE</p>
 <div class="grid grid-cols-3 gap-2 mt-2">
 <label class="bg-white p-2 rounded text-xs">NAVE 1 Cap<br><input id="cap1" type="number" value="8000" class="w-full border p-1 rounded font-black" oninput="recalcular()"></label>
@@ -30,12 +46,17 @@
 <div class="bg-black text-white rounded-xl p-3 text-center"><p class="text-[10px] font-bold text-yellow-400">TOTAL<br>OQUENDO Lv</p><p class="text-2xl font-black" id="nt">9,061</p><p class="text-[10px]">Cap <span id="capTxtT">18,000</span></p><p class="font-black text-yellow-400 text-xs" id="pt">51.4%</p><div class="bg-gray-700 h-3 rounded-full mt-1 overflow-hidden"><div id="bt" class="bg-yellow-400 h-3" style="width:51.4%"></div></div><p class="text-[10px] mt-1">Libres al tope: <b id="lib">8,579</b></p></div>
 </div>
 
-<div class="grid grid-cols-2 gap-2 mt-3">
-<button onclick="compartirDetallado()" class="bg-green-600 text-white font-black p-3 rounded-xl">📲 COMPARTIR REPORTE DETALLADO POR WHATSAPP</button>
+<!-- TEXTO DE ALERTA PARA LA CAPTURA - SOLO SALE EN CAPTURA -->
+<div class="solo-captura bg-yellow-50 border-2 border-yellow-400 rounded-xl p-3 mt-3 text-center">
+<p class="font-black text-sm">⚠️ ALERTA: NAVE 2 casi llena, quedan solo 860 pal libres. NAVE 1 tiene espacio.</p>
+</div>
+
+<div class="grid grid-cols-2 gap-2 mt-3 no-captura">
+<button onclick="entrarCaptura()" class="bg-green-600 text-white font-black p-3 rounded-xl">📲 COMPARTIR POR WHATSAPP</button>
 <button onclick="document.getElementById('f1').click()" class="bg-black text-white font-black p-3 rounded-xl">📄 SUBIR DATA NUEVA</button>
 </div>
-<input id="f1" type="file" accept=".xlsx,.xls,.csv" class="hidden">
-<p id="st" class="text-xs mt-2 font-bold text-center">✅ DATA 26.11.2026 YA LLENA EN HTML</p>
+<input id="f1" type="file" accept=".xlsx,.xls,.csv" class="hidden no-captura">
+<p id="st" class="text-xs mt-2 font-bold text-center no-captura">✅ DATA 26.11.2026 YA LLENA EN HTML</p>
 
 <div class="bg-white rounded-xl p-3 mt-3"><p class="font-black">🏆 TOP 10 QUE MAS OCUPAN - 26.11.2026</p>
 <div class="space-y-2 mt-2 text-xs">
@@ -53,7 +74,7 @@
 
 <div class="bg-white rounded-xl mt-3 overflow-hidden">
 <div class="bg-black text-white p-2 text-center font-black text-sm">DETALLE POR CODIGO - YA LLENO</div>
-<div class="p-2"><input id="busc" type="text" placeholder="🔍 Buscar... Ej: 1001169 o SAN MATEO" class="w-full border-2 p-2 rounded-xl" oninput="filtrar()"></div>
+<div class="p-2 no-captura"><input id="busc" type="text" placeholder="🔍 Buscar... Ej: 1001169 o SAN MATEO" class="w-full border-2 p-2 rounded-xl" oninput="filtrar()"></div>
 <div class="overflow-x-auto"><table class="w-full text-xs"><thead><tr class="bg-gray-100"><th class="p-2 text-left">CODIGO</th><th class="p-2 text-left">DESCRIPCION</th><th class="p-2">STOCK</th><th class="p-2">U x C</th><th class="p-2">C x P</th><th class="p-2">UND x PAL</th><th class="p-2">PALLETS</th><th class="p-2">ALMACEN</th></tr></thead>
 <tbody id="tb">
 <tr class="border-b"><td class="p-2 font-bold">1005271</td><td class="p-2">SAN MATEO AGUA SIN GAS PET 600ML X15</td><td class="p-2 text-right">1,475,280</td><td class="p-2 text-center">15</td><td class="p-2 text-center">72</td><td class="p-2 text-center font-bold">1,080</td><td class="p-2 text-center font-bold bg-yellow-50">1,366.0</td><td class="p-2 text-center">ABARROTES</td></tr>
@@ -71,7 +92,8 @@
 <tr class="border-b"><td class="p-2 font-bold">1001135</td><td class="p-2">GLORIA LECHE REC ENTERA 170GRX48</td><td class="p-2 text-right">414,720</td><td class="p-2 text-center">48</td><td class="p-2 text-center">80</td><td class="p-2 text-center font-bold">3,840</td><td class="p-2 text-center font-bold bg-yellow-50">108.0</td><td class="p-2 text-center">ABARROTES</td></tr>
 </tbody></table></div>
 </div>
-<p class="text-center text-[11px] text-gray-500 mt-2">CD OQUENDO Lv - V7 COMPLETO - Totales reales 26.11.2026: 121 + 8,940 = 9,061</p>
+<p class="text-center text-[11px] text-gray-500 mt-2 no-captura">CD OQUENDO Lv - V8 MODO CAPTURA - Totales reales 26.11.2026: 121 + 8,940 = 9,061</p>
+<p class="solo-captura text-center text-[11px] text-gray-500 mt-2 font-bold">CD OQUENDO Lv - Reporte para WhatsApp • https://ghostheo.github.io/CD_OQUENDO_Lv/</p>
 </div>
 <script>
 function fechaPeru(){
@@ -115,15 +137,11 @@ function filtrar(){
  var rows=document.querySelectorAll('#tb tr');
  rows.forEach(function(r){ r.style.display = r.textContent.toLowerCase().includes(q) ? '' : 'none'; });
 }
-function compartirDetallado(){
-  var fecha = fechaPeru();
-  var txt = '📦 CD OQUENDO Lv - UCA | REPORTE\n' + fecha + '\n\n' +
-  '🧊 NAVE 1 - REFRIGERADOS\nOcupado: 121 pal / 7,840 al 98%\nLibre: 7,719 pal\nOcupabilidad: 1.5% - VACIO\n\n' +
-  '📦 NAVE 2 - ABARROTES\nOcupado: 8,940 pal / 9,800 al 98%\nLibre: 860 pal\nOcupabilidad: 91.2% - CASI LLENO ⚠️\n\n' +
-  'TOTAL OQUENDO: 9,061 pal / 17,640 al 98% - 51.4%\nLibres totales: 8,579 pal\n\n' +
-  '🏆 TOP 5 QUE MAS OCUPAN:\n1. 1005271 SAN MATEO 600ML X15 - 1,366 pal\n2. 1001169 GLORIA EVP 410G - 1,316 pal\n3. 1004891 GLORIA DURAZNO 315ML - 946 pal\n4. 1005275 SAN MATEO 2.5L - 630 pal\n5. 1001173 GLORIA PAE 390G - 602 pal\n\n' +
-  '⚠️ ALERTA: NAVE 2 casi llena, queda solo 860 pal libres. NAVE 1 tiene espacio para mover carga.\n\n' +
-  'Ver reporte completo:\nhttps://ghostheo.github.io/CD_OQUENDO_Lv/';
-  window.open('https://wa.me/?text=' + encodeURIComponent(txt), '_blank');
+function entrarCaptura(){
+  document.body.classList.add('captura');
+  window.scrollTo(0,0);
+}
+function salirCaptura(){
+  document.body.classList.remove('captura');
 }
 </script></body></html>
