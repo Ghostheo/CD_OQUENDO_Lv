@@ -5,57 +5,55 @@
 <title>UCA - CD OQUENDO</title>
 <style>
 *{box-sizing:border-box;font-family:Arial,sans-serif}body{margin:0;background:#eef2f7}
-header{background:#1e4fa3;color:#fff;text-align:center;padding:12px 8px}
-header small{font-size:10px;letter-spacing:2px;opacity:.85}header h1{margin:2px 0;font-size:22px}header p{margin:0;font-size:11px}
-.wrap{max-width:1000px;margin:auto;padding:10px}.card{background:#fff;border-radius:10px;padding:10px;margin-bottom:10px;box-shadow:0 1px 5px rgba(0,0,0,.1)}
-.card h3{background:#1e4fa3;color:#fff;text-align:center;margin:-10px -10px 10px;padding:8px;border-radius:10px 10px 0 0;font-size:14px}
-table{width:100%;border-collapse:collapse;font-size:12px}th,td{border:1px solid #d1d5db;padding:6px;text-align:center}th{background:#1e4fa3;color:#fff;font-size:11px}
+header{background:#1e5cb8;color:#fff;text-align:center;padding:14px 8px 10px;position:relative}
+header::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:140px;height:5px;background:#ef4444;border-radius:0 0 4px 4px}
+header small{font-size:11px;letter-spacing:3px}header h1{margin:4px 0;font-size:30px}header p{margin:0;font-size:12px;opacity:.9}
+header::after{content:"";display:block;width:140px;height:5px;background:#22c55e;margin:8px auto 0;border-radius:4px}
+.wrap{max-width:1000px;margin:auto;padding:10px}.card{background:#fff;border-radius:12px;overflow:hidden;margin-bottom:10px;box-shadow:0 1px 5px rgba(0,0,0,.1)}
+.card h3{background:#0b3a7a;color:#fff;text-align:center;margin:0;padding:12px;font-size:20px;letter-spacing:1px}
+table{width:100%;border-collapse:collapse;font-size:12px}th,td{border:1px solid #d1d5db;padding:8px;text-align:center}th{background:#e5e7eb;color:#1e3a5f;font-size:11px}
+.topbar{background:#0b2f5e;color:#fff;font-size:13px}.topbar td{border-color:#0b2f5e;color:#fff;font-weight:bold;padding:10px 6px;background:#0b2f5e}
+.topbar select{background:#0b2f5e;color:#fff;border:1px solid #fff;border-radius:6px;padding:2px 4px;font-weight:bold}
 td[contenteditable]{background:#fffbe6;outline:none}td[contenteditable]:focus{background:#fef08a}
-/* ✅ CORTE EN OSCURO COMO ANTES */
-#corte{background:#111;color:#fff;font-weight:900;font-size:15px;padding:6px 10px;border-radius:6px;letter-spacing:1px}
-#fecha,#turno{background:#fff;color:#111;font-weight:bold;padding:6px;border-radius:6px}
-.gauges{display:grid;grid-template-columns:1fr 1fr;gap:10px;text-align:center}
-.gauge-wrap{position:relative;width:190px;height:105px;margin:6px auto 0;overflow:hidden}
-.gauge-bg{width:190px;height:190px;border-radius:50%;background:conic-gradient(#22c55e 0deg 108deg,#eab308 108deg 144deg,#ef4444 144deg 180deg);transform:rotate(180deg)}
-.gauge-mask{position:absolute;left:22px;top:22px;width:146px;height:146px;background:#fff;border-radius:50%}
-.gauge-label{position:absolute;left:0;right:0;bottom:2px;text-align:center;font-size:24px;font-weight:900;color:#1e4fa3}
-.needle{position:absolute;left:50%;bottom:0;width:4px;height:88px;background:#111;transform-origin:bottom center;transform:translateX(-50%) rotate(0deg);z-index:5;border-radius:2px}
-.gauge-center{position:absolute;left:50%;bottom:-6px;width:14px;height:14px;background:#111;border-radius:50%;transform:translateX(-50%);z-index:6}
-.btn{border:0;border-radius:8px;padding:11px;font-weight:bold;cursor:pointer;width:100%}.btn-blue{background:#2563eb;color:#fff}.btn-green{background:#16a34a;color:#fff}.btn-purple{background:#7c3aed;color:#fff}.btn-gray{background:#e5e7eb}.row{display:flex;gap:8px}.row .btn{flex:1}
-textarea{width:100%;min-height:110px;border-radius:8px;border:1px solid #ccc;padding:8px;font-family:monospace;font-size:12px}input{width:100%;padding:9px;border-radius:8px;border:1px solid #ccc}
+.yellow{background:#facc15!important;font-weight:bold}.black{background:#111!important;color:#fff!important;font-weight:bold}
+.total td{background:#144a8a;color:#fff;font-weight:bold;border-color:#144a8a}
+.transito-bar{background:#c9c9c9;padding:10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13px;font-weight:bold}
+.transito-bar input{width:80px;padding:6px;text-align:center;border:0;border-radius:6px;font-weight:bold;font-size:14px}
+.gauges{display:grid;grid-template-columns:1fr 1fr;gap:10px;text-align:center;padding:14px 6px 6px}
+.gauge-title{color:#144a8a;font-weight:800;font-size:16px;margin-bottom:2px}
+.gauge-num{font-size:36px;font-weight:900;color:#144a8a;line-height:1;margin-top:-4px}
+.gauge-sub{font-size:11px;color:#888;margin-top:2px}
+.btn{border:0;border-radius:10px;padding:13px;font-weight:bold;cursor:pointer;width:100%}.btn-blue{background:#2563eb;color:#fff}.btn-green{background:#16a34a;color:#fff}.btn-purple{background:#7c3aed;color:#fff}.btn-gray{background:#e5e7eb}.row{display:flex;gap:8px}.row .btn{flex:1}
+textarea{width:100%;min-height:110px;border-radius:8px;border:1px solid #ccc;padding:8px;font-family:monospace;font-size:12px}input.search{width:100%;padding:9px;border-radius:8px;border:1px solid #ccc}
 .bar{height:14px;background:#e5e7eb;border-radius:7px;overflow:hidden}.bar i{display:block;height:100%;background:#2563eb}
-#baseBox{display:none}
-/* MODO CAPTURA: solo se ve lo del UCA */
-body.captura .hide-captura{display:none!important}
-body.captura .wrap{max-width:1000px}
-body.captura header p{display:none}
-#btnSalirCaptura{display:none;background:#111;color:#fff}
-body.captura #btnSalirCaptura{display:block}
+#baseBox{display:none}.footer{background:#1e5cb8;color:#fff;text-align:center;font-size:11px;padding:10px;border-radius:0 0 12px 12px}
+body.captura .hide-captura{display:none!important}body.captura header p{display:none}
+#btnSalirCaptura{display:none;background:#111;color:#fff}.body.captura #btnSalirCaptura{display:block}body.captura #btnSalirCaptura{display:block}
 </style>
 </head>
 <body>
-<header><small>OPERACIONES LAVORO</small><h1>UCA - CD OQUENDO</h1><p>Desarrollado por Luis Vallejo | Operaciones - Lavoro | CD OQUENDO - UCA</p></header>
+<header><small>OPERACIONES LAVORO</small><h1>UCA - CD OQUENDO</h1><p>Desarrollado por <b>Luis Vallejo</b> | Operaciones - Lavoro</p></header>
 <div class="wrap">
 <button id="btnSalirCaptura" class="btn" onclick="salirCaptura()">❌ SALIR DE MODO CAPTURA - VOLVER A EDITAR</button>
-<div class="card"><h3>OCUPABILIDAD POR POSICIÓN</h3>
-<p class="hide-captura" style="font-size:11px;color:#666;text-align:center;margin:4px 0">✏️ Toca cualquier número amarillo para editarlo en su misma posición</p>
+<div class="card"><h3>OCUPABILIDAD POR POSICION</h3>
 <table>
-<tr><th colspan="2">CD OQUENDO Lx - UCA</th><th id="fecha">27/11/2026</th><th id="turno">TURNO 1</th><th colspan="4"><span id="corte">CORTE 02:02:24</span></th></tr>
-<tr><th>NAVE</th><th>ALMACEN</th><th>ALMACENAMIENTO</th><th>CAPACIDAD MAXIMA</th><th>AL 98%</th><th>STOCK OCUPADO</th><th>UBICACIONES LIBRES</th><th>% OCUPABILIDAD</th></tr>
-<tr><td>NAVE 1</td><td>REFRIGERADOS</td><td contenteditable="true">-</td><td contenteditable="true" id="capN1" oninput="recalc()">8000</td><td id="al98N1">7840.0</td><td id="cN1">121.2</td><td id="lN1">7718.8</td><td id="pN1">1.5%</td></tr>
-<tr><td>NAVE 2</td><td>ABARROTES</td><td contenteditable="true">-</td><td contenteditable="true" id="capN2" oninput="recalc()">10000</td><td id="al98N2">9800.0</td><td id="cN2">9840.3</td><td id="lN2">-40.3</td><td id="pN2">98.4%</td></tr>
-<tr><td colspan="3"><b>TOTAL GENERAL</b></td><td id="capTot">18000</td><td id="al98Tot">17640.0</td><td id="cTot">9961.5</td><td id="lTot">7678.5</td><td id="pTot">55.3%</td></tr>
+<tr class="topbar"><td style="text-align:left">CD OQUENDO Lv - UCA</td><td id="fecha">27/11/2026</td><td>TURNO <select id="turnoSel" onchange="document.getElementById('turnoTxt').textContent=this.value"><option>TURNO 1</option><option selected>TURNO 2</option><option>TURNO 3</option></select><span id="turnoTxt" style="display:none">TURNO 2</span></td><td id="corte" style="text-align:right">CORTE 02:02:24</td></tr>
+<tr><th style="text-align:left">NAVE</th><th style="text-align:left">ALMACEN</th><th>ALMACENAMIENTO</th><th>CAPACIDAD<br>NOMINAL ✏️</th><th>AL 98%</th><th>STOCK<br>OCUPADO</th><th>UBICACIONES<br>LIBRES</th><th>% OCUPABILIDAD<br>OCUPABILIDAD</th></tr>
+<tr><td style="text-align:left"><b>NAVE 1</b></td><td style="text-align:left">REFRIGERADOS</td><td>-</td><td contenteditable="true" id="capN1" oninput="recalc()" style="font-weight:bold">8000</td><td>7,840.0</td><td class="yellow" id="cN1">121.2</td><td class="yellow" id="lN1">7,718.8</td><td class="black" id="pN1">1.5%</td></tr>
+<tr><td style="text-align:left"><b>NAVE 2</b></td><td style="text-align:left">ABARROTES</td><td>-</td><td contenteditable="true" id="capN2" oninput="recalc()" style="font-weight:bold">10000</td><td>9,800.0</td><td class="yellow" id="cN2">8,940.3</td><td class="yellow" id="lN2">859.7</td><td class="black" id="pN2">91.2%</td></tr>
+<tr class="total"><td colspan="3" style="text-align:left">TOTAL GENERAL</td><td id="capTot">18,000</td><td id="al98Tot">17,640.0</td><td class="yellow" id="cTot" style="color:#111">9,061.5</td><td class="yellow" id="lTot" style="color:#111">8,578.5</td><td class="black" id="pTot">51.4%</td></tr>
 </table>
-<p style="font-size:12px"><b>TRÁNSITOS:</b> <span contenteditable="true" id="transito" oninput="recalc()" style="background:#fffbe6;padding:2px 6px;border:1px solid #ddd;border-radius:4px">326</span> &nbsp; % TOPE <span contenteditable="true" id="tope" oninput="recalc()" style="background:#fffbe6;padding:2px 6px;border:1px solid #ddd;border-radius:4px">98</span> &nbsp; <b>TOTAL GENERAL con tránsito:</b> <span id="cTrans">9961.5</span> | <span id="pTrans">55.3%</span> | Libres: <span id="lTrans">7678.5</span></p>
+<div class="transito-bar"><span>TRÁNSITOS:</span><input id="transito" value="326" oninput="recalc()"><span>% TOPE:</span><input id="tope" value="98" oninput="recalc()"><span>%</span><span style="margin-left:auto">TOTAL GENERAL con transito: <span id="cTrans">9,387.5</span> | <span id="pTrans">53.2%</span> | Libres: <span id="lTrans">8,252.5</span></span></div>
 <div class="gauges">
-<div><b>UCA SIN TRANSITO</b><div class="gauge-wrap"><div class="gauge-bg"></div><div class="gauge-mask"></div><div class="needle" id="needle1"></div><div class="gauge-center"></div><div class="gauge-label" id="g1">55%</div></div></div>
-<div><b>UCA CON TRANSITO</b><div class="gauge-wrap"><div class="gauge-bg"></div><div class="gauge-mask"></div><div class="needle" id="needle2"></div><div class="gauge-center"></div><div class="gauge-label" id="g2">57%</div></div></div>
+<div><div class="gauge-title">UCA SIN TRANSITO</div><div id="gauge1"></div><div class="gauge-num" id="g1">51%</div><div class="gauge-sub" id="sub1">9,061.5 pal / 17,640.0</div></div>
+<div><div class="gauge-title">UCA CON TRANSITO</div><div id="gauge2"></div><div class="gauge-num" id="g2">53%</div><div class="gauge-sub" id="sub2">9,387.5 pal / 17,640.0 • +326</div></div>
 </div>
+<div class="footer">Desarrollado por <b>Luis Vallejo</b> | Operaciones - Lavoro | CD OQUENDO Lv - UCA</div>
 </div>
 
-<div class="card hide-captura"><button class="btn btn-green" onclick="compartir()">📲 COMPARTIR POR WHATSAPP - MODO CAPTURA</button><p id="msgShare" style="font-size:12px;text-align:center;margin:6px 0 0;color:#15803d;font-weight:bold"></p></div>
+<div class="card hide-captura" style="padding:0"><button class="btn btn-green" style="border-radius:10px" onclick="compartir()">📲 COMPARTIR POR WHATSAPP - MODO CAPTURA</button></div>
 
-<div class="card hide-captura"><h3>ACTUALIZAR CON MB52 - SOLO CÓDIGO - CANTIDAD ▼</h3>
+<div class="card hide-captura" style="padding:10px"><h3 style="margin:-10px -10px 10px;border-radius:10px 10px 0 0">ACTUALIZAR CON MB52 - SOLO CÓDIGO - CANTIDAD ▼</h3>
 <p style="font-size:12px">Ya tenemos tu BASE MADRE con U x C, C x P y Descripción. Solo pega <b>CODIGO - CANTIDAD</b> (unidades) y la página convierte sola a pallets.</p>
 <textarea id="txtMB" placeholder="Ejemplo:&#10;1001273 - 2112  →  (24 x 68) = 1.0 pal"></textarea>
 <div class="row"><button class="btn btn-blue" onclick="actualizar()">⚡ ACTUALIZAR UCA AHORA</button><button class="btn btn-gray" style="flex:.35" onclick="document.getElementById('txtMB').value='1001273 - 2112\n1001169 - 2526827'">EJEMPLO</button></div>
@@ -63,48 +61,48 @@ body.captura #btnSalirCaptura{display:block}
 <button class="btn btn-purple" onclick="toggleBase()" style="margin-top:10px">💜 BASE MADRE - VER / EDITAR / GUARDAR ( <span id="countBase">16 códigos</span> ) ▼</button>
 <div id="baseBox" style="margin-top:10px"><textarea id="txtBase"></textarea><button class="btn btn-purple" onclick="guardarBase()">💾 GUARDAR EN BASE MADRE</button><div class="row" style="margin-top:8px"><button class="btn btn-gray" onclick="exportarBase()">📤 EXPORTAR / COPIAR BASE MADRE</button><button class="btn btn-gray" onclick="document.getElementById('txtBase').value=''">🧹 LIMPIAR</button></div><div id="msgBase" style="font-weight:bold;margin-top:8px"></div></div>
 </div>
-
-<div class="card hide-captura"><h3>TOP 10 REAL - MB52 x MAESTRO</h3><div id="top10"></div></div>
-<div class="card hide-captura"><h3>DETALLE CORREGIDO - CAJAS Y PALLETS REALES | <span id="countDet">16</span> CÓDIGOS | 7 ACTIVOS EXCLUIDOS</h3><input id="busc" placeholder="🔍 Buscar... Ej: 1001169 o SAN MATEO" oninput="render()"><div style="overflow:auto"><table><thead><tr><th>CODIGO</th><th>DESCRIPCION</th><th>STOCK LIBRE</th><th>U x C</th><th>C x P</th><th>UND x PAL</th><th>CAJAS</th><th>PALLETS</th><th>ALMACEN</th></tr></thead><tbody id="tbody"></tbody></table></div></div>
+<div class="card hide-captura" style="padding:10px"><h3 style="margin:-10px -10px 10px;border-radius:10px 10px 0 0">TOP 10 REAL - MB52 x MAESTRO</h3><div id="top10"></div></div>
+<div class="card hide-captura" style="padding:10px"><h3 style="margin:-10px -10px 10px;border-radius:10px 10px 0 0">DETALLE CORREGIDO - CAJAS Y PALLETS REALES | <span id="countDet">16</span> CÓDIGOS | 7 ACTIVOS EXCLUIDOS</h3><input class="search" id="busc" placeholder="🔍 Buscar... Ej: 1001169 o SAN MATEO" oninput="render()"><div style="overflow:auto"><table><thead><tr><th>CODIGO</th><th>DESCRIPCION</th><th>STOCK LIBRE</th><th>U x C</th><th>C x P</th><th>UND x PAL</th><th>CAJAS</th><th>PALLETS</th><th>ALMACEN</th></tr></thead><tbody id="tbody"></tbody></table></div></div>
 </div>
 
 <script>
-function reloj(){
-  let ahora=new Date();
-  let d=String(ahora.getDate()).padStart(2,'0')+'/'+String(ahora.getMonth()+1).padStart(2,'0')+'/'+ahora.getFullYear();
-  let h=ahora.getHours(), m=String(ahora.getMinutes()).padStart(2,'0'), s=String(ahora.getSeconds()).padStart(2,'0');
-  let hh=String(h).padStart(2,'0');
-  document.getElementById('fecha').textContent=d;
-  document.getElementById('turno').textContent=(h>=6&&h<14)?'TURNO 1':(h>=14&&h<22)?'TURNO 2':'TURNO 3';
-  document.getElementById('corte').textContent='CORTE '+hh+':'+m+':'+s;
+function reloj(){let a=new Date();let d=String(a.getDate()).padStart(2,'0')+'/'+String(a.getMonth()+1).padStart(2,'0')+'/'+a.getFullYear();let h=a.getHours();document.getElementById('fecha').textContent=d;let turno=(h>=6&&h<14)?'TURNO 1':(h>=14&&h<22)?'TURNO 2':'TURNO 3';let sel=document.getElementById('turnoSel');if(sel)sel.value=turno;document.getElementById('corte').textContent='CORTE '+String(h).padStart(2,'0')+':'+String(a.getMinutes()).padStart(2,'0')+':'+String(a.getSeconds()).padStart(2,'0');}
+reloj();setInterval(reloj,1000);
+// ✅ TACÓMETRO EXACTO COMO TU FOTO: 0-120, rojo-verde-amarillo-rojo, óvalo blanco, aguja negra
+function gaugeSVG(pct120, id){
+  let cx=110, cy=100, R=100, r=62;
+  function pt(v){let ang=Math.PI - (v/120)*Math.PI;return [cx+R*Math.cos(ang), cy-R*Math.sin(ang)];}
+  function arc(v1,v2,color){let [x1,y1]=pt(v1),[x2,y2]=pt(v2);return '<path d="M '+x1+' '+y1+' A '+R+' '+R+' 0 0 1 '+x2+' '+y2+' L '+cx+' '+cy+' Z" fill="'+color+'"/>';}
+  let ang=Math.PI - (pct120/120)*Math.PI;
+  let nx=cx+78*Math.cos(ang), ny=cy-78*Math.sin(ang);
+  return '<svg viewBox="0 0 220 112" style="width:210px;max-width:100%;display:block;margin:auto"><g>'+arc(0,32,'#ef4444')+arc(32,58,'#22c55e')+arc(58,82,'#eab308')+arc(82,120,'#ef4444')+'<ellipse cx="110" cy="100" rx="68" ry="38" fill="#fff"/>'+'<text x="22" y="98" font-size="10" fill="#111" font-weight="bold">0</text><text x="22" y="68" font-size="10" fill="#111" font-weight="bold">20</text><text x="52" y="42" font-size="10" fill="#111" font-weight="bold">40</text><text x="104" y="30" font-size="10" fill="#111" font-weight="bold">60</text><text x="156" y="42" font-size="10" fill="#111" font-weight="bold">80</text><text x="184" y="68" font-size="10" fill="#111" font-weight="bold">100</text><text x="180" y="98" font-size="10" fill="#111" font-weight="bold">120</text>'+'<line x1="110" y1="100" x2="'+nx+'" y2="'+ny+'" stroke="#111" stroke-width="3" stroke-linecap="round"/>'+'<circle cx="110" cy="100" r="6" fill="#111" stroke="#fff" stroke-width="2"/>'+'</g></svg>';
 }
-reloj(); setInterval(reloj,1000);
 const DEFAULT_BASE={"1004891":{desc:"GLORIA LECHE EVAP X 400ML 24U",ucaja:24,cpallet:85,alm:"ABARROTES"},"1005271":{desc:"LECHE GLORIA EVAPORADA TETRA X 360 ML",ucaja:18,cpallet:60,alm:"ABARROTES"},"1001169":{desc:"GLORIA EVAPORADA LATA X 400ML",ucaja:24,cpallet:85,alm:"ABARROTES"},"1001155":{desc:"GLORIA LECHE EVAP X 400ML 24U",ucaja:24,cpallet:85,alm:"ABARROTES"},"1004893":{desc:"GLORIA LECHE EVAP X 400ML",ucaja:24,cpallet:85,alm:"ABARROTES"},"1004895":{desc:"GLORIA LECHE EVAP X 400ML",ucaja:24,cpallet:85,alm:"ABARROTES"},"1001101":{desc:"GLORIA LECHE ENTERA B X 1 LT",ucaja:12,cpallet:108,alm:"ABARROTES"},"1001230":{desc:"GLORIA LECHE EVAP X 400ML",ucaja:24,cpallet:85,alm:"ABARROTES"},"1001151":{desc:"GLORIA LECHE EVAP X 400ML",ucaja:24,cpallet:85,alm:"ABARROTES"},"1001158":{desc:"GLORIA LECHE EVAP X 400ML",ucaja:24,cpallet:85,alm:"ABARROTES"},"1001093":{desc:"GLORIA LECHE ENTERA B X 1 LT",ucaja:24,cpallet:85,alm:"ABARROTES"},"1001273":{desc:"GLORIA LECHE EVAP X 400ML",ucaja:24,cpallet:68,alm:"ABARROTES"},"1001851":{desc:"GLORIA BASE DE HELADO VAIN.X946ML BOLSA",ucaja:10,cpallet:65,alm:"ABARROTES"},"10506391":{desc:"GLORIA LCH X 190ML X 24U",ucaja:24,cpallet:85,alm:"ABARROTES"},"10507327":{desc:"GLORIA LCH X 190ML",ucaja:24,cpallet:85,alm:"ABARROTES"},"1001168":{desc:"GLORIA MANTEQUILLA SIN SAL X 200GR",ucaja:24,cpallet:60,alm:"REFRIGERADOS"}};
 const DEFAULT_STOCK={"1004891":3678300,"1005271":1475198,"1001169":2526827,"1001155":2270880,"1004893":2189000,"1004895":2023000,"1001101":2225840,"1001230":1929000,"1001151":1911000,"1001158":1846000,"1001273":2112,"1001851":6500,"10506391":1250000};
 let base=JSON.parse(localStorage.getItem('baseMadre')||localStorage.getItem('uca_base')||'null')||DEFAULT_BASE;
 let stock=JSON.parse(localStorage.getItem('stockMB52')||localStorage.getItem('uca_stock')||'null')||DEFAULT_STOCK;
 function norm(c){c=String(c||'').trim();if(c.length<=4)return '100'+c;if(c.length==6)return '10'+c;return c;}
 function num(id){return parseFloat(document.getElementById(id).textContent.replace(/[^0-9.-]/g,''))||0;}
+function numInp(id){return parseFloat(document.getElementById(id).value)||0;}
 function toggleBase(){let b=document.getElementById('baseBox');b.style.display=b.style.display=='none'?'block':'none';if(b.style.display=='block')document.getElementById('txtBase').value=Object.keys(base).map(k=>k+' - '+base[k].desc+' - '+base[k].ucaja+' - '+base[k].cpallet+' - '+base[k].alm).join('\n');}
 function guardarBase(){let t=document.getElementById('txtBase').value.trim();if(!t)return alert('Pega tu columna H');let n=0,a=0;t.split('\n').forEach(l=>{l=l.trim();if(!l)return;let p=l.split('-').map(x=>x.trim());if(p.length<5)return;let cod=norm(p[0]);if(!base[cod])n++;else a++;base[cod]={desc:p[1],ucaja:parseFloat(p[2])||1,cpallet:parseFloat(p[3])||1,alm:p.slice(4).join(' - ').toUpperCase()};});localStorage.setItem('baseMadre',JSON.stringify(base));localStorage.setItem('uca_base',JSON.stringify(base));document.getElementById('msgBase').innerHTML='✅ Guardado: '+n+' nuevos + '+a+' actualizados. Total: '+Object.keys(base).length;render();}
 function exportarBase(){let o=Object.keys(base).map(k=>k+' - '+base[k].desc+' - '+base[k].ucaja+' - '+base[k].cpallet+' - '+base[k].alm).join('\n');navigator.clipboard.writeText(o).then(()=>alert('Base Madre copiada: '+Object.keys(base).length));}
 function actualizar(){let t=document.getElementById('txtMB').value.trim();if(!t)return alert('Pega tu MB52');let rojos=[],c=0;t.split('\n').forEach(l=>{l=l.trim();if(!l)return;let p=l.split('-');if(p.length<2)return;let cod=norm(p[0]);let cant=parseFloat(String(p[1]).replace(/[^0-9.-]/g,''))||0;if(!base[cod]){rojos.push(cod);return;}stock[cod]=cant;c++;});localStorage.setItem('stockMB52',JSON.stringify(stock));localStorage.setItem('uca_stock',JSON.stringify(stock));document.getElementById('msg').innerHTML='✅ Actualizado: '+c+' códigos'+(rojos.length?' • <span style="color:red">'+rojos.length+' NO están en Base Madre</span>':'');if(rojos.length){let d=document.getElementById('rojos');d.style.display='block';d.innerHTML='<b style="color:red">⚠️ Códigos NO en Base Madre ('+rojos.length+'):</b><br>'+rojos.join(', ');}else document.getElementById('rojos').style.display='none';render();}
-// ✅ AHORA SÍ: NO ABRE WHATSAPP, SOLO DEJA LA PANTALLA LIMPIA PARA CAPTURA
-function compartir(){document.body.classList.add('captura');window.scrollTo(0,0);document.getElementById('msgShare').innerHTML='';}
+function compartir(){document.body.classList.add('captura');window.scrollTo(0,0);}
 function salirCaptura(){document.body.classList.remove('captura');}
 function recalc(){
-let cap1=num('capN1'),cap2=num('capN2'),tope=num('tope'),tr=num('transito');
-let c1=num('cN1'),c2=num('cN2'),tot=c1+c2,capT=cap1+cap2;
-document.getElementById('al98N1').textContent=(cap1*tope/100).toFixed(1);document.getElementById('al98N2').textContent=(cap2*tope/100).toFixed(1);document.getElementById('al98Tot').textContent=(capT*tope/100).toFixed(1);
-document.getElementById('capTot').textContent=capT.toLocaleString();document.getElementById('cTot').textContent=tot.toFixed(1);
-document.getElementById('lN1').textContent=(cap1*tope/100-c1).toFixed(1);document.getElementById('lN2').textContent=(cap2*tope/100-c2).toFixed(1);document.getElementById('lTot').textContent=(capT*tope/100-tot).toFixed(1);
+let cap1=num('capN1'),cap2=num('capN2'),tope=numInp('tope'),tr=numInp('transito');
+let c1=num('cN1'),c2=num('cN2'),tot=c1+c2,capT=cap1+cap2,al98=capT*tope/100;
+document.getElementById('capTot').textContent=capT.toLocaleString();document.getElementById('al98Tot').textContent=al98.toFixed(1);document.getElementById('cTot').textContent=tot.toLocaleString('en-US',{minimumFractionDigits:1,maximumFractionDigits:1});
+document.getElementById('lN1').textContent=(cap1*tope/100-c1).toLocaleString('en-US',{minimumFractionDigits:1,maximumFractionDigits:1});document.getElementById('lN2').textContent=(cap2*tope/100-c2).toLocaleString('en-US',{minimumFractionDigits:1,maximumFractionDigits:1});document.getElementById('lTot').textContent=(al98-tot).toLocaleString('en-US',{minimumFractionDigits:1,maximumFractionDigits:1});
 let p1=cap1?c1/cap1*100:0,p2=cap2?c2/cap2*100:0,pT=capT?tot/capT*100:0;
 document.getElementById('pN1').textContent=p1.toFixed(1)+'%';document.getElementById('pN2').textContent=p2.toFixed(1)+'%';document.getElementById('pTot').textContent=pT.toFixed(1)+'%';
 let totConTr=tot+tr,pConTr=capT?totConTr/capT*100:0;
-document.getElementById('cTrans').textContent=totConTr.toFixed(1);document.getElementById('pTrans').textContent=pConTr.toFixed(1)+'%';document.getElementById('lTrans').textContent=(capT*tope/100-totConTr).toFixed(1);
+document.getElementById('cTrans').textContent=totConTr.toLocaleString('en-US',{minimumFractionDigits:1,maximumFractionDigits:1});document.getElementById('pTrans').textContent=pConTr.toFixed(1)+'%';document.getElementById('lTrans').textContent=(al98-totConTr).toLocaleString('en-US',{minimumFractionDigits:1,maximumFractionDigits:1});
 document.getElementById('g1').textContent=Math.round(pT)+'%';document.getElementById('g2').textContent=Math.round(pConTr)+'%';
-document.getElementById('needle1').style.transform='translateX(-50%) rotate('+(-90+pT*1.8)+'deg)';
-document.getElementById('needle2').style.transform='translateX(-50%) rotate('+(-90+pConTr*1.8)+'deg)';
+document.getElementById('sub1').textContent=tot.toLocaleString('en-US',{minimumFractionDigits:1,maximumFractionDigits:1})+' pal / '+al98.toLocaleString('en-US',{minimumFractionDigits:1,maximumFractionDigits:1});
+document.getElementById('sub2').textContent=totConTr.toLocaleString('en-US',{minimumFractionDigits:1,maximumFractionDigits:1})+' pal / '+al98.toLocaleString('en-US',{minimumFractionDigits:1,maximumFractionDigits:1})+' • +'+tr;
+document.getElementById('gauge1').innerHTML=gaugeSVG(pT/100*120,'g1');document.getElementById('gauge2').innerHTML=gaugeSVG(pConTr/100*120,'g2');
 }
 function render(){
 let f=(document.getElementById('busc').value||'').toLowerCase();let arr=[];
