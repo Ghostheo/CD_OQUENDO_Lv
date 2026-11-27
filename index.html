@@ -1,31 +1,37 @@
 <!DOCTYPE html>
 <html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CD OQUENDO Lv - UCA V8</title>
+<title>CD OQUENDO Lv - UCA V8.1</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <style>
-  /* MODO CAPTURA - OCULTA LO QUE NO VA EN LA FOTO */
   body.captura .no-captura{ display:none !important; }
   body.captura .solo-captura{ display:block !important; }
   body.captura{ background:white !important; }
   body.captura #reporteCaptura{ padding:0 !important; }
   .solo-captura{ display:none; }
+  /* BOTON SALIR FLOTANTE AL COSTADO */
+  #btnSalirFlotante{
+    position:fixed; top:75px; right:8px; z-index:99;
+    background:#1e40af; color:white;
+    width:52px; height:52px; border-radius:9999px;
+    display:none; align-items:center; justify-content:center;
+    flex-direction:column; font-size:20px; line-height:1;
+    box-shadow:0 4px 12px rgba(0,0,0,0.35); border:2px solid white;
+  }
+  body.captura #btnSalirFlotante{ display:flex !important; }
+  #btnSalirFlotante span{ font-size:8px; font-weight:900; margin-top:1px; }
 </style>
 </head>
 <body class="bg-[#f1f1f1] pb-6">
 <div class="bg-black text-white p-4 text-center sticky top-0 z-10">
 <p class="text-[11px] tracking-widest text-yellow-400 font-bold">GLORIA • OQUENDO • LIVE</p>
 <h1 class="text-2xl font-black">CD OQUENDO <span class="text-yellow-400">Lv</span> - UCA</h1>
-<p class="text-xs text-gray-300 no-captura">V8 • DATA LLENA 26.11.2026 • Hora Perú en vivo</p>
+<p class="text-xs text-gray-300 no-captura">V8.1 • DATA LLENA 26.11.2026 • Hora Perú en vivo</p>
 <p id="fechaHora" class="text-sm font-black text-yellow-400 mt-1">📅 Cargando fecha y hora Perú...</p>
 </div>
 
-<!-- BARRA MODO CAPTURA - SOLO SALE CUANDO ACTIVAS -->
-<div id="modoCaptura" class="solo-captura bg-blue-600 text-white p-3 text-center sticky top-0 z-20">
-<p class="font-black text-sm">📸 MODO CAPTURA ACTIVADO</p>
-<p class="text-xs">Toma screenshot ahora con tu celular y mándalo por WhatsApp</p>
-<button onclick="salirCaptura()" class="bg-white text-blue-700 font-black px-4 py-2 rounded-full mt-2 text-sm">❌ SALIR DE MODO CAPTURA</button>
-</div>
+<!-- BOTON SALIR FLOTANTE AL COSTADO - NO ESTROPEA LA CAPTURA -->
+<button id="btnSalirFlotante" onclick="salirCaptura()" title="Salir de modo captura">🚪<span>SALIR</span></button>
 
 <div id="reporteCaptura" class="max-w-5xl mx-auto px-3">
 <div id="alerta" class="bg-red-600 text-white p-3 rounded-xl mt-3 flex gap-3 items-center"><div class="text-3xl">⚠️</div><div><p class="font-black text-sm" id="alertTitle">NAVE 2 CASI LLENA</p><p class="text-xs" id="alertText">Nave1: 121 / 7,840 | Nave2: 8,940 / 9,800 | Total: 9,061 al 98%</p></div></div>
@@ -46,7 +52,6 @@
 <div class="bg-black text-white rounded-xl p-3 text-center"><p class="text-[10px] font-bold text-yellow-400">TOTAL<br>OQUENDO Lv</p><p class="text-2xl font-black" id="nt">9,061</p><p class="text-[10px]">Cap <span id="capTxtT">18,000</span></p><p class="font-black text-yellow-400 text-xs" id="pt">51.4%</p><div class="bg-gray-700 h-3 rounded-full mt-1 overflow-hidden"><div id="bt" class="bg-yellow-400 h-3" style="width:51.4%"></div></div><p class="text-[10px] mt-1">Libres al tope: <b id="lib">8,579</b></p></div>
 </div>
 
-<!-- TEXTO DE ALERTA PARA LA CAPTURA - SOLO SALE EN CAPTURA -->
 <div class="solo-captura bg-yellow-50 border-2 border-yellow-400 rounded-xl p-3 mt-3 text-center">
 <p class="font-black text-sm">⚠️ ALERTA: NAVE 2 casi llena, quedan solo 860 pal libres. NAVE 1 tiene espacio.</p>
 </div>
@@ -92,7 +97,7 @@
 <tr class="border-b"><td class="p-2 font-bold">1001135</td><td class="p-2">GLORIA LECHE REC ENTERA 170GRX48</td><td class="p-2 text-right">414,720</td><td class="p-2 text-center">48</td><td class="p-2 text-center">80</td><td class="p-2 text-center font-bold">3,840</td><td class="p-2 text-center font-bold bg-yellow-50">108.0</td><td class="p-2 text-center">ABARROTES</td></tr>
 </tbody></table></div>
 </div>
-<p class="text-center text-[11px] text-gray-500 mt-2 no-captura">CD OQUENDO Lv - V8 MODO CAPTURA - Totales reales 26.11.2026: 121 + 8,940 = 9,061</p>
+<p class="text-center text-[11px] text-gray-500 mt-2 no-captura">CD OQUENDO Lv - V8.1 MODO CAPTURA - Totales reales 26.11.2026: 121 + 8,940 = 9,061</p>
 <p class="solo-captura text-center text-[11px] text-gray-500 mt-2 font-bold">CD OQUENDO Lv - Reporte para WhatsApp • https://ghostheo.github.io/CD_OQUENDO_Lv/</p>
 </div>
 <script>
