@@ -27,16 +27,20 @@ textarea{width:100%;min-height:110px;border-radius:8px;border:1px solid #ccc;pad
 .bar{height:14px;background:#e5e7eb;border-radius:7px;overflow:hidden}.bar i{display:block;height:100%;background:#2563eb}
 #baseBox{display:none}.footer{background:#1e5cb8;color:#fff;text-align:center;font-size:11px;padding:10px;border-radius:0 0 12px 12px}
 body.captura .hide-captura{display:none!important}body.captura header p{display:none}
-#btnSalirCaptura{display:none;background:#111;color:#fff}body.captura #btnSalirCaptura{display:block}
+/* ✅ BOTON X SALIR CHICO A LA DERECHA, EN LA MISMA FILA - YA NO ES BARRA NEGRA GRANDE */
+.fila-salir{display:none;height:28px;position:relative}
+body.captura .fila-salir{display:block}
+#btnSalirCaptura{display:none;width:auto!important;padding:5px 12px!important;font-size:11px!important;background:#111!important;color:#fff!important;border-radius:20px;position:absolute;right:0;top:2px}
+body.captura #btnSalirCaptura{display:inline-block!important}
 </style>
 </head>
 <body>
 <header><small>OPERACIONES LAVORO</small><h1>UCA - CD OQUENDO</h1><p>Desarrollado por <b>Luis Vallejo</b> | Operaciones - Lavoro</p></header>
 <div class="wrap">
-<button id="btnSalirCaptura" class="btn" onclick="salirCaptura()">❌ SALIR DE MODO CAPTURA - VOLVER A EDITAR</button>
+<div class="fila-salir"><button id="btnSalirCaptura" class="btn" onclick="salirCaptura()">✕ SALIR</button></div>
 <div class="card"><h3>OCUPABILIDAD POR POSICION</h3>
 <table>
-<tr class="topbar"><td colspan="2" style="text-align:left">CD OQUENDO Lv - UCA</td><td id="fecha">27/11/2026</td><td colspan="2">TURNO <select id="turnoSel"><option>TURNO 1</option><option selected>TURNO 2</option><option>TURNO 3</option></select></td><td colspan="3" style="text-align:right"><span id="corte">CORTE 18:28:08</span></td></tr>
+<tr class="topbar"><td colspan="2" style="text-align:left">CD OQUENDO Lv - UCA</td><td id="fecha">27/11/2026</td><td colspan="2">TURNO <select id="turnoSel"><option>TURNO 1</option><option selected>TURNO 2</option><option>TURNO 3</option></select></td><td colspan="3" style="text-align:right"><span id="corte">CORTE 19:13:56</span></td></tr>
 <tr><th style="text-align:left">NAVE</th><th style="text-align:left">ALMACEN</th><th>ALMACENAMIENTO</th><th>CAPACIDAD<br>NOMINAL ✏️</th><th>AL 98%</th><th>STOCK<br>OCUPADO</th><th>UBICACIONES<br>LIBRES</th><th>% OCUPABILIDAD<br>OCUPABILIDAD</th></tr>
 <tr><td style="text-align:left"><b>NAVE 1</b></td><td style="text-align:left">REFRIGERADOS</td><td>-</td><td contenteditable="true" id="capN1" oninput="recalc()" style="font-weight:bold">8000</td><td>7,840.0</td><td class="yellow" id="cN1">121.2</td><td class="yellow" id="lN1">7,718.8</td><td class="black" id="pN1">1.5%</td></tr>
 <tr><td style="text-align:left"><b>NAVE 2</b></td><td style="text-align:left">ABARROTES</td><td>-</td><td contenteditable="true" id="capN2" oninput="recalc()" style="font-weight:bold">10000</td><td>9,800.0</td><td class="yellow" id="cN2">8,940.3</td><td class="yellow" id="lN2">859.7</td><td class="black" id="pN2">89.4%</td></tr>
@@ -59,7 +63,6 @@ body.captura .hide-captura{display:none!important}body.captura header p{display:
 <div class="card hide-captura" style="padding:10px"><h3 style="margin:-10px -10px 10px;border-radius:10px 10px 0 0">DETALLE CORREGIDO - CAJAS Y PALLETS REALES | <span id="countDet">16</span> CÓDIGOS | 7 ACTIVOS EXCLUIDOS</h3><input class="search" id="busc" placeholder="🔍 Buscar... Ej: 1001169 o SAN MATEO" oninput="render()"><div style="overflow:auto"><table><thead><tr><th>CODIGO</th><th>DESCRIPCION</th><th>STOCK LIBRE</th><th>U x C</th><th>C x P</th><th>UND x PAL</th><th>CAJAS</th><th>PALLETS</th><th>ALMACEN</th></tr></thead><tbody id="tbody"></tbody></table></div></div>
 </div>
 <script>
-// ✅ RELOJ SOLO ACTUALIZA FECHA Y CORTE - YA NO TOCA EL TURNO
 function reloj(){let a=new Date();let d=String(a.getDate()).padStart(2,'0')+'/'+String(a.getMonth()+1).padStart(2,'0')+'/'+a.getFullYear();let h=a.getHours();document.getElementById('fecha').textContent=d;document.getElementById('corte').textContent='CORTE '+String(h).padStart(2,'0')+':'+String(a.getMinutes()).padStart(2,'0')+':'+String(a.getSeconds()).padStart(2,'0');}
 reloj();setInterval(reloj,1000);
 function gaugeSVG(pct120){let cx=110,cy=100,R=100;function pt(v){let ang=Math.PI-(v/120)*Math.PI;return [cx+R*Math.cos(ang),cy-R*Math.sin(ang)];}function arc(v1,v2,color){let [x1,y1]=pt(v1),[x2,y2]=pt(v2);return '<path d="M '+x1+' '+y1+' A '+R+' '+R+' 0 0 1 '+x2+' '+y2+' L '+cx+' '+cy+' Z" fill="'+color+'"/>';}let ang=Math.PI-(pct120/120)*Math.PI;let nx=cx+78*Math.cos(ang),ny=cy-78*Math.sin(ang);return '<svg viewBox="0 0 220 112" style="width:210px;max-width:100%;display:block;margin:auto"><g>'+arc(0,32,'#ef4444')+arc(32,58,'#22c55e')+arc(58,82,'#eab308')+arc(82,120,'#ef4444')+'<ellipse cx="110" cy="100" rx="68" ry="38" fill="#fff"/>'+'<text x="22" y="98" font-size="10" fill="#111" font-weight="bold">0</text><text x="22" y="68" font-size="10" fill="#111" font-weight="bold">20</text><text x="52" y="42" font-size="10" fill="#111" font-weight="bold">40</text><text x="104" y="30" font-size="10" fill="#111" font-weight="bold">60</text><text x="156" y="42" font-size="10" fill="#111" font-weight="bold">80</text><text x="184" y="68" font-size="10" fill="#111" font-weight="bold">100</text><text x="180" y="98" font-size="10" fill="#111" font-weight="bold">120</text>'+'<line x1="110" y1="100" x2="'+nx+'" y2="'+ny+'" stroke="#111" stroke-width="3" stroke-linecap="round"/>'+'<circle cx="110" cy="100" r="6" fill="#111" stroke="#fff" stroke-width="2"/>'+'</g></svg>';}
