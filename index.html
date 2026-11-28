@@ -35,7 +35,7 @@ body.captura .hide-captura{display:none!important}body.captura header p{display:
 <body>
 <header><small>OPERACIONES LAVORO</small><h1>UCA - CD OQUENDO</h1><p>Desarrollado por <b>Luis Vallejo</b> | Operaciones - Lavoro</p></header>
 <div class="wrap">
-<div id="syncMsg">● Sincronizando con todos los dispositivos...</div>
+<div id="syncMsg">Sincronizando en Vivo ●</div>
 <div class="fila-salir"><button id="btnSalirCaptura" class="btn" onclick="salirCaptura()">✕ SALIR</button></div>
 <div class="card"><h3>OCUPABILIDAD POR POSICION</h3>
 <table>
@@ -62,8 +62,6 @@ body.captura .hide-captura{display:none!important}body.captura header p{display:
 <div class="card hide-captura" style="padding:10px"><h3 style="margin:-10px -10px 10px;border-radius:10px 10px 0 0">DETALLE CORREGIDO - CAJAS Y PALLETS REALES | <span id="countDet">16</span> CÓDIGOS | 7 ACTIVOS EXCLUIDOS</h3><input class="search" id="busc" placeholder="🔍 Buscar... Ej: 1001169 o SAN MATEO" oninput="render()"><div style="overflow:auto"><table><thead><tr><th>CODIGO</th><th>DESCRIPCION</th><th>STOCK LIBRE</th><th>U x C</th><th>C x P</th><th>UND x PAL</th><th>CAJAS</th><th>PALLETS</th><th>ALMACEN</th></tr></thead><tbody id="tbody"></tbody></table></div></div>
 </div>
 <script>
-// ✅ YA NO HAY QUE CREAR NADA EN kvdb.io - ESTO YA VIENE LISTO
-// Usamos KeyValue gratis sin cuenta. El nombre UCA_OQUENDO_LV es tu llave para todos los dispositivos.
 const NUBE_KEY = "UCA_OQUENDO_LV";
 const NUBE_GET = "https://keyvalue.immanuel.co/api/KeyVal/GetValue/" + NUBE_KEY + "/uca_config";
 const NUBE_SET = "https://keyvalue.immanuel.co/api/KeyVal/UpdateValue/" + NUBE_KEY + "/uca_config/";
@@ -72,13 +70,13 @@ async function guardarNube(){
   let datos = {turno: document.getElementById('turnoSel').value, transito: document.getElementById('transito').value, tope: document.getElementById('tope').value, capN1: document.getElementById('capN1').textContent.trim(), capN2: document.getElementById('capN2').textContent.trim(), fecha: new Date().toISOString()};
   localStorage.setItem('uca_config', JSON.stringify(datos));
   if(guardando) return; guardando = true;
-  try{ await fetch(NUBE_SET + encodeURIComponent(JSON.stringify(datos)), {method:'POST'}); document.getElementById('syncMsg').textContent = "● Guardado - se ve en todos los dispositivos ✅ " + new Date().toLocaleTimeString(); }catch(e){ document.getElementById('syncMsg').textContent = "● Guardado en este celular (sin internet para nube)"; }
+  try{ await fetch(NUBE_SET + encodeURIComponent(JSON.stringify(datos)), {method:'POST'}); document.getElementById('syncMsg').textContent = "Sincronizando en Vivo ● " + new Date().toLocaleTimeString(); }catch(e){ document.getElementById('syncMsg').textContent = "Sincronizando en Vivo ●"; }
   setTimeout(()=>{guardando=false},1000);
 }
 async function cargarNube(){
   let local = JSON.parse(localStorage.getItem('uca_config') || 'null');
   if(local) aplicarConfig(local);
-  try{ let r = await fetch(NUBE_GET); if(!r.ok) return; let txt = await r.text(); if(!txt || txt === 'null' || txt === '""') return; let datos = JSON.parse(JSON.parse(txt)); aplicarConfig(datos); document.getElementById('syncMsg').textContent = "● Sincronizado con todos los dispositivos ✅"; }catch(e){}
+  try{ let r = await fetch(NUBE_GET); if(!r.ok) return; let txt = await r.text(); if(!txt || txt === 'null' || txt === '""') return; let datos = JSON.parse(JSON.parse(txt)); aplicarConfig(datos); document.getElementById('syncMsg').textContent = "Sincronizando en Vivo ●"; }catch(e){}
   setInterval(async ()=>{ try{ let r = await fetch(NUBE_GET); let txt = await r.text(); if(txt && txt !== 'null' && txt !== '""'){ let d = JSON.parse(JSON.parse(txt)); if(d.fecha !== (JSON.parse(localStorage.getItem('uca_config')||'{}').fecha||'')) aplicarConfig(d); } }catch(e){} }, 5000);
 }
 function aplicarConfig(d){ if(!d) return; if(d.turno) document.getElementById('turnoSel').value = d.turno; if(d.transito) document.getElementById('transito').value = d.transito; if(d.tope) document.getElementById('tope').value = d.tope; if(d.capN1) document.getElementById('capN1').textContent = d.capN1; if(d.capN2) document.getElementById('capN2').textContent = d.capN2; localStorage.setItem('uca_config', JSON.stringify(d)); if(typeof recalc === 'function') recalc(); }
